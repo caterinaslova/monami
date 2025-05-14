@@ -5,7 +5,7 @@ import Navbar from '../generales/Navbar';
 
 export default function Portada() {
   return (
-    <>
+    <div className='w-full bg-stone-100 rounded-2xl flex justify-center items-center overflow-hidden'>
         <Navbar/>
       <div className={estilos.section}   style={{ clipPath: 'ellipse(75% 100% at 60% 50%)' }}>
         <div className={estilos.cajaImagen}>
@@ -41,6 +41,6 @@ export default function Portada() {
           <BotonWhatsApp/>
         </div>
       </div>
-    </>
+    </div>
   )
 }

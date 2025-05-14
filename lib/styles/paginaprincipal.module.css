@@ -13,8 +13,9 @@
          border-bottom-right-radius: 5%;
         align-items: center;
         /* background: radial-gradient( #000000 70%, #fdfd96,#000000);  */
-         background: radial-gradient( #000000 70%, #00BDA7,#000000); 
+         background: radial-gradient( #000000 75%, #00BDA7,#000000 ); 
          perspective: 1000px;
+         overflow: hidden;
         z-index: 10;
         /* background: radial-gradient(circle at 80% 80%, #111 0%, #000 100%); */
       
@@ -97,7 +98,7 @@
         border-radius: 50%;
         background-color: white;
         opacity: 0;
-        animation: aparecePelota 2s ease forwards 2.3s ;
+        animation: aparecePelota 3s ease forwards 2.3s ;
     
       }
 
@@ -139,7 +140,7 @@
         opacity: 0;
         animation:vibrar 3s ease forwards 0.5s;
       }
-      @media screen and (max-width:1100px) {
+      @media screen and (max-width:576px) {
         .logo::after{
           right: 6rem;
         }
@@ -152,7 +153,7 @@
       @keyframes vibrar {
         from{
            opacity: 0;
-           letter-spacing: 5px;
+           letter-spacing: 3px;
         }
         to{
             opacity: 1;
@@ -178,33 +179,33 @@
       @keyframes aparecePelota {
         0%{
             opacity: 0;
-            transform: translateX(-700px) translateY(70px);
+            /* transform: translateX(-700px) translateY(70px); */
         }
         100%{
             opacity: 1;
-            transform: translateX(0) translateY(0);
+            /* transform: translateX(0) translateY(0); */
         }
         
       }
       @keyframes aparecePelotaCelu {
         0%{
             opacity: 0;
-            transform: translateX(-180px) translateY(-200px);
+            /* transform: translateX(-180px) translateY(-200px); */
         }
         100%{
             opacity: 1;
-            transform: translateX(0) translateY(0);
+            /* transform: translateX(0) translateY(0); */
         }
         
       }
       @keyframes aparecePelotaTablet {
         0%{
             opacity: 0;
-            transform: translateX(-450px) translateY(70px);
+            /* transform: translateX(-450px) translateY(70px); */
         }
         100%{
             opacity: 1;
-            transform: translateX(0) translateY(0);
+            /* transform: translateX(0) translateY(0); */
         }
         
       }
@@ -325,11 +326,11 @@
           margin-left: 5rem;
         }
         .logo::after{
-          animation: aparecePelotaTablet 2s ease forwards 2.3s;
+          animation: aparecePelotaTablet 3s ease forwards 2.3s;
         }
         
       }
-      @media screen and (max-width:960px) {
+      @media screen and (max-width:800px) {
         
         .video{
           height: 200px;
@@ -337,7 +338,7 @@
           margin-left: 0;
          }
          .logo::after{
-          animation: aparecePelotaCelu 2s ease forwards 2.3s;
+          animation: aparecePelotaCelu 3s ease forwards 2.3s;
         }
         
       }

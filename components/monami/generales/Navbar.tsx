@@ -25,8 +25,8 @@ const Navbar = () => {
         scrolled ? 'bg-black text-white' : 'bg-transparent text-black'
       }`}
     >
-      <div className='max-w-7xl mx-auto px-4 py-2'>
-        <ul className='flex justify-center items-center gap-12 p-6'>
+      <div className='max-w-7xl mx-auto px-1 md:px-4 py-2'>
+        <ul className='flex justify-center items-center gap-3 md:gap-12 p-6'>
           <li className='cursor-pointer'>
             <Link
               href='/monamipadelsquash/escuela'
