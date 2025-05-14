@@ -27,7 +27,7 @@
           transform-style: preserve-3d;
       }
       .cajaImagen video{
-        animation: apareceJugador 1.5s ease forwards 1s;
+        animation: apareceJugador 1.5s ease forwards 1.5s;
       }
       @keyframes apareceJugador {
         0%{
