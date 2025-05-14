@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  email       String
+  telefono    String
+  nombre      String
+  dni         String         @default("")
+  informacion String         @default("")
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  fijos       TurnoFijo[]
+  puntual     TurnoPuntual[]
+}
+
+enum Dia {
+  aLunes
+  bMartes
+  cMiércoles
+  dJueves
+  eViernes
+  fSábado
+  gDomingo
+}
+
+enum Cancha {
+  Squash1
+  Squash2
+  Squash3
+  Padel1
+  Padel2
+  Asador1
+  Asador2
+}
+
+model TurnoFijo {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  clienteId       String   @db.ObjectId
+  cancha          Cancha
+  dia             Dia
+  horaComienzo    String
+  cantidadModulos Int
+  horaFinaliza    String
+  modulosOcupados String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  cliente         Cliente  @relation(fields: [clienteId], references: [id])
+}
+
+model TurnoPuntual {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  fecha           DateTime @default(now())
+  clienteId       String   @db.ObjectId
+  cancha          Cancha
+  dia             Dia
+  horaComienzo    String
+  horaFinaliza    String
+  cantidadModulos Int
+  modulosOcupados String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  cliente         Cliente  @relation(fields: [clienteId], references: [id])
+}
+
+
+
+model HorarioPosible {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  dia             String
+  horarioComienzo String
+  abierto         Boolean
+}

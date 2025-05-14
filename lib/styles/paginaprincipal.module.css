@@ -1,0 +1,330 @@
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
+
+  
+   
+
+      .section {
+        width: 100vw;
+        height: 100vh;
+        padding: 2rem 2rem;
+        display: flex;
+        justify-content: center;
+        border-bottom-left-radius: 5%;
+         border-bottom-right-radius: 5%;
+        align-items: center;
+        /* background: radial-gradient( #000000 70%, #fdfd96,#000000);  */
+         background: radial-gradient( #000000 70%, #00BDA7,#000000); 
+         perspective: 1000px;
+        z-index: 10;
+        /* background: radial-gradient(circle at 80% 80%, #111 0%, #000 100%); */
+      
+  
+        /* gap: 4rem; */
+        
+      }
+      .cajaImagen{
+        text-align: center;
+          transform-style: preserve-3d;
+      }
+      .cajaImagen video{
+        animation: apareceJugador 1.5s ease forwards 1s;
+      }
+      @keyframes apareceJugador {
+        0%{
+          opacity: 0;
+          transform: scale(0);
+        }
+        100%{
+          opacity: 1;
+          transform: scale(1.4);
+        }
+        
+      }
+
+      @media screen and (max-width:768px) {
+        .section{
+            flex-direction: column;
+            justify-content:center;
+            align-items: center;
+        }
+      }
+      .logo {
+        height: 150px;
+        display: flex;
+         justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+      }
+
+
+      .svg {
+        width: 350px;
+        height: 100%;
+       
+      }
+
+      .drawfill {
+        font-family: 'Cal Sans', sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 70px;
+        stroke-width: 1;
+        fill: transparent;
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: draw 5s ease forwards, fill 2s ease forwards 1s;
+      }
+      @media screen  and (max-width:578px) {
+        .logo{
+        margin-left: 5.5rem;
+        }
+        .drawfill{
+
+          width: 50%;
+          height: auto;  
+          font-size: 50px;
+        }
+      }
+
+      .logo::after{
+        content: "";
+        height: 1rem;
+        width: 1rem;
+        position: absolute;
+        top:60px;
+        right: 0;
+        border-radius: 50%;
+        background-color: white;
+        opacity: 0;
+        animation: aparecePelota 2s ease forwards 1.8s ;
+    
+      }
+
+      .mon {
+        stroke: #00bda7;
+      }
+
+      .ami {
+        stroke: #cfff;
+      }
+
+      @keyframes draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @keyframes fill {
+        to {
+          fill: currentColor;
+        }
+      }
+
+      .mon {
+        color: #00bda7;
+      }
+
+      .ami {
+        color: #fff;
+      }
+  
+      .sublogo{
+        color:#1B8239;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 2rem;
+        position: absolute;
+        top:80px;
+        right: 35px;
+        opacity: 0;
+        animation:vibrar 3s ease forwards 0.5s;
+      }
+      @media screen and (max-width:576px) {
+        .logo::after{
+          right: 6rem;
+        }
+        .sublogo{
+           font-size: 1.5rem;
+           right: 124px;
+        }
+      }
+      @keyframes vibrar {
+        from{
+           opacity: 0;
+           letter-spacing: 5px;
+        }
+        to{
+            opacity: 1;
+         
+            letter-spacing: 1px;
+        }
+        
+      }
+
+
+      @keyframes aparecePelota {
+        0%{
+            opacity: 0;
+            transform: translateX(-700px) translateY(70px);
+        }
+        100%{
+            opacity: 1;
+            transform: translateX(0) translateY(0);
+        }
+        
+      }
+      @keyframes aparecePelotaCelu {
+        0%{
+            opacity: 0;
+            transform: translateX(-200px) translateY(-200px);
+        }
+        100%{
+            opacity: 1;
+            transform: translateX(0) translateY(0);
+        }
+        
+      }
+      @keyframes aparecePelotaTablet {
+        0%{
+            opacity: 0;
+            transform: translateX(-550px) translateY(70px);
+        }
+        100%{
+            opacity: 1;
+            transform: translateX(0) translateY(0);
+        }
+        
+      }
+      .contenido{
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .btn{
+        background: white;
+        color:black;
+        border-radius: 1rem;
+        padding: 0.5rem 3rem;
+        letter-spacing: 3px;
+        font-family: Roboto;
+        font-size: 1rem;
+        box-shadow: inset 3px 3px 3px rgba(0,0,0,0.2);
+        margin-top: -4rem;
+        cursor: pointer;
+      }
+        .btnNegro{
+        background: black;
+        color:white;
+        border-radius: 1rem;
+        padding: 0.5rem 3rem;
+        letter-spacing: 3px;
+        font-family: Roboto;
+        font-size: 1rem;
+        box-shadow: inset 3px 3px 3px rgba(255,255,255,0.2);
+        /* margin-top: -4rem; */
+        cursor: pointer;
+      }
+      .nav{
+        position: fixed;
+        top:0;
+        right: 0;
+        left: 0;
+        background: transparent;
+        font-family: Roboto;
+        z-index: 1000;
+      }
+      .nav .ul{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        gap:3rem;
+      }
+ 
+      @media screen and (max-width:768px) {
+        .nav .ul {
+          gap:1rem;
+        }
+        
+      }
+      .servicios{
+        background-color: #00bda7;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 3rem;
+        justify-content: center;
+        align-items: center;
+        gap:2rem;
+      }
+      .tarjeta{
+        width: 20rem;
+        height: 30rem;
+        border-radius: 1rem;
+        background-color: white;
+      }
+      .tarjeta img{
+        height: 15rem;
+        width: 20rem;
+        object-fit: cover;
+        border-top-right-radius: 1rem;
+        border-top-left-radius: 1rem;
+
+      }
+      .des{
+        display: flex;
+        flex-direction: column;
+        
+      }
+      .des h1{
+        text-align: center;
+        font-family: Roboto;
+        padding: 1rem;
+      }
+      .des p{
+        padding: 0.5rem;
+        text-align: justify;
+      }
+      .des button{
+        background-color: black;
+        padding: 0.356rem 0.7rem;
+        color: white;
+        letter-spacing: 3px;
+        margin: 0 auto;
+      }
+      .video{
+        width: auto;
+        height: 380px;
+        opacity: 0;
+        margin-left: 10rem;
+        border-radius: 40%;
+        position: relative;
+       
+     
+      }
+
+      @media screen and (max-width:1100px) {
+        
+        .video{
+          height: 350px;
+          width: auto;
+          margin-left: 5rem;
+        }
+        .logo::after{
+          animation: aparecePelotaTablet 2s ease forwards 1.5s;
+        }
+        
+      }
+      @media screen and (max-width:780px) {
+        
+        .video{
+          height: 200px;
+          width: auto;
+          margin-left: 0;
+         }
+         .logo::after{
+          animation: aparecePelotaCelu 2s ease forwards 1.5s;
+        }
+        
+      }
