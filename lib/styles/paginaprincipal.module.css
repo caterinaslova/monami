@@ -97,7 +97,7 @@
         border-radius: 50%;
         background-color: white;
         opacity: 0;
-        animation: aparecePelota 2s ease forwards 2.8s ;
+        animation: aparecePelota 2s ease forwards 2.5s ;
     
       }
 
@@ -139,19 +139,32 @@
         opacity: 0;
         animation:vibrar 3s ease forwards 0.5s;
       }
-      @media screen and (max-width:576px) {
+      @media screen and (max-width:996px) {
         .logo::after{
           right: 6rem;
         }
         .sublogo{
            font-size: 1.5rem;
            right: 124px;
+           animation: vibrarCelu 3s ease forwards 0.5s;
         }
       }
       @keyframes vibrar {
         from{
            opacity: 0;
            letter-spacing: 5px;
+        }
+        to{
+            opacity: 1;
+         
+            letter-spacing: 1px;
+        }
+        
+      }
+      @keyframes vibrarCelu {
+        from{
+           opacity: 0;
+           letter-spacing: 2px;
         }
         to{
             opacity: 1;
@@ -312,7 +325,7 @@
           margin-left: 5rem;
         }
         .logo::after{
-          animation: aparecePelotaTablet 2s ease forwards 2.8s;
+          animation: aparecePelotaTablet 2s ease forwards 2.5s;
         }
         
       }
@@ -324,7 +337,7 @@
           margin-left: 0;
          }
          .logo::after{
-          animation: aparecePelotaCelu 2s ease forwards 2.8s;
+          animation: aparecePelotaCelu 2s ease forwards 2.5s;
         }
         
       }
