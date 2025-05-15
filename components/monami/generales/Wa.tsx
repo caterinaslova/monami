@@ -1,5 +1,6 @@
 
 import { SiWhatsapp } from "react-icons/si";
+import { IoLogoWhatsapp } from "react-icons/io";
 
 export default function Wa() {
   const numero = '5493512521739'; // Código de país + número sin espacios
@@ -16,7 +17,7 @@ export default function Wa() {
         className='fixed bottom-10 right-10 text-white rounded-full shadow-lg hover:scale-125 transition duration-300 z-20'
         aria-label='logo whats app'
       >
-        <span className='text-green-600'><SiWhatsapp size={36!}/></span>
+        <div className='text-green-800 bg-stone-200 rounded-full shadow p-0 '><span className="z-30! " ><IoLogoWhatsapp   size={48!}/></span></div>
       </a>
     </div>
   );

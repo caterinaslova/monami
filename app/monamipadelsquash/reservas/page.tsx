@@ -1,6 +1,9 @@
 import Titulo from '@/components/admin/generales/Titulo'
 import TurnosSemana from '@/components/admin/Listados/TurnosSemana'
+import TituloCliente from '@/components/monami/generales/TituloCliente'
+import { Separator } from '@/components/ui/separator'
 import prisma from "@/lib/prisma"
+import { Suspense } from 'react'
 const hoy = new Date()
 hoy.setHours(0,0,0,0)
 
@@ -33,9 +36,12 @@ export default async function ReservasPage() {
   const turnosFijos = await getTurnosFijos()
   const horario = await getHorario()
   return ( 
-    <div className='w-full h-[100vh]flex justify-center items-center' id="home">
-      <Titulo titulo={'Turnos de la semana'}/>
-      <TurnosSemana turnosPuntuales={turnosPuntuales} turnosFijos={turnosFijos} horario={horario}/>
+    <div className='w-full h-[100vh]flex mt-25 justify-center items-center' id="home">
+      <TituloCliente texto={'Turnos de la semana'}/>
+      <Separator className='mb-3' />
+      <Suspense>
+         <TurnosSemana turnosPuntuales={turnosPuntuales} turnosFijos={turnosFijos} horario={horario}/>
+      </Suspense>
     </div>
   )
 }

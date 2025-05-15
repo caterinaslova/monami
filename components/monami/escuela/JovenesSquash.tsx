@@ -1,12 +1,11 @@
 import BotonContactoNegro from '@/components/monami/generales/BotonContactoNegro';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import TituloCliente from '../generales/TituloCliente';
 
 export default function JovenesSquash() {
   return (
     <>
-      <h1 className='my-5 text-lg md:text-xl font-semibold text-center'>
-        Escuela de Squash para jóvenes desde 7 a 14 años
-      </h1>
+      <TituloCliente texto="Escuela Squash para jóvenes de 7 a 14 años"/>
       <div className='flex flex-col md:flex-row justify-center items-center  gap-3'>
         <div className=' w-[90%] md:w-[30%] h-[600px] my-5'>
           <video

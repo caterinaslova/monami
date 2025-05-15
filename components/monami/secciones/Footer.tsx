@@ -35,7 +35,7 @@ export default function Footer() {
 
         <a href="https://www.facebook.com/profile.php?id=100064661110809"><span className="text-sky-600"><FaFacebookSquare size={40} /></span></a>
         <a href="https://www.instagram.com/monami_ps/"><span className="text-pink-400"><SlSocialInstagram  size={38} /></span></a>
-        <a href={url}><span className="text-green-600"><IoLogoWhatsapp size={40} /></span></a>
+        {/* <a href={url}><span className="text-green-600"><IoLogoWhatsapp size={40} /></span></a> */}
     </div>
 </div>
   )

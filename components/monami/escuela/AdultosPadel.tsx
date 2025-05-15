@@ -1,12 +1,11 @@
 import BotonContactoNegro from '@/components/monami/generales/BotonContactoNegro';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import TituloCliente from '../generales/TituloCliente';
 
 export default function AdultosPadel() {
   return (
     <>
-      <h1 className='my-5 text-lg md:text-xl font-semibold text-center'>
-        Escuela de Padel de 15 a 100 años
-      </h1>
+      <TituloCliente texto=" Escuela de Padel para adultos"/>
       <div className='flex flex-col md:flex-row justify-center items-center  gap-3'>
         <div className='w-[90%] md:w-[30%] h-[600px] my-5'>
           <video
