@@ -8,31 +8,26 @@ import prisma from "@/lib/prisma";
 const horariosPosiblesLunes=[
   {
     dia:"aLunes",
-    idNumero:1,
     horarioComienzo:"00:00",
     abierto:false
   },
   {
     dia:"aLunes",
-    idNumero:2,
     horarioComienzo:"00:30",
     abierto:false
   },
   {
     dia:"aLunes",
-    idNumero:3,
     horarioComienzo:"01:00",
     abierto:false
   },
   {
     dia:"aLunes",
-    idNumero:4,
     horarioComienzo:"01:30",
     abierto:false
   },
   {
     dia:"aLunes",
-    idNumero:5,
     horarioComienzo:"02:00",
     abierto:false
   },

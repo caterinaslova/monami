@@ -80,7 +80,6 @@ model TurnoPuntual {
 
 model HorarioPosible {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  idNumero        Int
   dia             String
   horarioComienzo String
   abierto         Boolean
