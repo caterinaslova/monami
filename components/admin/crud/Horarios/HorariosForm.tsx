@@ -1,21 +1,16 @@
 'use client';
 import { HorarioPosible } from '@/lib/generated/prisma';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { createHorario } from '@/actions/horariosAction';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
+  Form
 } from '@/components/ui/form';
 import { startTransition, useActionState, useEffect, useRef, useState } from 'react';
-import { createHorario } from '@/actions/horariosAction';
 import { toast } from 'react-toastify';
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 const FormSchema = z.object({
  
@@ -27,6 +22,10 @@ type HorarioFormTypes = {
 };
 
 export default function HorarioForm({ horario }: HorarioFormTypes) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  
 
   const [valor,setValor]= useState(horario.abierto)
 
@@ -37,6 +36,19 @@ export default function HorarioForm({ horario }: HorarioFormTypes) {
   });
   const form = useForm<z.infer<typeof FormSchema>>();
 
+   const recargarConParametros = () => {
+    const params = searchParams.toString(); // convierte los parámetros a string
+    const fullUrl = `${pathname}?${params}`;
+    
+    router.replace(fullUrl); // recarga la misma URL sin perder los parámetros
+  };
+
+  useEffect(()=>{
+    if (mensaje.errors.length){
+      recargarConParametros()
+      toast.error(mensaje.errors[0])
+    }
+  },[mensaje])
 
 
   return (

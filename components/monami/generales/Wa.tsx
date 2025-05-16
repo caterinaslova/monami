@@ -17,7 +17,7 @@ export default function Wa() {
         className='fixed bottom-10 right-10 text-white rounded-full shadow-lg hover:scale-125 transition duration-300 z-20'
         aria-label='logo whats app'
       >
-        <div className='text-green-800 bg-stone-200 rounded-full shadow p-0 '><span className="z-30! " ><IoLogoWhatsapp   size={48!}/></span></div>
+        <div className='text-green-800 bg-[rgba(255,255,255,0.7)] rounded-full shadow p-0 '><span className="z-30! " ><IoLogoWhatsapp   size={48!}/></span></div>
       </a>
     </div>
   );

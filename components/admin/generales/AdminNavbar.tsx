@@ -8,14 +8,14 @@ import BotonPerfil from "./BotonPerfil"
 import Link from "next/link"
 
 
-export function AdminNavbar() {
- 
+export function AdminNavbar({user}:{user:string}) {
+
 return(
   <div className="py-4 px-6 h-20 bg-secondary fixed top-0 right-0 left-0 flex items-center justify-center gap-10  md:justify-between">
     <div className=""> <Link href="/"><Logo /> </Link></div>
     <div className="flex gap-4">
            <ModeToggle/>
-           <BotonPerfil/>
+           <BotonPerfil user={user}/>
     </div>
   </div>
 

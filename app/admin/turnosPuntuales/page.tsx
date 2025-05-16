@@ -5,7 +5,7 @@ import { DataTable } from '../../../components/admin/crud/generales/data-table';
 import { columns } from './columns';
 import TurnoPuntualAgregar from '@/components/admin/crud/TurnosPuntuales/TurnoPuntualAgregar';
 
-const getTurnosFijos = async () => {
+const getTurnosPuntuales = async () => {
   const datos = await prisma.turnoPuntual.findMany({
     orderBy: {
       createdAt: 'desc',
@@ -33,11 +33,11 @@ const getTurnosFijos = async () => {
 };
 
 export default async function TurnosPuntualesPage() {
-  const data = await getTurnosFijos();
-
+  const data = await getTurnosPuntuales();
+ 
   return (
     <div>
-      <Titulo titulo='Listado de Turnos Fijos' />
+      <Titulo titulo='Listado de Turnos Puntuales' />
       <div className='container mx-auto py-1 max-w-[800px]'>
         <DataTable
           columns={columns}

@@ -1,6 +1,6 @@
 "use server"
 
-import { horariosPosibles, referenciaDia } from "@/lib/datos"
+import {  referenciaDia } from "@/lib/datos"
 import prisma from "@/lib/prisma"
 import { z } from "zod"
 import { Mensajeria } from "./zz-tiposDatosGenerales"
@@ -36,6 +36,8 @@ export const createTurnoPuntual = async (mensajeria:Mensajeria, formData:FormDat
   
     const diaReferenciado= DiaConLetras.parse(referenciaDia[diaNumero]) 
 
+    const horariosPosibles = await prisma.horarioPosible.findMany({where:{AND:[{dia:diaReferenciado},{abierto:true}]}})
+
     const dataCruda = {
         clienteId:formData.get('clienteId') as string,
         cancha:formData.get('cancha') as string,
@@ -53,19 +55,51 @@ export const createTurnoPuntual = async (mensajeria:Mensajeria, formData:FormDat
             exitoso:''
         }
     }
-   
-    const desde = Number(dataValida.data.horaComienzo)
-    const hasta = desde + Number(dataValida.data.cantidadModulos)
+  
+    const desde = horariosPosibles.findIndex(item=>item.id===dataValida.data.horaComienzo)
+  
+   const hasta = desde + Number(dataValida.data.cantidadModulos)
+
+     if (hasta> horariosPosibles.length){
+        return {
+      errors:['Los horarios elegidos superan los horarios abiertos de este día'],
+      exitoso: '',
+    };
+  }
 
     const modulosOcupados:string[] =[]
 
     for (let i=desde; i< hasta; i++){
+
+        if(!horariosPosibles[i]){
+            return{
+                errors:['Eligió un turno cerrado'],
+                 exitoso:''
+            }
+        }
        
         modulosOcupados.push(horariosPosibles[i].horarioComienzo) 
     }
-   
- const horaFinaliza= horariosPosibles[hasta].horarioComienzo
- const horaComienzoString = horariosPosibles[desde].horarioComienzo
+
+ const cerrados = modulosOcupados
+  .map(item => horariosPosibles.find(horario => horario.horarioComienzo === item))
+  .filter(horario => horario && !horario.abierto);
+
+   if (cerrados.length>0){
+            return{
+        errors:['Ha elegido horarios cerrados. debe abrirlo primero.'],
+        exitoso:''
+    }
+   }
+let horaFinaliza=""
+if (hasta < horariosPosibles.length){
+
+    horaFinaliza= horariosPosibles[hasta].horarioComienzo
+}else{
+    horaFinaliza="24:00"
+}
+ 
+
 
  const verificarOcupadoPuntual = await prisma.turnoPuntual.findFirst({
     where:{
@@ -80,7 +114,7 @@ export const createTurnoPuntual = async (mensajeria:Mensajeria, formData:FormDat
             {
             AND:[
             {fecha:dataValida.data.fecha},
-            {modulosOcupados:{has: horaComienzoString}},
+            {modulosOcupados:{hasSome: modulosOcupados}},
             {cancha:dataValida.data.cancha}
             ]
             }
@@ -108,7 +142,7 @@ export const createTurnoPuntual = async (mensajeria:Mensajeria, formData:FormDat
             {
             AND:[
             {dia:diaReferenciado},
-            {modulosOcupados:{has: horaComienzoString}},
+            {modulosOcupados:{hasSome: modulosOcupados}},
             {cancha:dataValida.data.cancha}
             ]
             }
@@ -128,7 +162,7 @@ export const createTurnoPuntual = async (mensajeria:Mensajeria, formData:FormDat
         fecha:new Date(dataValida.data.fecha),
         cancha:dataValida.data.cancha,
         dia:dataValida.data.dia,
-        horaComienzo:dataValida.data.horaComienzo,
+        horaComienzo:horariosPosibles[desde].horarioComienzo,
         cantidadModulos:dataValida.data.cantidadModulos,
         horaFinaliza,
         modulosOcupados,

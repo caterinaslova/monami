@@ -8,13 +8,20 @@ hoy.setHours(0,0,0,0)
   const turnosPuntuales = await prisma.turnoPuntual.findMany({
     where:{
       fecha:{gte:hoy}
+    },
+    include:{
+      cliente:true
     }
   })
   return turnosPuntuales
  }
 
 const getTurnosFijos = async()=>{
-  const turnosFijos= await prisma.turnoFijo.findMany({})
+  const turnosFijos= await prisma.turnoFijo.findMany({
+    include:{
+      cliente:true
+    }
+  })
   return turnosFijos
 }
 
@@ -32,10 +39,12 @@ export default async function AdminPage() {
   const turnosPuntuales = await getTurnosPuntuales()
   const turnosFijos = await getTurnosFijos()
   const horario = await getHorario()
+  const conNombre=true
+
   return ( 
     <div className='w-full h-[100vh]flex justify-center items-center'>
       <Titulo titulo={'Turnos de la semana'}/>
-      <TurnosSemana turnosPuntuales={turnosPuntuales} turnosFijos={turnosFijos} horario={horario}/>
+      <TurnosSemana turnosPuntuales={turnosPuntuales} turnosFijos={turnosFijos} horario={horario} conNombre={conNombre}/>
     </div>
   )
 }

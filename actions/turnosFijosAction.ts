@@ -43,9 +43,15 @@ export const createTurnoFijo = async (
       exitoso: '',
     };
   }
-
-  const desde = Number(dataValida.data.horaComienzo);
+  const horariosPosibles = await prisma.horarioPosible.findMany({where:{dia:dataValida.data.dia}})
+  const desde = horariosPosibles.findIndex(item=>item.id===dataValida.data.horaComienzo)
   const hasta = desde + Number(dataValida.data.cantidadModulos);
+  if (hasta> horariosPosibles.length){
+        return {
+      errors:['Los horarios elegidos superan los horarios abiertos de este día'],
+      exitoso: '',
+    };
+  }
 
    const horaComienzoString = horariosPosibles[desde].horarioComienzo
 
@@ -54,7 +60,25 @@ export const createTurnoFijo = async (
   for (let i = desde; i < hasta; i++) {
     modulosOcupados.push(horariosPosibles[i].horarioComienzo);
   }
-  const horaFinaliza= horariosPosibles[hasta].horarioComienzo
+ 
+const cerrados = modulosOcupados
+  .map(item => horariosPosibles.find(horario => horario.horarioComienzo === item))
+  .filter(horario => horario && !horario.abierto);
+
+   if (cerrados.length>0){
+            return{
+        errors:['Ha elegido horarios cerrados. debe abrirlo primero.'],
+        exitoso:''
+    }
+   }
+ let horaFinaliza=""
+if (hasta < horariosPosibles.length){
+
+    horaFinaliza= horariosPosibles[hasta].horarioComienzo
+}else{
+    horaFinaliza="24:00"
+}
+ 
 
   const verificarOcupadoFijo = await prisma.turnoFijo.findFirst({
     where:{
@@ -69,7 +93,7 @@ export const createTurnoFijo = async (
             {
             AND:[
             {dia:dataValida.data.dia},
-            {modulosOcupados:{has: horaComienzoString}},
+            {modulosOcupados:{hasSome: modulosOcupados}},
             {cancha:dataValida.data.cancha}
             ]
             }
@@ -98,7 +122,7 @@ export const createTurnoFijo = async (
             {
             AND:[
             {dia:dataValida.data.dia},
-            {modulosOcupados:{has: horaComienzoString}},
+            {modulosOcupados:{hasSome: modulosOcupados}},
             {cancha:dataValida.data.cancha}
             ]
             }
@@ -120,16 +144,16 @@ export const createTurnoFijo = async (
       clienteId: dataValida.data.clienteId,
       cancha: dataValida.data.cancha,
       dia: dataValida.data.dia,
-      horaComienzo: dataValida.data.horaComienzo,
+      horaComienzo: horaComienzoString,
       cantidadModulos: dataValida.data.cantidadModulos,
       horaFinaliza,
       modulosOcupados,
       createdAt: new Date(),
     },
   });
-  // antes de dar de alta verificar que no se repita en este mismo archivo
-  // día y hora
-  // verificar que no haya turnos asignados en el de turnos generales que todavia no hice
+// falta verificar que no superen los turnos finales del día
+// y que los que se cargan sean correlativos
+// y que ninguno de los modulos est+e coupado
 
   return {
     errors: [],

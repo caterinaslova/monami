@@ -10,6 +10,10 @@ export type TurnoPuntualType ={
     modulosOcupados: string[]
     createdAt :      Date
     updatedAt :      Date
+    cliente:{
+        id:String
+        nombre:String
+    }
 }
 export type TurnoFijoType ={
     id:             string
@@ -22,4 +26,8 @@ export type TurnoFijoType ={
     modulosOcupados: string[]
     createdAt :      Date
     updatedAt :      Date
+    cliente:{
+        id:String
+        nombre:String
+    }
 }

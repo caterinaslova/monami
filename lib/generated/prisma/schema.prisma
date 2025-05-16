@@ -82,3 +82,12 @@ model HorarioPosible {
   horarioComienzo String
   abierto         Boolean
 }
+
+model Administrador {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  email              String   @unique()
+  password           String
+  createdAt          DateTime @default(now())
+  twoFactorSecret    String
+  twoFactorActivated Boolean  @default(false)
+}

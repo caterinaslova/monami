@@ -38,7 +38,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { horariosPosibles } from '@/lib/datos';
+
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
@@ -54,6 +54,8 @@ import {
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { z } from 'zod';
+import { HorarioPosible } from "@/lib/generated/prisma";
+import { diasOrdenados } from "@/lib/datos";
 
 const formSchema = z.object({
   fecha: z.date(),
@@ -69,6 +71,7 @@ const formSchema = z.object({
 type TurnoPuntualFormProps = {
 
   clientesSelect: { label: string; value: string }[];
+  horariosPosibles: HorarioPosible[]
 };
 
 const hoy = new Date()
@@ -77,6 +80,7 @@ hoy.setHours(0,0,0,0)
 export default function TurnoPuntualForm({
 
   clientesSelect,
+  horariosPosibles
 }: TurnoPuntualFormProps) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
@@ -90,6 +94,8 @@ export default function TurnoPuntualForm({
       exitoso: '',
     }
   );
+  const diaNumero = fecha.getDay()
+  let horariosAbiertos = horariosPosibles.filter((item) => item.dia===diasOrdenados[diaNumero]);
 
   useEffect(() => {
     if (mensaje.errors.length) {
@@ -97,7 +103,7 @@ export default function TurnoPuntualForm({
     }
     if (mensaje.exitoso) {
       toast.success(mensaje.exitoso);
-      router.push('/admin/turnosPuntuales');
+      router.push('/admin');
     }
   }, [mensaje]);
 
@@ -114,7 +120,10 @@ export default function TurnoPuntualForm({
     mode:'onChange'
   });
 
-  const horariosAbiertos = horariosPosibles.filter((item) => item.abierto);
+  useEffect(()=>{
+   horariosAbiertos = horariosPosibles.filter((item) => item.dia===diasOrdenados[diaNumero]);
+  },[fecha])
+  
 
 
   return (
@@ -237,8 +246,6 @@ export default function TurnoPuntualForm({
                         <SelectItem value='Squash3'>Squash 3</SelectItem>
                         <SelectItem value='Padel1'>Padel 1</SelectItem>
                         <SelectItem value='Padel2'>Padel 2</SelectItem>
-                        <SelectItem value='Asador1'>Asador 1</SelectItem>
-                        <SelectItem value='Asador2'>Asador 2</SelectItem>
                       </SelectContent>
                     </Select>
 

@@ -35,8 +35,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { horariosPosibles } from '@/lib/datos';
-import { TurnoFijo } from '@/lib/generated/prisma';
+
+import { HorarioPosible, TurnoFijo } from '@/lib/generated/prisma';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Check, ChevronsUpDown } from 'lucide-react';
@@ -70,9 +70,10 @@ type ClienteFormProps = {
   tarea: 'agregar' | 'modificar' | 'ver';
   turnoFijo?: TurnoFijo | null;
   clientesSelect:{label:string,value:string}[]
+  horariosPosibles: HorarioPosible[]
 };
 
-export default function TurnoFijoForm({ tarea, turnoFijo,clientesSelect}: ClienteFormProps) {
+export default function TurnoFijoForm({ tarea, turnoFijo,clientesSelect,  horariosPosibles}: ClienteFormProps) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const [open, setOpen] = useState(false);
@@ -87,13 +88,15 @@ export default function TurnoFijoForm({ tarea, turnoFijo,clientesSelect}: Client
     }
   );
 
+ 
+
   useEffect(() => {
     if (mensaje.errors.length) {
       mensaje.errors.map((error) => toast.error(error));
     }
     if (mensaje.exitoso) {
       toast.success(mensaje.exitoso);
-      router.push('/admin/turnosFijos');
+      router.push('/admin');
     }
   }, [mensaje]);
 
@@ -109,8 +112,13 @@ export default function TurnoFijoForm({ tarea, turnoFijo,clientesSelect}: Client
     },
    
   });
+  const diaElegido = form.watch("dia")
+   let horariosAbiertos = horariosPosibles.filter((item) => item.dia===diaElegido);
+  useEffect(()=>{
+     horariosAbiertos = horariosPosibles.filter((item) => item.dia===diaElegido);
+    },[diaElegido])
 
-  const horariosAbiertos = horariosPosibles.filter((item) => item.abierto);
+ 
 
   return (
     <Form {...form}>
@@ -232,8 +240,6 @@ export default function TurnoFijoForm({ tarea, turnoFijo,clientesSelect}: Client
                         <SelectItem value='Squash3'>Squash 3</SelectItem>
                         <SelectItem value='Padel1'>Padel 1</SelectItem>
                         <SelectItem value='Padel2'>Padel 2</SelectItem>
-                        <SelectItem value='Asador1'>Asador 1</SelectItem>
-                        <SelectItem value='Asador2'>Asador 2</SelectItem>
                       </SelectContent>
                     </Select>
 

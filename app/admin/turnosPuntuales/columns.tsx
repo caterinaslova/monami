@@ -88,8 +88,7 @@ export const columns: ColumnDef<TurnoFijoType>[] = [
       },
     cell:({row})=>{
         const horaComienzo =row.getValue("horaComienzo") as number
-       const desde = horariosPosibles[horaComienzo].horarioComienzo
-        return <div className=" text-center">{desde}</div>
+            return <div className=" text-center">{horaComienzo}</div>
     }
   },
   {

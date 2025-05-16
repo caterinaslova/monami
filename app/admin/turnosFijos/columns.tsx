@@ -2,12 +2,11 @@
 
 import EliminarCliente from "@/components/admin/crud/Clientes/EliminarCliente"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table"
+import { format } from "date-fns"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import Link from "next/link"
-import { format } from "date-fns";
-import { horariosPosibles } from "@/lib/datos"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -96,8 +95,8 @@ export const columns: ColumnDef<TurnoFijoType>[] = [
       },
     cell:({row})=>{
         const horaComienzo =row.getValue("horaComienzo") as number
-       const desde = horariosPosibles[horaComienzo].horarioComienzo
-        return <div className=" text-center">{desde}</div>
+     
+        return <div className=" text-center">{horaComienzo}</div>
     }
   },
   {

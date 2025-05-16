@@ -15,9 +15,10 @@ type TurnosSemanaProps={
   turnosPuntuales:TurnoPuntualType[];
   turnosFijos:TurnoFijoType[];
   horario:HorarioPosible[]
+  conNombre:boolean
 }
 
-export default function TurnosSemana({turnosPuntuales,turnosFijos,horario}:TurnosSemanaProps) {
+export default function TurnosSemana({turnosPuntuales,turnosFijos,horario,conNombre}:TurnosSemanaProps) {
     const [fecha,setFecha]= useState(hoy)
 
     const diaNumero = fecha.getDay()
@@ -31,7 +32,7 @@ export default function TurnosSemana({turnosPuntuales,turnosFijos,horario}:Turno
         <SeleccionarFechaForm fecha={fecha} setFecha={setFecha}/>
         <ReferenciaOcupados/>
       </div>
-      <ListarOcupados fecha={fecha} turnosPuntuales={turnosPuntuales} turnosFijos={turnosFijos} horarioDeEseDia={horarioDeEseDia}/>
+      <ListarOcupados fecha={fecha} turnosPuntuales={turnosPuntuales} turnosFijos={turnosFijos} horarioDeEseDia={horarioDeEseDia} conNombre={conNombre}/>
 
     </div>
   )

@@ -15,13 +15,21 @@ const getClientesParaSelect = async ()=>{
     return datosSelect
   }
 
+  const getHorariosPosibles = async ()=>{
+    const horariosPosibles = await prisma.horarioPosible.findMany({
+      where:{abierto:true}
+    })
+    return horariosPosibles
+  }
+
 export default async function AgregarTurnoFijo() {
      const clientesSelect = await getClientesParaSelect()
+     const horariosPosibles = await getHorariosPosibles()
   return (
     <div>
         <Titulo titulo='Agregar turno Fijo'/>
         <div className="max-w-[900px] mx-auto">
-           <TurnoPuntualForm   clientesSelect={clientesSelect}/>
+           <TurnoPuntualForm   clientesSelect={clientesSelect} horariosPosibles={horariosPosibles}/>
         </div>
     </div>
   )
