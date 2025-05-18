@@ -24,7 +24,7 @@ return(
         <Link href="/monamipadelsquash/reservas" className="hidden xl:block tracking-widest">Reservas</Link>
          <Link href="/monamipadelsquash/torneos" className="hidden xl:block tracking-widest">Torneos</Link>
         <Link href="https://maps.app.goo.gl/UcyNPscFnckB6GnB9" target="_blank" className="flex gap-2"><span className="text-[#00BDA7]"><LandPlot/></span><span className="tracking-widest">Enrique Larreta 660</span></Link>
-        <Link href={url} target="_blank" className="flex gap-2"><span className="text-green-500"><PhoneOutgoing/></span><span className="tracking-wider">351 - 252 1739</span></Link>
+
 
     </div>
   </div>
