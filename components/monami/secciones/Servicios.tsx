@@ -1,3 +1,4 @@
+"use client"
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -9,11 +10,32 @@ import {
 } from '@/components/ui/card';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Servicios() {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+  const observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) setVisible(true);
+  }, { threshold: 0.05 });
+
+  if (ref.current) observer.observe(ref.current);
+
+  return () => {
+    if (ref.current) observer.unobserve(ref.current);
+  };
+}, []);
+
   return (
-    <div className='flex flex-wrap gap-5 justify-center items-center'>
-      <Card className='w-[350px] h-[510px] p-0 pb-4 hover:shadow-lg transition-all'>
+    <div className='min-h-screen flex flex-wrap gap-5 justify-center items-center' ref={ref}>
+      <Card className={` w-[350px] h-[510px] p-0 pb-4 hover:shadow-lg rounded-xl  shadow-md transform transition-all duration-700 ease-out
+            ${visible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-10'}
+          `}
+          style={{ transitionDelay: `${1 * 150}ms` }}>
         <CardHeader className='m-0 p-0'>
           <div className='w-[348px] h-[280px] relative'>
             <Image
@@ -37,7 +59,12 @@ export default function Servicios() {
         </CardFooter>
       </Card>
 
-      <Card className='w-[350px] h-[510px] p-0 pb-4 hover:shadow-lg transition-all'>
+      <Card className={` w-[350px] h-[510px] p-0 pb-4 hover:shadow-lg rounded-xl  shadow-md transform transition-all duration-700 ease-out
+            ${visible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-10'}
+          `}
+          style={{ transitionDelay: `${2 * 150}ms` }}>
         <CardHeader className='m-0 p-0'>
           <div className='w-[348px] h-[280px] relative'>
             <Image
@@ -64,7 +91,12 @@ export default function Servicios() {
       </Card>
 
       
-      <Card className='w-[350px] h-[510px] p-0 pb-4 hover:shadow-lg transition-all'>
+      <Card className={` w-[350px] h-[510px] p-0 pb-4 hover:shadow-lg rounded-xl  shadow-md transform transition-all duration-700 ease-out
+            ${visible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-10'}
+          `}
+          style={{ transitionDelay: `${1 * 150}ms` }}>
         <CardHeader className='m-0 p-0'>
           <div className='w-[348px] h-[280px] relative'>
             <Image

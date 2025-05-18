@@ -150,3 +150,12 @@ html {
   object-fit: cover; /* O 'contain', según lo que busques */
   border-radius: 8px;
 }
+.animate {
+    opacity: 0;
+    filter: blur(5px);
+    transition: 0.5s;
+}
+.show-animate .animate {
+    opacity: 1;
+    filter: blur(0px);
+}

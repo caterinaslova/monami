@@ -3,8 +3,9 @@
 import * as React from "react"
 
 import Logo from '@/components/admin/generales/Logo'
-import { LandPlot, PhoneOutgoing } from "lucide-react"
+import { LandPlot,  PhoneOutgoing } from "lucide-react"
 import Link from "next/link"
+import MenuCliente from "./MenuCliente"
 
 
 
@@ -17,8 +18,11 @@ export function MonAmiNavbar() {
 return(
   <div className="py-4 px-6 h-20 bg-primary fixed top-0 right-0 left-0 flex items-center  gap-2  justify-between">
     <div className=""> <Link href="/"><Logo /> </Link></div>
-    <div className="flex flex-wrap justify-center items-center gap-1 md:gap-20 text-white">
-        <Link href="/" className="hidden md:block tracking-widest">Inicio</Link>
+    <MenuCliente/>
+    <div className="hidden xl:flex flex-wrap justify-center items-center gap-1 xl:gap-20 text-white">
+        <Link href="/monamipadelsquash/escuela" className="hidden xl:block tracking-widest">Escuela</Link>
+        <Link href="/monamipadelsquash/reservas" className="hidden xl:block tracking-widest">Reservas</Link>
+         <Link href="/monamipadelsquash/torneos" className="hidden xl:block tracking-widest">Torneos</Link>
         <Link href="https://maps.app.goo.gl/UcyNPscFnckB6GnB9" target="_blank" className="flex gap-2"><span className="text-[#00BDA7]"><LandPlot/></span><span className="tracking-widest">Enrique Larreta 660</span></Link>
         <Link href={url} target="_blank" className="flex gap-2"><span className="text-green-500"><PhoneOutgoing/></span><span className="tracking-wider">351 - 252 1739</span></Link>
 

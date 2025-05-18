@@ -4,7 +4,7 @@ import InfoTorneos from "@/components/monami/torneos/InfoTorneos";
 
 export default function TorneosPage() {
   return (
-    <div className="flex flex-col p-5 m-10 mt-20">
+    <div className="flex flex-col px-1 mx-1 mt-24">
       <TituloCliente texto="Torneos en Monami Padel Squash"/>
       <InfoTorneos/>
       <InfoTorneos/>

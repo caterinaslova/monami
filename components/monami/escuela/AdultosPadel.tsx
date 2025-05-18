@@ -14,7 +14,7 @@ export default function AdultosPadel() {
             muted
             loop
             className=' rounded-xl w-full h-[600px] object-cover'
-            poster='/imagenes/escuela.jpg'
+            poster='/imagenes/padel.jpg'
           >
             <source src='/imagenes/padel3.mp4' type='video/mp4' />
             Disculpe, su explorador no admite videos.

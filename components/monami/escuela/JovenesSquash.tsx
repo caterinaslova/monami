@@ -2,6 +2,7 @@ import BotonContactoNegro from '@/components/monami/generales/BotonContactoNegro
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import TituloCliente from '../generales/TituloCliente';
 
+
 export default function JovenesSquash() {
   return (
     <>
@@ -41,6 +42,7 @@ export default function JovenesSquash() {
                 nacionales, en la medida que el joven lo decida. Sin presiones,
                 asimilando la vida deportiva como su mundo natural y corriente.
               </p>
+        
               <h4 className='my-10 font-black tracking-widest text-center text-3xl'>
                 Acercate, vení a ver!!!
               </h4>
