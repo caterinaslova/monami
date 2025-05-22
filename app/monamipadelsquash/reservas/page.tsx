@@ -7,6 +7,7 @@ import { Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 const hoy = new Date();
 hoy.setHours(0, 0, 0, 0);
+hoy.setUTCHours(hoy.getUTCHours() - 3)
 
 const getTurnosPuntuales = async () => {
   const turnosPuntuales = await prisma.turnoPuntual.findMany({

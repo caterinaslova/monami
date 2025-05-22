@@ -47,7 +47,7 @@ export const createTurnoGeneral = async (mensajeria:Mensajeria,formData:FormData
     
     const fechaDate = new Date(anio,mes,diaElegido)
     fechaDate.setUTCHours(fechaDate.getUTCHours() + 3)
-  console.log(fechaDate)
+  
 
 
     const diaNumero = fechaDate.getDay()
