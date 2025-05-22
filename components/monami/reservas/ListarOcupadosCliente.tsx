@@ -199,10 +199,10 @@ export default function ListarOcupadosCliente({
                           <SheetHeader>
                             <SheetTitle>Revisa los datos a  grabar</SheetTitle>
                             <div className="mt-5">
-                              <SheetDescription className='text-lg tracking-wide text-stone-900'><strong>Día: </strong> {format(hoy, 'dd-MM-yyyy')}
+                              <SheetDescription className='text-lg tracking-wide text-stone-900 dark:text-stone-100'><strong>Día: </strong> {format(hoy, 'dd-MM-yyyy')}
                               </SheetDescription>
-                              <SheetDescription className='text-lg tracking-wide text-stone-900'><strong>Cancha: </strong> {cancha}</SheetDescription>
-                              <SheetDescription className='text-lg tracking-wide text-stone-900'><strong>A partir de: </strong>{hora} h.</SheetDescription>
+                              <SheetDescription className='text-lg tracking-wide text-stone-900 dark:text-stone-100'><strong>Cancha: </strong> {cancha}</SheetDescription>
+                              <SheetDescription className='text-lg tracking-wide text-stone-900 dark:text-stone-100'><strong>A partir de: </strong>{hora} h.</SheetDescription>
                             </div>
 
                           </SheetHeader>

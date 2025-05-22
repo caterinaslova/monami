@@ -87,6 +87,10 @@ export default function FormReservaCliente({
       setHayError(true)
       
     }
+    if (mensaje.exitoso) {
+      // toast.success(mensaje.exitoso);
+      router.push('/monamipadelsquash/reservas')
+    }
 
   }, [mensaje]);
 

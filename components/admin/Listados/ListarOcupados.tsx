@@ -10,7 +10,7 @@ import {
 import { referenciaDia } from '@/lib/datos';
 import { HorarioPosible, TurnoRegistradoPorCliente } from '@/lib/generated/prisma';
 import { DiaConLetras } from '@/lib/schemas';
-import { TurnoFijoType, TurnoPuntualType } from '@/lib/types';
+import { TurnoAutoType, TurnoFijoType, TurnoPuntualType } from '@/lib/types';
 import { format } from 'date-fns';
 import { GiImpLaugh } from 'react-icons/gi';
 import FormReserva from './FormReserva';
@@ -25,7 +25,7 @@ type ListarOcupadosProps = {
   turnosPuntuales: TurnoPuntualType[];
   turnosFijos: TurnoFijoType[];
   horarioDeEseDia: HorarioPosible[];
-  turnosAutoRegistrados:TurnoRegistradoPorCliente[]
+  turnosAutoRegistrados:TurnoAutoType[]
    clientesSelect: { label: string; value: string }[];
 };
 
@@ -113,7 +113,7 @@ export default function ListarOcupados({
                         turno || turnoFijo || turnoAuto || cerrado
                           ? turnoFijo
                             ? 'bg-stone-800'
-                            : turnoAuto ?'bg-red-500' : cerrado ? `${diagonal}` :'bg-stone-500'
+                            : turnoAuto ? 'bg-red-500' : cerrado ? `${diagonal}` :'bg-stone-500'
                           : 'bg-green-200'
                       }`}
                           >
@@ -128,7 +128,7 @@ export default function ListarOcupados({
                                   <p className='text-[10px] text-white'>
                                     {turnoFijo!.cliente.nombre.slice(0, 8)}
                                   </p>
-                                ): (<p className='text-[10px] text-white'>{turnoAuto!.usuarioId.slice(0,8)}</p>)
+                                ): (<p className='text-[10px] text-white'>{turnoAuto!.usuario.name.slice(0,8)}</p>)
                               ) : null}
                           </div>
                         </SheetTrigger>
@@ -136,10 +136,10 @@ export default function ListarOcupados({
                           <SheetHeader>
                             <SheetTitle>Revisa los datos a  grabar</SheetTitle>
                             <div className="mt-5">
-                              <SheetDescription className='text-lg tracking-wide text-stone-900'><strong>Día: </strong> {format(hoy, 'dd-MM-yyyy')}
+                              <SheetDescription className='text-lg tracking-wide text-stone-900 dark:text-stone-100'><strong>Día: </strong> {format(hoy, 'dd-MM-yyyy')}
                               </SheetDescription>
-                              <SheetDescription className='text-lg tracking-wide text-stone-900'><strong>Cancha: </strong> {cancha}</SheetDescription>
-                              <SheetDescription className='text-lg tracking-wide text-stone-900'><strong>A partir de: </strong>{hora} h.</SheetDescription>
+                              <SheetDescription className='text-lg tracking-wide text-stone-900 dark:text-stone-100'><strong>Cancha: </strong> {cancha}</SheetDescription>
+                              <SheetDescription className='text-lg tracking-wide text-stone-900 dark:text-stone-100'><strong>A partir de: </strong>{hora} h.</SheetDescription>
                             </div>
 
                           </SheetHeader>
@@ -200,7 +200,7 @@ export default function ListarOcupados({
                                   <p className='text-[10px] text-white'>
                                     {turnoFijo!.cliente.nombre.slice(0, 8)}
                                   </p>
-                                ) : (<p className='text-[10px] text-white'>{turnoAuto!.usuarioId.slice(0,8)}</p>)
+                                ) : (<p className='text-[10px] text-white'>{turnoAuto!.usuario.name.slice(0,8)}</p>)
                               ) : null
                             }
                           </div>

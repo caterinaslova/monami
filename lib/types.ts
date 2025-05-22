@@ -11,8 +11,8 @@ export type TurnoPuntualType ={
     createdAt :      Date
     updatedAt :      Date
     cliente:{
-        id:String
-        nombre:String
+        id:string
+        nombre:string
     }
 }
 export type TurnoFijoType ={
@@ -27,7 +27,25 @@ export type TurnoFijoType ={
     createdAt :      Date
     updatedAt :      Date
     cliente:{
-        id:String
-        nombre:String
+        id:string
+        nombre:string
+    }
+}
+export type TurnoAutoType ={
+    id:             string
+    fecha :         Date
+    usuarioId :      string
+    cancha :         string
+    dia :            string
+    horaComienzo :   string
+    cantidadModulos: number
+    horaFinaliza:    string
+    modulosOcupados: string[]
+    createdAt :      Date
+    updatedAt :      Date
+    usuario:{
+        id:string
+        name:string,
+        role:'USER' | 'ADMIN'
     }
 }

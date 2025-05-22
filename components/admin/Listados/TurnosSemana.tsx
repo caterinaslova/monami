@@ -1,5 +1,5 @@
 "use client"
-import { TurnoFijoType, TurnoPuntualType } from '@/lib/types'
+import { TurnoAutoType, TurnoFijoType, TurnoPuntualType } from '@/lib/types'
 import { useState } from 'react'
 import ListarOcupados from './ListarOcupados'
 import { SeleccionarFechaForm } from './SeleccionarFecha'
@@ -14,7 +14,7 @@ hoy.setHours(0,0,0,)
 type TurnosSemanaProps={
   turnosPuntuales:TurnoPuntualType[];
   turnosFijos:TurnoFijoType[];
-  turnosAutoRegistrados:TurnoRegistradoPorCliente[]
+  turnosAutoRegistrados:TurnoAutoType[]
   horario:HorarioPosible[]
   clientesSelect: { label: string; value: string }[];
 }

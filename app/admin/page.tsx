@@ -2,6 +2,7 @@ import { auth } from '@/auth'
 import Titulo from '@/components/admin/generales/Titulo'
 import TurnosSemana from '@/components/admin/Listados/TurnosSemana'
 import prisma from "@/lib/prisma"
+import { TurnoAutoType } from '@/lib/types'
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 const hoy = new Date()
@@ -32,9 +33,15 @@ const getTurnosFijos = async()=>{
     where:{
       fecha:{gte:hoy}
     },
-    // include:{
-    //   usuario:true
-    // }
+    include:{
+      usuario:{
+        select:{
+          id:true,
+          name:true,
+          role:true
+        }
+      }
+    }
   })
   return turnosRegistrados
  }
