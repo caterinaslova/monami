@@ -4,6 +4,8 @@ import Titulo from '@/components/admin/generales/Titulo';
 import prisma from '@/lib/prisma';
 import { DataTable } from '../../../components/admin/crud/generales/data-table';
 import { columns } from './columns';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
 
 
@@ -32,6 +34,10 @@ const getTurnosFijos = async () => {
 };
 
 export default async function TurnosFijosPage() {
+    const session = await auth()
+    if (!session?.user.id || session?.user.role !== "ADMIN"){
+      redirect('/login')
+    }
   const data = await getTurnosFijos();
  
   return (

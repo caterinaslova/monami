@@ -32,7 +32,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <a href={'/admin'} >
                       <CalendarCheck/>
-                      <span>Hoy</span>
+                      <span>Todos los turnos</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

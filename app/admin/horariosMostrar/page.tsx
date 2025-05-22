@@ -40,7 +40,7 @@ export default async function HorariosPage({searchParams}:{searchParams:SearchPa
       <Titulo titulo={"Horarios del club"}/>
       <div className="flex flex-col justify-center items-center space-y-3">
         <FiltrarPorDia/>
-        <HorariosList horariosDeEseDia={horariosDeEseDia} tarea="abrir"/>
+        <HorariosList horariosDeEseDia={horariosDeEseDia} tarea="mostrar"/>
       </div>
    
     </div>

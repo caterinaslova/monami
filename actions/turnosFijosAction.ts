@@ -1,6 +1,6 @@
 'use server';
 
-import { horariosPosibles } from '@/lib/datos';
+
 import prisma from '@/lib/prisma';
 import { z } from 'zod';
 import { Mensajeria } from './zz-tiposDatosGenerales';
@@ -43,7 +43,7 @@ export const createTurnoFijo = async (
       exitoso: '',
     };
   }
-  const horariosPosibles = await prisma.horarioPosible.findMany({where:{dia:dataValida.data.dia}})
+  const horariosPosibles = await prisma.horarioPosible.findMany({where:{dia:dataValida.data.dia},orderBy:{horarioComienzo:'asc'}})
   const desde = horariosPosibles.findIndex(item=>item.id===dataValida.data.horaComienzo)
   const hasta = desde + Number(dataValida.data.cantidadModulos);
   if (hasta> horariosPosibles.length){
@@ -136,7 +136,34 @@ if (hasta < horariosPosibles.length){
         exitoso:''
     }
  }
+const verificarOcupadoAuto = await prisma.turnoRegistradoPorCliente.findFirst({
+    where:{
+        OR:[
+            {
+            AND:[
+            {dia:dataValida.data.dia},
+            {horaComienzo:dataValida.data.horaComienzo},
+            {cancha:dataValida.data.cancha}
+            ]
+            },
+            {
+            AND:[
+            {dia:dataValida.data.dia},
+            {modulosOcupados:{hasSome: modulosOcupados}},
+            {cancha:dataValida.data.cancha}
+            ]
+            }
+        ]
 
+    }
+ })
+
+ if (verificarOcupadoAuto){
+        return{
+        errors:['Ya hay un turno Autoregistrado en ese horario, en ese dia, en esa cancha.'],
+        exitoso:''
+    }
+ }
  
 
   await prisma.turnoFijo.create({

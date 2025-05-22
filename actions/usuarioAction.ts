@@ -5,24 +5,36 @@ import { z } from "zod"
 import  {hash} from "bcryptjs"
 import prisma from "@/lib/prisma";
 import { passwordSchema } from "@/lib/validaciones/passwordSchema";
-import { signIn, signOut } from "@/auth";
+import { auth, signIn, signOut } from "@/auth";
+import { AuthError } from "next-auth";
+
+interface User {
+    id:string;
+    name:string;
+    email:string;
+    role: string;
+}
 
 
-export const registerUser = async ({email,password,passwordConfirm}:{
+export const registerUser = async ({email,name,password,passwordConfirm}:{
     email:string,
+    name:string,
     password:string,
     passwordConfirm:string
+    
 })=>{
 
 
     try {
-        const newUserSchema = z.object({  email: z.string().email({message:"Debe escribir un email válido"}),
+        const newUserSchema = z.object({ name:z.string().min(2,{message:"Escriba su nombre, por favor."}),  email: z.string().email({message:"Debe escribir un email válido"}),
     }).and(passwordMathSchema);
 
     const newUserSchemaValidation = newUserSchema.safeParse({
         email,
+        name,
         password,
-        passwordConfirm
+        passwordConfirm,
+     
     })
 
     if (!newUserSchemaValidation.success){
@@ -35,14 +47,17 @@ export const registerUser = async ({email,password,passwordConfirm}:{
    
     const hashedPassword = await hash(password,10)
 
-    await prisma.administrador.create({data:{
+    await prisma.usuario.create({data:{
+        name,
         email,
         password:hashedPassword,
-        twoFactorSecret:""
+        twoFactorSecret:"",
+   
+
     }})
         return{
             error:false,
-            message:"El administrador ha sido creado correctamente"
+            message:"El usuario ha sido creado correctamente"
         }
         
     } catch (error:any) {
@@ -74,19 +89,45 @@ export const loginUser= async ({email,password}:{email:string,password:string})=
         if ( !loginValidation.success){
             return{
                 error:true,
-                message:loginValidation.error.issues[0].message ?? "Hubo un error"
+                message:loginValidation.error.issues[0].message ?? "Hubo un error",
+                user:{}
             }
         }
-        await signIn("credentials",{
+       const response = await signIn("credentials",{
             email,
             password,
             redirect:false
         })
-    } catch (error) {
-        return{
-            error:true,
-            message:"Credenciales no válidas"
+        if (response?.error) {
+                return { error:true, message: response.error,user:{} }
         }
+        const user:User | null = await prisma.usuario.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
+    })
+
+    if (!user) return { error:true,message: "Credenciales  no válidas",user:{} }
+
+    return {
+      error:false,
+      message: '',
+      user
+    }
+        // Esperamos a que se cree el token y esté la sesión disponible
+        // const session = await import("@/auth").then(mod => mod.auth())
+        // const role = session?.user.role
+        // console.log(role)
+        // return { success: true, role }
+    } catch (error) {
+        if (error instanceof AuthError) {
+             return { error: "Credenciales inválidas" }
+        }
+    return { error: "Error desconocido" }
     }
 
 }

@@ -34,10 +34,15 @@ export type TurnoPuntual = $Result.DefaultSelection<Prisma.$TurnoPuntualPayload>
  */
 export type HorarioPosible = $Result.DefaultSelection<Prisma.$HorarioPosiblePayload>
 /**
- * Model Administrador
+ * Model Usuario
  * 
  */
-export type Administrador = $Result.DefaultSelection<Prisma.$AdministradorPayload>
+export type Usuario = $Result.DefaultSelection<Prisma.$UsuarioPayload>
+/**
+ * Model TurnoRegistradoPorCliente
+ * 
+ */
+export type TurnoRegistradoPorCliente = $Result.DefaultSelection<Prisma.$TurnoRegistradoPorClientePayload>
 
 /**
  * Enums
@@ -68,6 +73,14 @@ export const Cancha: {
 
 export type Cancha = (typeof Cancha)[keyof typeof Cancha]
 
+
+export const Role: {
+  ADMIN: 'ADMIN',
+  USER: 'USER'
+};
+
+export type Role = (typeof Role)[keyof typeof Role]
+
 }
 
 export type Dia = $Enums.Dia
@@ -77,6 +90,10 @@ export const Dia: typeof $Enums.Dia
 export type Cancha = $Enums.Cancha
 
 export const Cancha: typeof $Enums.Cancha
+
+export type Role = $Enums.Role
+
+export const Role: typeof $Enums.Role
 
 /**
  * ##  Prisma Client ʲˢ
@@ -211,14 +228,24 @@ export class PrismaClient<
   get horarioPosible(): Prisma.HorarioPosibleDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.administrador`: Exposes CRUD operations for the **Administrador** model.
+   * `prisma.usuario`: Exposes CRUD operations for the **Usuario** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Administradors
-    * const administradors = await prisma.administrador.findMany()
+    * // Fetch zero or more Usuarios
+    * const usuarios = await prisma.usuario.findMany()
     * ```
     */
-  get administrador(): Prisma.AdministradorDelegate<ExtArgs, ClientOptions>;
+  get usuario(): Prisma.UsuarioDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.turnoRegistradoPorCliente`: Exposes CRUD operations for the **TurnoRegistradoPorCliente** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TurnoRegistradoPorClientes
+    * const turnoRegistradoPorClientes = await prisma.turnoRegistradoPorCliente.findMany()
+    * ```
+    */
+  get turnoRegistradoPorCliente(): Prisma.TurnoRegistradoPorClienteDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -663,7 +690,8 @@ export namespace Prisma {
     TurnoFijo: 'TurnoFijo',
     TurnoPuntual: 'TurnoPuntual',
     HorarioPosible: 'HorarioPosible',
-    Administrador: 'Administrador'
+    Usuario: 'Usuario',
+    TurnoRegistradoPorCliente: 'TurnoRegistradoPorCliente'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -682,7 +710,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "cliente" | "turnoFijo" | "turnoPuntual" | "horarioPosible" | "administrador"
+      modelProps: "cliente" | "turnoFijo" | "turnoPuntual" | "horarioPosible" | "usuario" | "turnoRegistradoPorCliente"
       txIsolationLevel: never
     }
     model: {
@@ -982,77 +1010,151 @@ export namespace Prisma {
           }
         }
       }
-      Administrador: {
-        payload: Prisma.$AdministradorPayload<ExtArgs>
-        fields: Prisma.AdministradorFieldRefs
+      Usuario: {
+        payload: Prisma.$UsuarioPayload<ExtArgs>
+        fields: Prisma.UsuarioFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.AdministradorFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdministradorPayload> | null
+            args: Prisma.UsuarioFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.AdministradorFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdministradorPayload>
+            args: Prisma.UsuarioFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           findFirst: {
-            args: Prisma.AdministradorFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdministradorPayload> | null
+            args: Prisma.UsuarioFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.AdministradorFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdministradorPayload>
+            args: Prisma.UsuarioFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           findMany: {
-            args: Prisma.AdministradorFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdministradorPayload>[]
+            args: Prisma.UsuarioFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>[]
           }
           create: {
-            args: Prisma.AdministradorCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdministradorPayload>
+            args: Prisma.UsuarioCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           createMany: {
-            args: Prisma.AdministradorCreateManyArgs<ExtArgs>
+            args: Prisma.UsuarioCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.AdministradorDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdministradorPayload>
+            args: Prisma.UsuarioDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           update: {
-            args: Prisma.AdministradorUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdministradorPayload>
+            args: Prisma.UsuarioUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           deleteMany: {
-            args: Prisma.AdministradorDeleteManyArgs<ExtArgs>
+            args: Prisma.UsuarioDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.AdministradorUpdateManyArgs<ExtArgs>
+            args: Prisma.UsuarioUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.AdministradorUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdministradorPayload>
+            args: Prisma.UsuarioUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           aggregate: {
-            args: Prisma.AdministradorAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAdministrador>
+            args: Prisma.UsuarioAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsuario>
           }
           groupBy: {
-            args: Prisma.AdministradorGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AdministradorGroupByOutputType>[]
+            args: Prisma.UsuarioGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsuarioGroupByOutputType>[]
           }
           findRaw: {
-            args: Prisma.AdministradorFindRawArgs<ExtArgs>
+            args: Prisma.UsuarioFindRawArgs<ExtArgs>
             result: JsonObject
           }
           aggregateRaw: {
-            args: Prisma.AdministradorAggregateRawArgs<ExtArgs>
+            args: Prisma.UsuarioAggregateRawArgs<ExtArgs>
             result: JsonObject
           }
           count: {
-            args: Prisma.AdministradorCountArgs<ExtArgs>
-            result: $Utils.Optional<AdministradorCountAggregateOutputType> | number
+            args: Prisma.UsuarioCountArgs<ExtArgs>
+            result: $Utils.Optional<UsuarioCountAggregateOutputType> | number
+          }
+        }
+      }
+      TurnoRegistradoPorCliente: {
+        payload: Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>
+        fields: Prisma.TurnoRegistradoPorClienteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TurnoRegistradoPorClienteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurnoRegistradoPorClientePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TurnoRegistradoPorClienteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurnoRegistradoPorClientePayload>
+          }
+          findFirst: {
+            args: Prisma.TurnoRegistradoPorClienteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurnoRegistradoPorClientePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TurnoRegistradoPorClienteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurnoRegistradoPorClientePayload>
+          }
+          findMany: {
+            args: Prisma.TurnoRegistradoPorClienteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurnoRegistradoPorClientePayload>[]
+          }
+          create: {
+            args: Prisma.TurnoRegistradoPorClienteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurnoRegistradoPorClientePayload>
+          }
+          createMany: {
+            args: Prisma.TurnoRegistradoPorClienteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.TurnoRegistradoPorClienteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurnoRegistradoPorClientePayload>
+          }
+          update: {
+            args: Prisma.TurnoRegistradoPorClienteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurnoRegistradoPorClientePayload>
+          }
+          deleteMany: {
+            args: Prisma.TurnoRegistradoPorClienteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TurnoRegistradoPorClienteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.TurnoRegistradoPorClienteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TurnoRegistradoPorClientePayload>
+          }
+          aggregate: {
+            args: Prisma.TurnoRegistradoPorClienteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTurnoRegistradoPorCliente>
+          }
+          groupBy: {
+            args: Prisma.TurnoRegistradoPorClienteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TurnoRegistradoPorClienteGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.TurnoRegistradoPorClienteFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.TurnoRegistradoPorClienteAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.TurnoRegistradoPorClienteCountArgs<ExtArgs>
+            result: $Utils.Optional<TurnoRegistradoPorClienteCountAggregateOutputType> | number
           }
         }
       }
@@ -1131,7 +1233,8 @@ export namespace Prisma {
     turnoFijo?: TurnoFijoOmit
     turnoPuntual?: TurnoPuntualOmit
     horarioPosible?: HorarioPosibleOmit
-    administrador?: AdministradorOmit
+    usuario?: UsuarioOmit
+    turnoRegistradoPorCliente?: TurnoRegistradoPorClienteOmit
   }
 
   /* Types for Logging */
@@ -1258,6 +1361,37 @@ export namespace Prisma {
    */
   export type ClienteCountOutputTypeCountPuntualArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TurnoPuntualWhereInput
+  }
+
+
+  /**
+   * Count Type UsuarioCountOutputType
+   */
+
+  export type UsuarioCountOutputType = {
+    turnos: number
+  }
+
+  export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    turnos?: boolean | UsuarioCountOutputTypeCountTurnosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioCountOutputType
+     */
+    select?: UsuarioCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountTurnosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TurnoRegistradoPorClienteWhereInput
   }
 
 
@@ -4485,6 +4619,7 @@ export namespace Prisma {
     dia: string | null
     horarioComienzo: string | null
     abierto: boolean | null
+    mostrar: boolean | null
   }
 
   export type HorarioPosibleMaxAggregateOutputType = {
@@ -4492,6 +4627,7 @@ export namespace Prisma {
     dia: string | null
     horarioComienzo: string | null
     abierto: boolean | null
+    mostrar: boolean | null
   }
 
   export type HorarioPosibleCountAggregateOutputType = {
@@ -4499,6 +4635,7 @@ export namespace Prisma {
     dia: number
     horarioComienzo: number
     abierto: number
+    mostrar: number
     _all: number
   }
 
@@ -4508,6 +4645,7 @@ export namespace Prisma {
     dia?: true
     horarioComienzo?: true
     abierto?: true
+    mostrar?: true
   }
 
   export type HorarioPosibleMaxAggregateInputType = {
@@ -4515,6 +4653,7 @@ export namespace Prisma {
     dia?: true
     horarioComienzo?: true
     abierto?: true
+    mostrar?: true
   }
 
   export type HorarioPosibleCountAggregateInputType = {
@@ -4522,6 +4661,7 @@ export namespace Prisma {
     dia?: true
     horarioComienzo?: true
     abierto?: true
+    mostrar?: true
     _all?: true
   }
 
@@ -4602,6 +4742,7 @@ export namespace Prisma {
     dia: string
     horarioComienzo: string
     abierto: boolean
+    mostrar: boolean
     _count: HorarioPosibleCountAggregateOutputType | null
     _min: HorarioPosibleMinAggregateOutputType | null
     _max: HorarioPosibleMaxAggregateOutputType | null
@@ -4626,6 +4767,7 @@ export namespace Prisma {
     dia?: boolean
     horarioComienzo?: boolean
     abierto?: boolean
+    mostrar?: boolean
   }, ExtArgs["result"]["horarioPosible"]>
 
 
@@ -4635,9 +4777,10 @@ export namespace Prisma {
     dia?: boolean
     horarioComienzo?: boolean
     abierto?: boolean
+    mostrar?: boolean
   }
 
-  export type HorarioPosibleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dia" | "horarioComienzo" | "abierto", ExtArgs["result"]["horarioPosible"]>
+  export type HorarioPosibleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dia" | "horarioComienzo" | "abierto" | "mostrar", ExtArgs["result"]["horarioPosible"]>
 
   export type $HorarioPosiblePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "HorarioPosible"
@@ -4647,6 +4790,7 @@ export namespace Prisma {
       dia: string
       horarioComienzo: string
       abierto: boolean
+      mostrar: boolean
     }, ExtArgs["result"]["horarioPosible"]>
     composites: {}
   }
@@ -5043,6 +5187,7 @@ export namespace Prisma {
     readonly dia: FieldRef<"HorarioPosible", 'String'>
     readonly horarioComienzo: FieldRef<"HorarioPosible", 'String'>
     readonly abierto: FieldRef<"HorarioPosible", 'Boolean'>
+    readonly mostrar: FieldRef<"HorarioPosible", 'Boolean'>
   }
     
 
@@ -5392,339 +5537,377 @@ export namespace Prisma {
 
 
   /**
-   * Model Administrador
+   * Model Usuario
    */
 
-  export type AggregateAdministrador = {
-    _count: AdministradorCountAggregateOutputType | null
-    _min: AdministradorMinAggregateOutputType | null
-    _max: AdministradorMaxAggregateOutputType | null
+  export type AggregateUsuario = {
+    _count: UsuarioCountAggregateOutputType | null
+    _min: UsuarioMinAggregateOutputType | null
+    _max: UsuarioMaxAggregateOutputType | null
   }
 
-  export type AdministradorMinAggregateOutputType = {
+  export type UsuarioMinAggregateOutputType = {
     id: string | null
     email: string | null
+    name: string | null
     password: string | null
     createdAt: Date | null
+    updatedAt: Date | null
     twoFactorSecret: string | null
     twoFactorActivated: boolean | null
+    role: $Enums.Role | null
   }
 
-  export type AdministradorMaxAggregateOutputType = {
+  export type UsuarioMaxAggregateOutputType = {
     id: string | null
     email: string | null
+    name: string | null
     password: string | null
     createdAt: Date | null
+    updatedAt: Date | null
     twoFactorSecret: string | null
     twoFactorActivated: boolean | null
+    role: $Enums.Role | null
   }
 
-  export type AdministradorCountAggregateOutputType = {
+  export type UsuarioCountAggregateOutputType = {
     id: number
     email: number
+    name: number
     password: number
     createdAt: number
+    updatedAt: number
     twoFactorSecret: number
     twoFactorActivated: number
+    role: number
     _all: number
   }
 
 
-  export type AdministradorMinAggregateInputType = {
+  export type UsuarioMinAggregateInputType = {
     id?: true
     email?: true
+    name?: true
     password?: true
     createdAt?: true
+    updatedAt?: true
     twoFactorSecret?: true
     twoFactorActivated?: true
+    role?: true
   }
 
-  export type AdministradorMaxAggregateInputType = {
+  export type UsuarioMaxAggregateInputType = {
     id?: true
     email?: true
+    name?: true
     password?: true
     createdAt?: true
+    updatedAt?: true
     twoFactorSecret?: true
     twoFactorActivated?: true
+    role?: true
   }
 
-  export type AdministradorCountAggregateInputType = {
+  export type UsuarioCountAggregateInputType = {
     id?: true
     email?: true
+    name?: true
     password?: true
     createdAt?: true
+    updatedAt?: true
     twoFactorSecret?: true
     twoFactorActivated?: true
+    role?: true
     _all?: true
   }
 
-  export type AdministradorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Administrador to aggregate.
+     * Filter which Usuario to aggregate.
      */
-    where?: AdministradorWhereInput
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Administradors to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: AdministradorOrderByWithRelationInput | AdministradorOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: AdministradorWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Administradors from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Administradors.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Administradors
+     * Count returned Usuarios
     **/
-    _count?: true | AdministradorCountAggregateInputType
+    _count?: true | UsuarioCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: AdministradorMinAggregateInputType
+    _min?: UsuarioMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: AdministradorMaxAggregateInputType
+    _max?: UsuarioMaxAggregateInputType
   }
 
-  export type GetAdministradorAggregateType<T extends AdministradorAggregateArgs> = {
-        [P in keyof T & keyof AggregateAdministrador]: P extends '_count' | 'count'
+  export type GetUsuarioAggregateType<T extends UsuarioAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsuario]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateAdministrador[P]>
-      : GetScalarType<T[P], AggregateAdministrador[P]>
+        : GetScalarType<T[P], AggregateUsuario[P]>
+      : GetScalarType<T[P], AggregateUsuario[P]>
   }
 
 
 
 
-  export type AdministradorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AdministradorWhereInput
-    orderBy?: AdministradorOrderByWithAggregationInput | AdministradorOrderByWithAggregationInput[]
-    by: AdministradorScalarFieldEnum[] | AdministradorScalarFieldEnum
-    having?: AdministradorScalarWhereWithAggregatesInput
+  export type UsuarioGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsuarioWhereInput
+    orderBy?: UsuarioOrderByWithAggregationInput | UsuarioOrderByWithAggregationInput[]
+    by: UsuarioScalarFieldEnum[] | UsuarioScalarFieldEnum
+    having?: UsuarioScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: AdministradorCountAggregateInputType | true
-    _min?: AdministradorMinAggregateInputType
-    _max?: AdministradorMaxAggregateInputType
+    _count?: UsuarioCountAggregateInputType | true
+    _min?: UsuarioMinAggregateInputType
+    _max?: UsuarioMaxAggregateInputType
   }
 
-  export type AdministradorGroupByOutputType = {
+  export type UsuarioGroupByOutputType = {
     id: string
     email: string
+    name: string
     password: string
     createdAt: Date
+    updatedAt: Date
     twoFactorSecret: string
     twoFactorActivated: boolean
-    _count: AdministradorCountAggregateOutputType | null
-    _min: AdministradorMinAggregateOutputType | null
-    _max: AdministradorMaxAggregateOutputType | null
+    role: $Enums.Role
+    _count: UsuarioCountAggregateOutputType | null
+    _min: UsuarioMinAggregateOutputType | null
+    _max: UsuarioMaxAggregateOutputType | null
   }
 
-  type GetAdministradorGroupByPayload<T extends AdministradorGroupByArgs> = Prisma.PrismaPromise<
+  type GetUsuarioGroupByPayload<T extends UsuarioGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<AdministradorGroupByOutputType, T['by']> &
+      PickEnumerable<UsuarioGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof AdministradorGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof UsuarioGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], AdministradorGroupByOutputType[P]>
-            : GetScalarType<T[P], AdministradorGroupByOutputType[P]>
+              : GetScalarType<T[P], UsuarioGroupByOutputType[P]>
+            : GetScalarType<T[P], UsuarioGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type AdministradorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UsuarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    name?: boolean
     password?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     twoFactorSecret?: boolean
     twoFactorActivated?: boolean
-  }, ExtArgs["result"]["administrador"]>
+    role?: boolean
+    turnos?: boolean | Usuario$turnosArgs<ExtArgs>
+    _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usuario"]>
 
 
 
-  export type AdministradorSelectScalar = {
+  export type UsuarioSelectScalar = {
     id?: boolean
     email?: boolean
+    name?: boolean
     password?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     twoFactorSecret?: boolean
     twoFactorActivated?: boolean
+    role?: boolean
   }
 
-  export type AdministradorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "createdAt" | "twoFactorSecret" | "twoFactorActivated", ExtArgs["result"]["administrador"]>
+  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "password" | "createdAt" | "updatedAt" | "twoFactorSecret" | "twoFactorActivated" | "role", ExtArgs["result"]["usuario"]>
+  export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    turnos?: boolean | Usuario$turnosArgs<ExtArgs>
+    _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
-  export type $AdministradorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Administrador"
-    objects: {}
+  export type $UsuarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Usuario"
+    objects: {
+      turnos: Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
+      name: string
       password: string
       createdAt: Date
+      updatedAt: Date
       twoFactorSecret: string
       twoFactorActivated: boolean
-    }, ExtArgs["result"]["administrador"]>
+      role: $Enums.Role
+    }, ExtArgs["result"]["usuario"]>
     composites: {}
   }
 
-  type AdministradorGetPayload<S extends boolean | null | undefined | AdministradorDefaultArgs> = $Result.GetResult<Prisma.$AdministradorPayload, S>
+  type UsuarioGetPayload<S extends boolean | null | undefined | UsuarioDefaultArgs> = $Result.GetResult<Prisma.$UsuarioPayload, S>
 
-  type AdministradorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AdministradorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AdministradorCountAggregateInputType | true
+  type UsuarioCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UsuarioFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UsuarioCountAggregateInputType | true
     }
 
-  export interface AdministradorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Administrador'], meta: { name: 'Administrador' } }
+  export interface UsuarioDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Usuario'], meta: { name: 'Usuario' } }
     /**
-     * Find zero or one Administrador that matches the filter.
-     * @param {AdministradorFindUniqueArgs} args - Arguments to find a Administrador
+     * Find zero or one Usuario that matches the filter.
+     * @param {UsuarioFindUniqueArgs} args - Arguments to find a Usuario
      * @example
-     * // Get one Administrador
-     * const administrador = await prisma.administrador.findUnique({
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends AdministradorFindUniqueArgs>(args: SelectSubset<T, AdministradorFindUniqueArgs<ExtArgs>>): Prisma__AdministradorClient<$Result.GetResult<Prisma.$AdministradorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends UsuarioFindUniqueArgs>(args: SelectSubset<T, UsuarioFindUniqueArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Administrador that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Usuario that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {AdministradorFindUniqueOrThrowArgs} args - Arguments to find a Administrador
+     * @param {UsuarioFindUniqueOrThrowArgs} args - Arguments to find a Usuario
      * @example
-     * // Get one Administrador
-     * const administrador = await prisma.administrador.findUniqueOrThrow({
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends AdministradorFindUniqueOrThrowArgs>(args: SelectSubset<T, AdministradorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdministradorClient<$Result.GetResult<Prisma.$AdministradorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends UsuarioFindUniqueOrThrowArgs>(args: SelectSubset<T, UsuarioFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Administrador that matches the filter.
+     * Find the first Usuario that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdministradorFindFirstArgs} args - Arguments to find a Administrador
+     * @param {UsuarioFindFirstArgs} args - Arguments to find a Usuario
      * @example
-     * // Get one Administrador
-     * const administrador = await prisma.administrador.findFirst({
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends AdministradorFindFirstArgs>(args?: SelectSubset<T, AdministradorFindFirstArgs<ExtArgs>>): Prisma__AdministradorClient<$Result.GetResult<Prisma.$AdministradorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends UsuarioFindFirstArgs>(args?: SelectSubset<T, UsuarioFindFirstArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Administrador that matches the filter or
+     * Find the first Usuario that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdministradorFindFirstOrThrowArgs} args - Arguments to find a Administrador
+     * @param {UsuarioFindFirstOrThrowArgs} args - Arguments to find a Usuario
      * @example
-     * // Get one Administrador
-     * const administrador = await prisma.administrador.findFirstOrThrow({
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends AdministradorFindFirstOrThrowArgs>(args?: SelectSubset<T, AdministradorFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdministradorClient<$Result.GetResult<Prisma.$AdministradorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends UsuarioFindFirstOrThrowArgs>(args?: SelectSubset<T, UsuarioFindFirstOrThrowArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Administradors that matches the filter.
+     * Find zero or more Usuarios that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdministradorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {UsuarioFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Administradors
-     * const administradors = await prisma.administrador.findMany()
+     * // Get all Usuarios
+     * const usuarios = await prisma.usuario.findMany()
      * 
-     * // Get first 10 Administradors
-     * const administradors = await prisma.administrador.findMany({ take: 10 })
+     * // Get first 10 Usuarios
+     * const usuarios = await prisma.usuario.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const administradorWithIdOnly = await prisma.administrador.findMany({ select: { id: true } })
+     * const usuarioWithIdOnly = await prisma.usuario.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends AdministradorFindManyArgs>(args?: SelectSubset<T, AdministradorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdministradorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends UsuarioFindManyArgs>(args?: SelectSubset<T, UsuarioFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Administrador.
-     * @param {AdministradorCreateArgs} args - Arguments to create a Administrador.
+     * Create a Usuario.
+     * @param {UsuarioCreateArgs} args - Arguments to create a Usuario.
      * @example
-     * // Create one Administrador
-     * const Administrador = await prisma.administrador.create({
+     * // Create one Usuario
+     * const Usuario = await prisma.usuario.create({
      *   data: {
-     *     // ... data to create a Administrador
+     *     // ... data to create a Usuario
      *   }
      * })
      * 
      */
-    create<T extends AdministradorCreateArgs>(args: SelectSubset<T, AdministradorCreateArgs<ExtArgs>>): Prisma__AdministradorClient<$Result.GetResult<Prisma.$AdministradorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends UsuarioCreateArgs>(args: SelectSubset<T, UsuarioCreateArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Administradors.
-     * @param {AdministradorCreateManyArgs} args - Arguments to create many Administradors.
+     * Create many Usuarios.
+     * @param {UsuarioCreateManyArgs} args - Arguments to create many Usuarios.
      * @example
-     * // Create many Administradors
-     * const administrador = await prisma.administrador.createMany({
+     * // Create many Usuarios
+     * const usuario = await prisma.usuario.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends AdministradorCreateManyArgs>(args?: SelectSubset<T, AdministradorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends UsuarioCreateManyArgs>(args?: SelectSubset<T, UsuarioCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Administrador.
-     * @param {AdministradorDeleteArgs} args - Arguments to delete one Administrador.
+     * Delete a Usuario.
+     * @param {UsuarioDeleteArgs} args - Arguments to delete one Usuario.
      * @example
-     * // Delete one Administrador
-     * const Administrador = await prisma.administrador.delete({
+     * // Delete one Usuario
+     * const Usuario = await prisma.usuario.delete({
      *   where: {
-     *     // ... filter to delete one Administrador
+     *     // ... filter to delete one Usuario
      *   }
      * })
      * 
      */
-    delete<T extends AdministradorDeleteArgs>(args: SelectSubset<T, AdministradorDeleteArgs<ExtArgs>>): Prisma__AdministradorClient<$Result.GetResult<Prisma.$AdministradorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends UsuarioDeleteArgs>(args: SelectSubset<T, UsuarioDeleteArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Administrador.
-     * @param {AdministradorUpdateArgs} args - Arguments to update one Administrador.
+     * Update one Usuario.
+     * @param {UsuarioUpdateArgs} args - Arguments to update one Usuario.
      * @example
-     * // Update one Administrador
-     * const administrador = await prisma.administrador.update({
+     * // Update one Usuario
+     * const usuario = await prisma.usuario.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5734,30 +5917,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends AdministradorUpdateArgs>(args: SelectSubset<T, AdministradorUpdateArgs<ExtArgs>>): Prisma__AdministradorClient<$Result.GetResult<Prisma.$AdministradorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends UsuarioUpdateArgs>(args: SelectSubset<T, UsuarioUpdateArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Administradors.
-     * @param {AdministradorDeleteManyArgs} args - Arguments to filter Administradors to delete.
+     * Delete zero or more Usuarios.
+     * @param {UsuarioDeleteManyArgs} args - Arguments to filter Usuarios to delete.
      * @example
-     * // Delete a few Administradors
-     * const { count } = await prisma.administrador.deleteMany({
+     * // Delete a few Usuarios
+     * const { count } = await prisma.usuario.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends AdministradorDeleteManyArgs>(args?: SelectSubset<T, AdministradorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends UsuarioDeleteManyArgs>(args?: SelectSubset<T, UsuarioDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Administradors.
+     * Update zero or more Usuarios.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdministradorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {UsuarioUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Administradors
-     * const administrador = await prisma.administrador.updateMany({
+     * // Update many Usuarios
+     * const usuario = await prisma.usuario.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5767,79 +5950,79 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends AdministradorUpdateManyArgs>(args: SelectSubset<T, AdministradorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends UsuarioUpdateManyArgs>(args: SelectSubset<T, UsuarioUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Administrador.
-     * @param {AdministradorUpsertArgs} args - Arguments to update or create a Administrador.
+     * Create or update one Usuario.
+     * @param {UsuarioUpsertArgs} args - Arguments to update or create a Usuario.
      * @example
-     * // Update or create a Administrador
-     * const administrador = await prisma.administrador.upsert({
+     * // Update or create a Usuario
+     * const usuario = await prisma.usuario.upsert({
      *   create: {
-     *     // ... data to create a Administrador
+     *     // ... data to create a Usuario
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Administrador we want to update
+     *     // ... the filter for the Usuario we want to update
      *   }
      * })
      */
-    upsert<T extends AdministradorUpsertArgs>(args: SelectSubset<T, AdministradorUpsertArgs<ExtArgs>>): Prisma__AdministradorClient<$Result.GetResult<Prisma.$AdministradorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends UsuarioUpsertArgs>(args: SelectSubset<T, UsuarioUpsertArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Administradors that matches the filter.
-     * @param {AdministradorFindRawArgs} args - Select which filters you would like to apply.
+     * Find zero or more Usuarios that matches the filter.
+     * @param {UsuarioFindRawArgs} args - Select which filters you would like to apply.
      * @example
-     * const administrador = await prisma.administrador.findRaw({
+     * const usuario = await prisma.usuario.findRaw({
      *   filter: { age: { $gt: 25 } }
      * })
      */
-    findRaw(args?: AdministradorFindRawArgs): Prisma.PrismaPromise<JsonObject>
+    findRaw(args?: UsuarioFindRawArgs): Prisma.PrismaPromise<JsonObject>
 
     /**
-     * Perform aggregation operations on a Administrador.
-     * @param {AdministradorAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * Perform aggregation operations on a Usuario.
+     * @param {UsuarioAggregateRawArgs} args - Select which aggregations you would like to apply.
      * @example
-     * const administrador = await prisma.administrador.aggregateRaw({
+     * const usuario = await prisma.usuario.aggregateRaw({
      *   pipeline: [
      *     { $match: { status: "registered" } },
      *     { $group: { _id: "$country", total: { $sum: 1 } } }
      *   ]
      * })
      */
-    aggregateRaw(args?: AdministradorAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+    aggregateRaw(args?: UsuarioAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
 
 
     /**
-     * Count the number of Administradors.
+     * Count the number of Usuarios.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdministradorCountArgs} args - Arguments to filter Administradors to count.
+     * @param {UsuarioCountArgs} args - Arguments to filter Usuarios to count.
      * @example
-     * // Count the number of Administradors
-     * const count = await prisma.administrador.count({
+     * // Count the number of Usuarios
+     * const count = await prisma.usuario.count({
      *   where: {
-     *     // ... the filter for the Administradors we want to count
+     *     // ... the filter for the Usuarios we want to count
      *   }
      * })
     **/
-    count<T extends AdministradorCountArgs>(
-      args?: Subset<T, AdministradorCountArgs>,
+    count<T extends UsuarioCountArgs>(
+      args?: Subset<T, UsuarioCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], AdministradorCountAggregateOutputType>
+          : GetScalarType<T['select'], UsuarioCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Administrador.
+     * Allows you to perform aggregations operations on a Usuario.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdministradorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {UsuarioAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -5859,13 +6042,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends AdministradorAggregateArgs>(args: Subset<T, AdministradorAggregateArgs>): Prisma.PrismaPromise<GetAdministradorAggregateType<T>>
+    aggregate<T extends UsuarioAggregateArgs>(args: Subset<T, UsuarioAggregateArgs>): Prisma.PrismaPromise<GetUsuarioAggregateType<T>>
 
     /**
-     * Group by Administrador.
+     * Group by Usuario.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdministradorGroupByArgs} args - Group by arguments.
+     * @param {UsuarioGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5880,14 +6063,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends AdministradorGroupByArgs,
+      T extends UsuarioGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AdministradorGroupByArgs['orderBy'] }
-        : { orderBy?: AdministradorGroupByArgs['orderBy'] },
+        ? { orderBy: UsuarioGroupByArgs['orderBy'] }
+        : { orderBy?: UsuarioGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -5936,21 +6119,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, AdministradorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdministradorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, UsuarioGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsuarioGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Administrador model
+   * Fields of the Usuario model
    */
-  readonly fields: AdministradorFieldRefs;
+  readonly fields: UsuarioFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Administrador.
+   * The delegate class that acts as a "Promise-like" for Usuario.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__AdministradorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    turnos<T extends Usuario$turnosArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$turnosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5977,324 +6161,363 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Administrador model
+   * Fields of the Usuario model
    */
-  interface AdministradorFieldRefs {
-    readonly id: FieldRef<"Administrador", 'String'>
-    readonly email: FieldRef<"Administrador", 'String'>
-    readonly password: FieldRef<"Administrador", 'String'>
-    readonly createdAt: FieldRef<"Administrador", 'DateTime'>
-    readonly twoFactorSecret: FieldRef<"Administrador", 'String'>
-    readonly twoFactorActivated: FieldRef<"Administrador", 'Boolean'>
+  interface UsuarioFieldRefs {
+    readonly id: FieldRef<"Usuario", 'String'>
+    readonly email: FieldRef<"Usuario", 'String'>
+    readonly name: FieldRef<"Usuario", 'String'>
+    readonly password: FieldRef<"Usuario", 'String'>
+    readonly createdAt: FieldRef<"Usuario", 'DateTime'>
+    readonly updatedAt: FieldRef<"Usuario", 'DateTime'>
+    readonly twoFactorSecret: FieldRef<"Usuario", 'String'>
+    readonly twoFactorActivated: FieldRef<"Usuario", 'Boolean'>
+    readonly role: FieldRef<"Usuario", 'Role'>
   }
     
 
   // Custom InputTypes
   /**
-   * Administrador findUnique
+   * Usuario findUnique
    */
-  export type AdministradorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Administrador
+     * Select specific fields to fetch from the Usuario
      */
-    select?: AdministradorSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Administrador
+     * Omit specific fields from the Usuario
      */
-    omit?: AdministradorOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * Filter, which Administrador to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: AdministradorWhereUniqueInput
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter, which Usuario to fetch.
+     */
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * Administrador findUniqueOrThrow
+   * Usuario findUniqueOrThrow
    */
-  export type AdministradorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Administrador
+     * Select specific fields to fetch from the Usuario
      */
-    select?: AdministradorSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Administrador
+     * Omit specific fields from the Usuario
      */
-    omit?: AdministradorOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * Filter, which Administrador to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: AdministradorWhereUniqueInput
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter, which Usuario to fetch.
+     */
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * Administrador findFirst
+   * Usuario findFirst
    */
-  export type AdministradorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Administrador
+     * Select specific fields to fetch from the Usuario
      */
-    select?: AdministradorSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Administrador
+     * Omit specific fields from the Usuario
      */
-    omit?: AdministradorOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * Filter, which Administrador to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: AdministradorWhereInput
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter, which Usuario to fetch.
+     */
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Administradors to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: AdministradorOrderByWithRelationInput | AdministradorOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Administradors.
+     * Sets the position for searching for Usuarios.
      */
-    cursor?: AdministradorWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Administradors from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Administradors.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Administradors.
+     * Filter by unique combinations of Usuarios.
      */
-    distinct?: AdministradorScalarFieldEnum | AdministradorScalarFieldEnum[]
+    distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
   }
 
   /**
-   * Administrador findFirstOrThrow
+   * Usuario findFirstOrThrow
    */
-  export type AdministradorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Administrador
+     * Select specific fields to fetch from the Usuario
      */
-    select?: AdministradorSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Administrador
+     * Omit specific fields from the Usuario
      */
-    omit?: AdministradorOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * Filter, which Administrador to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: AdministradorWhereInput
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter, which Usuario to fetch.
+     */
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Administradors to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: AdministradorOrderByWithRelationInput | AdministradorOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Administradors.
+     * Sets the position for searching for Usuarios.
      */
-    cursor?: AdministradorWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Administradors from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Administradors.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Administradors.
+     * Filter by unique combinations of Usuarios.
      */
-    distinct?: AdministradorScalarFieldEnum | AdministradorScalarFieldEnum[]
+    distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
   }
 
   /**
-   * Administrador findMany
+   * Usuario findMany
    */
-  export type AdministradorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Administrador
+     * Select specific fields to fetch from the Usuario
      */
-    select?: AdministradorSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Administrador
+     * Omit specific fields from the Usuario
      */
-    omit?: AdministradorOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * Filter, which Administradors to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: AdministradorWhereInput
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter, which Usuarios to fetch.
+     */
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Administradors to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: AdministradorOrderByWithRelationInput | AdministradorOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Administradors.
+     * Sets the position for listing Usuarios.
      */
-    cursor?: AdministradorWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Administradors from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Administradors.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
-    distinct?: AdministradorScalarFieldEnum | AdministradorScalarFieldEnum[]
+    distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
   }
 
   /**
-   * Administrador create
+   * Usuario create
    */
-  export type AdministradorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Administrador
+     * Select specific fields to fetch from the Usuario
      */
-    select?: AdministradorSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Administrador
+     * Omit specific fields from the Usuario
      */
-    omit?: AdministradorOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * The data needed to create a Administrador.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<AdministradorCreateInput, AdministradorUncheckedCreateInput>
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Usuario.
+     */
+    data: XOR<UsuarioCreateInput, UsuarioUncheckedCreateInput>
   }
 
   /**
-   * Administrador createMany
+   * Usuario createMany
    */
-  export type AdministradorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Administradors.
+     * The data used to create many Usuarios.
      */
-    data: AdministradorCreateManyInput | AdministradorCreateManyInput[]
+    data: UsuarioCreateManyInput | UsuarioCreateManyInput[]
   }
 
   /**
-   * Administrador update
+   * Usuario update
    */
-  export type AdministradorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Administrador
+     * Select specific fields to fetch from the Usuario
      */
-    select?: AdministradorSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Administrador
+     * Omit specific fields from the Usuario
      */
-    omit?: AdministradorOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * The data needed to update a Administrador.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<AdministradorUpdateInput, AdministradorUncheckedUpdateInput>
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Choose, which Administrador to update.
+     * The data needed to update a Usuario.
      */
-    where: AdministradorWhereUniqueInput
+    data: XOR<UsuarioUpdateInput, UsuarioUncheckedUpdateInput>
+    /**
+     * Choose, which Usuario to update.
+     */
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * Administrador updateMany
+   * Usuario updateMany
    */
-  export type AdministradorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Administradors.
+     * The data used to update Usuarios.
      */
-    data: XOR<AdministradorUpdateManyMutationInput, AdministradorUncheckedUpdateManyInput>
+    data: XOR<UsuarioUpdateManyMutationInput, UsuarioUncheckedUpdateManyInput>
     /**
-     * Filter which Administradors to update
+     * Filter which Usuarios to update
      */
-    where?: AdministradorWhereInput
+    where?: UsuarioWhereInput
     /**
-     * Limit how many Administradors to update.
+     * Limit how many Usuarios to update.
      */
     limit?: number
   }
 
   /**
-   * Administrador upsert
+   * Usuario upsert
    */
-  export type AdministradorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Administrador
+     * Select specific fields to fetch from the Usuario
      */
-    select?: AdministradorSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Administrador
+     * Omit specific fields from the Usuario
      */
-    omit?: AdministradorOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * The filter to search for the Administrador to update in case it exists.
+     * Choose, which related nodes to fetch as well
      */
-    where: AdministradorWhereUniqueInput
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * In case the Administrador found by the `where` argument doesn't exist, create a new Administrador with this data.
+     * The filter to search for the Usuario to update in case it exists.
      */
-    create: XOR<AdministradorCreateInput, AdministradorUncheckedCreateInput>
+    where: UsuarioWhereUniqueInput
     /**
-     * In case the Administrador was found with the provided `where` argument, update it with this data.
+     * In case the Usuario found by the `where` argument doesn't exist, create a new Usuario with this data.
      */
-    update: XOR<AdministradorUpdateInput, AdministradorUncheckedUpdateInput>
+    create: XOR<UsuarioCreateInput, UsuarioUncheckedCreateInput>
+    /**
+     * In case the Usuario was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UsuarioUpdateInput, UsuarioUncheckedUpdateInput>
   }
 
   /**
-   * Administrador delete
+   * Usuario delete
    */
-  export type AdministradorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Administrador
+     * Select specific fields to fetch from the Usuario
      */
-    select?: AdministradorSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Administrador
+     * Omit specific fields from the Usuario
      */
-    omit?: AdministradorOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * Filter which Administrador to delete.
+     * Choose, which related nodes to fetch as well
      */
-    where: AdministradorWhereUniqueInput
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter which Usuario to delete.
+     */
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * Administrador deleteMany
+   * Usuario deleteMany
    */
-  export type AdministradorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Administradors to delete
+     * Filter which Usuarios to delete
      */
-    where?: AdministradorWhereInput
+    where?: UsuarioWhereInput
     /**
-     * Limit how many Administradors to delete.
+     * Limit how many Usuarios to delete.
      */
     limit?: number
   }
 
   /**
-   * Administrador findRaw
+   * Usuario findRaw
    */
-  export type AdministradorFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
      */
@@ -6306,9 +6529,9 @@ export namespace Prisma {
   }
 
   /**
-   * Administrador aggregateRaw
+   * Usuario aggregateRaw
    */
-  export type AdministradorAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
      */
@@ -6320,17 +6543,1120 @@ export namespace Prisma {
   }
 
   /**
-   * Administrador without action
+   * Usuario.turnos
    */
-  export type AdministradorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Usuario$turnosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Administrador
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
      */
-    select?: AdministradorSelect<ExtArgs> | null
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Administrador
+     * Omit specific fields from the TurnoRegistradoPorCliente
      */
-    omit?: AdministradorOmit<ExtArgs> | null
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
+    where?: TurnoRegistradoPorClienteWhereInput
+    orderBy?: TurnoRegistradoPorClienteOrderByWithRelationInput | TurnoRegistradoPorClienteOrderByWithRelationInput[]
+    cursor?: TurnoRegistradoPorClienteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TurnoRegistradoPorClienteScalarFieldEnum | TurnoRegistradoPorClienteScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario without action
+   */
+  export type UsuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TurnoRegistradoPorCliente
+   */
+
+  export type AggregateTurnoRegistradoPorCliente = {
+    _count: TurnoRegistradoPorClienteCountAggregateOutputType | null
+    _avg: TurnoRegistradoPorClienteAvgAggregateOutputType | null
+    _sum: TurnoRegistradoPorClienteSumAggregateOutputType | null
+    _min: TurnoRegistradoPorClienteMinAggregateOutputType | null
+    _max: TurnoRegistradoPorClienteMaxAggregateOutputType | null
+  }
+
+  export type TurnoRegistradoPorClienteAvgAggregateOutputType = {
+    cantidadModulos: number | null
+  }
+
+  export type TurnoRegistradoPorClienteSumAggregateOutputType = {
+    cantidadModulos: number | null
+  }
+
+  export type TurnoRegistradoPorClienteMinAggregateOutputType = {
+    id: string | null
+    fecha: Date | null
+    usuarioId: string | null
+    cancha: $Enums.Cancha | null
+    dia: $Enums.Dia | null
+    horaComienzo: string | null
+    horaFinaliza: string | null
+    cantidadModulos: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TurnoRegistradoPorClienteMaxAggregateOutputType = {
+    id: string | null
+    fecha: Date | null
+    usuarioId: string | null
+    cancha: $Enums.Cancha | null
+    dia: $Enums.Dia | null
+    horaComienzo: string | null
+    horaFinaliza: string | null
+    cantidadModulos: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TurnoRegistradoPorClienteCountAggregateOutputType = {
+    id: number
+    fecha: number
+    usuarioId: number
+    cancha: number
+    dia: number
+    horaComienzo: number
+    horaFinaliza: number
+    cantidadModulos: number
+    modulosOcupados: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TurnoRegistradoPorClienteAvgAggregateInputType = {
+    cantidadModulos?: true
+  }
+
+  export type TurnoRegistradoPorClienteSumAggregateInputType = {
+    cantidadModulos?: true
+  }
+
+  export type TurnoRegistradoPorClienteMinAggregateInputType = {
+    id?: true
+    fecha?: true
+    usuarioId?: true
+    cancha?: true
+    dia?: true
+    horaComienzo?: true
+    horaFinaliza?: true
+    cantidadModulos?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TurnoRegistradoPorClienteMaxAggregateInputType = {
+    id?: true
+    fecha?: true
+    usuarioId?: true
+    cancha?: true
+    dia?: true
+    horaComienzo?: true
+    horaFinaliza?: true
+    cantidadModulos?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TurnoRegistradoPorClienteCountAggregateInputType = {
+    id?: true
+    fecha?: true
+    usuarioId?: true
+    cancha?: true
+    dia?: true
+    horaComienzo?: true
+    horaFinaliza?: true
+    cantidadModulos?: true
+    modulosOcupados?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TurnoRegistradoPorClienteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TurnoRegistradoPorCliente to aggregate.
+     */
+    where?: TurnoRegistradoPorClienteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TurnoRegistradoPorClientes to fetch.
+     */
+    orderBy?: TurnoRegistradoPorClienteOrderByWithRelationInput | TurnoRegistradoPorClienteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TurnoRegistradoPorClienteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TurnoRegistradoPorClientes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TurnoRegistradoPorClientes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TurnoRegistradoPorClientes
+    **/
+    _count?: true | TurnoRegistradoPorClienteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TurnoRegistradoPorClienteAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TurnoRegistradoPorClienteSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TurnoRegistradoPorClienteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TurnoRegistradoPorClienteMaxAggregateInputType
+  }
+
+  export type GetTurnoRegistradoPorClienteAggregateType<T extends TurnoRegistradoPorClienteAggregateArgs> = {
+        [P in keyof T & keyof AggregateTurnoRegistradoPorCliente]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTurnoRegistradoPorCliente[P]>
+      : GetScalarType<T[P], AggregateTurnoRegistradoPorCliente[P]>
+  }
+
+
+
+
+  export type TurnoRegistradoPorClienteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TurnoRegistradoPorClienteWhereInput
+    orderBy?: TurnoRegistradoPorClienteOrderByWithAggregationInput | TurnoRegistradoPorClienteOrderByWithAggregationInput[]
+    by: TurnoRegistradoPorClienteScalarFieldEnum[] | TurnoRegistradoPorClienteScalarFieldEnum
+    having?: TurnoRegistradoPorClienteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TurnoRegistradoPorClienteCountAggregateInputType | true
+    _avg?: TurnoRegistradoPorClienteAvgAggregateInputType
+    _sum?: TurnoRegistradoPorClienteSumAggregateInputType
+    _min?: TurnoRegistradoPorClienteMinAggregateInputType
+    _max?: TurnoRegistradoPorClienteMaxAggregateInputType
+  }
+
+  export type TurnoRegistradoPorClienteGroupByOutputType = {
+    id: string
+    fecha: Date
+    usuarioId: string
+    cancha: $Enums.Cancha
+    dia: $Enums.Dia
+    horaComienzo: string
+    horaFinaliza: string
+    cantidadModulos: number
+    modulosOcupados: string[]
+    createdAt: Date
+    updatedAt: Date
+    _count: TurnoRegistradoPorClienteCountAggregateOutputType | null
+    _avg: TurnoRegistradoPorClienteAvgAggregateOutputType | null
+    _sum: TurnoRegistradoPorClienteSumAggregateOutputType | null
+    _min: TurnoRegistradoPorClienteMinAggregateOutputType | null
+    _max: TurnoRegistradoPorClienteMaxAggregateOutputType | null
+  }
+
+  type GetTurnoRegistradoPorClienteGroupByPayload<T extends TurnoRegistradoPorClienteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TurnoRegistradoPorClienteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TurnoRegistradoPorClienteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TurnoRegistradoPorClienteGroupByOutputType[P]>
+            : GetScalarType<T[P], TurnoRegistradoPorClienteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TurnoRegistradoPorClienteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fecha?: boolean
+    usuarioId?: boolean
+    cancha?: boolean
+    dia?: boolean
+    horaComienzo?: boolean
+    horaFinaliza?: boolean
+    cantidadModulos?: boolean
+    modulosOcupados?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["turnoRegistradoPorCliente"]>
+
+
+
+  export type TurnoRegistradoPorClienteSelectScalar = {
+    id?: boolean
+    fecha?: boolean
+    usuarioId?: boolean
+    cancha?: boolean
+    dia?: boolean
+    horaComienzo?: boolean
+    horaFinaliza?: boolean
+    cantidadModulos?: boolean
+    modulosOcupados?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TurnoRegistradoPorClienteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fecha" | "usuarioId" | "cancha" | "dia" | "horaComienzo" | "horaFinaliza" | "cantidadModulos" | "modulosOcupados" | "createdAt" | "updatedAt", ExtArgs["result"]["turnoRegistradoPorCliente"]>
+  export type TurnoRegistradoPorClienteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }
+
+  export type $TurnoRegistradoPorClientePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TurnoRegistradoPorCliente"
+    objects: {
+      usuario: Prisma.$UsuarioPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      fecha: Date
+      usuarioId: string
+      cancha: $Enums.Cancha
+      dia: $Enums.Dia
+      horaComienzo: string
+      horaFinaliza: string
+      cantidadModulos: number
+      modulosOcupados: string[]
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["turnoRegistradoPorCliente"]>
+    composites: {}
+  }
+
+  type TurnoRegistradoPorClienteGetPayload<S extends boolean | null | undefined | TurnoRegistradoPorClienteDefaultArgs> = $Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload, S>
+
+  type TurnoRegistradoPorClienteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TurnoRegistradoPorClienteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TurnoRegistradoPorClienteCountAggregateInputType | true
+    }
+
+  export interface TurnoRegistradoPorClienteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TurnoRegistradoPorCliente'], meta: { name: 'TurnoRegistradoPorCliente' } }
+    /**
+     * Find zero or one TurnoRegistradoPorCliente that matches the filter.
+     * @param {TurnoRegistradoPorClienteFindUniqueArgs} args - Arguments to find a TurnoRegistradoPorCliente
+     * @example
+     * // Get one TurnoRegistradoPorCliente
+     * const turnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TurnoRegistradoPorClienteFindUniqueArgs>(args: SelectSubset<T, TurnoRegistradoPorClienteFindUniqueArgs<ExtArgs>>): Prisma__TurnoRegistradoPorClienteClient<$Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TurnoRegistradoPorCliente that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TurnoRegistradoPorClienteFindUniqueOrThrowArgs} args - Arguments to find a TurnoRegistradoPorCliente
+     * @example
+     * // Get one TurnoRegistradoPorCliente
+     * const turnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TurnoRegistradoPorClienteFindUniqueOrThrowArgs>(args: SelectSubset<T, TurnoRegistradoPorClienteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TurnoRegistradoPorClienteClient<$Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TurnoRegistradoPorCliente that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurnoRegistradoPorClienteFindFirstArgs} args - Arguments to find a TurnoRegistradoPorCliente
+     * @example
+     * // Get one TurnoRegistradoPorCliente
+     * const turnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TurnoRegistradoPorClienteFindFirstArgs>(args?: SelectSubset<T, TurnoRegistradoPorClienteFindFirstArgs<ExtArgs>>): Prisma__TurnoRegistradoPorClienteClient<$Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TurnoRegistradoPorCliente that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurnoRegistradoPorClienteFindFirstOrThrowArgs} args - Arguments to find a TurnoRegistradoPorCliente
+     * @example
+     * // Get one TurnoRegistradoPorCliente
+     * const turnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TurnoRegistradoPorClienteFindFirstOrThrowArgs>(args?: SelectSubset<T, TurnoRegistradoPorClienteFindFirstOrThrowArgs<ExtArgs>>): Prisma__TurnoRegistradoPorClienteClient<$Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TurnoRegistradoPorClientes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurnoRegistradoPorClienteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TurnoRegistradoPorClientes
+     * const turnoRegistradoPorClientes = await prisma.turnoRegistradoPorCliente.findMany()
+     * 
+     * // Get first 10 TurnoRegistradoPorClientes
+     * const turnoRegistradoPorClientes = await prisma.turnoRegistradoPorCliente.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const turnoRegistradoPorClienteWithIdOnly = await prisma.turnoRegistradoPorCliente.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TurnoRegistradoPorClienteFindManyArgs>(args?: SelectSubset<T, TurnoRegistradoPorClienteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TurnoRegistradoPorCliente.
+     * @param {TurnoRegistradoPorClienteCreateArgs} args - Arguments to create a TurnoRegistradoPorCliente.
+     * @example
+     * // Create one TurnoRegistradoPorCliente
+     * const TurnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.create({
+     *   data: {
+     *     // ... data to create a TurnoRegistradoPorCliente
+     *   }
+     * })
+     * 
+     */
+    create<T extends TurnoRegistradoPorClienteCreateArgs>(args: SelectSubset<T, TurnoRegistradoPorClienteCreateArgs<ExtArgs>>): Prisma__TurnoRegistradoPorClienteClient<$Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TurnoRegistradoPorClientes.
+     * @param {TurnoRegistradoPorClienteCreateManyArgs} args - Arguments to create many TurnoRegistradoPorClientes.
+     * @example
+     * // Create many TurnoRegistradoPorClientes
+     * const turnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TurnoRegistradoPorClienteCreateManyArgs>(args?: SelectSubset<T, TurnoRegistradoPorClienteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a TurnoRegistradoPorCliente.
+     * @param {TurnoRegistradoPorClienteDeleteArgs} args - Arguments to delete one TurnoRegistradoPorCliente.
+     * @example
+     * // Delete one TurnoRegistradoPorCliente
+     * const TurnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.delete({
+     *   where: {
+     *     // ... filter to delete one TurnoRegistradoPorCliente
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TurnoRegistradoPorClienteDeleteArgs>(args: SelectSubset<T, TurnoRegistradoPorClienteDeleteArgs<ExtArgs>>): Prisma__TurnoRegistradoPorClienteClient<$Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TurnoRegistradoPorCliente.
+     * @param {TurnoRegistradoPorClienteUpdateArgs} args - Arguments to update one TurnoRegistradoPorCliente.
+     * @example
+     * // Update one TurnoRegistradoPorCliente
+     * const turnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TurnoRegistradoPorClienteUpdateArgs>(args: SelectSubset<T, TurnoRegistradoPorClienteUpdateArgs<ExtArgs>>): Prisma__TurnoRegistradoPorClienteClient<$Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TurnoRegistradoPorClientes.
+     * @param {TurnoRegistradoPorClienteDeleteManyArgs} args - Arguments to filter TurnoRegistradoPorClientes to delete.
+     * @example
+     * // Delete a few TurnoRegistradoPorClientes
+     * const { count } = await prisma.turnoRegistradoPorCliente.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TurnoRegistradoPorClienteDeleteManyArgs>(args?: SelectSubset<T, TurnoRegistradoPorClienteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TurnoRegistradoPorClientes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurnoRegistradoPorClienteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TurnoRegistradoPorClientes
+     * const turnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TurnoRegistradoPorClienteUpdateManyArgs>(args: SelectSubset<T, TurnoRegistradoPorClienteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one TurnoRegistradoPorCliente.
+     * @param {TurnoRegistradoPorClienteUpsertArgs} args - Arguments to update or create a TurnoRegistradoPorCliente.
+     * @example
+     * // Update or create a TurnoRegistradoPorCliente
+     * const turnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.upsert({
+     *   create: {
+     *     // ... data to create a TurnoRegistradoPorCliente
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TurnoRegistradoPorCliente we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TurnoRegistradoPorClienteUpsertArgs>(args: SelectSubset<T, TurnoRegistradoPorClienteUpsertArgs<ExtArgs>>): Prisma__TurnoRegistradoPorClienteClient<$Result.GetResult<Prisma.$TurnoRegistradoPorClientePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TurnoRegistradoPorClientes that matches the filter.
+     * @param {TurnoRegistradoPorClienteFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const turnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: TurnoRegistradoPorClienteFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a TurnoRegistradoPorCliente.
+     * @param {TurnoRegistradoPorClienteAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const turnoRegistradoPorCliente = await prisma.turnoRegistradoPorCliente.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: TurnoRegistradoPorClienteAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of TurnoRegistradoPorClientes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurnoRegistradoPorClienteCountArgs} args - Arguments to filter TurnoRegistradoPorClientes to count.
+     * @example
+     * // Count the number of TurnoRegistradoPorClientes
+     * const count = await prisma.turnoRegistradoPorCliente.count({
+     *   where: {
+     *     // ... the filter for the TurnoRegistradoPorClientes we want to count
+     *   }
+     * })
+    **/
+    count<T extends TurnoRegistradoPorClienteCountArgs>(
+      args?: Subset<T, TurnoRegistradoPorClienteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TurnoRegistradoPorClienteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TurnoRegistradoPorCliente.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurnoRegistradoPorClienteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TurnoRegistradoPorClienteAggregateArgs>(args: Subset<T, TurnoRegistradoPorClienteAggregateArgs>): Prisma.PrismaPromise<GetTurnoRegistradoPorClienteAggregateType<T>>
+
+    /**
+     * Group by TurnoRegistradoPorCliente.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TurnoRegistradoPorClienteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TurnoRegistradoPorClienteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TurnoRegistradoPorClienteGroupByArgs['orderBy'] }
+        : { orderBy?: TurnoRegistradoPorClienteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TurnoRegistradoPorClienteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTurnoRegistradoPorClienteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TurnoRegistradoPorCliente model
+   */
+  readonly fields: TurnoRegistradoPorClienteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TurnoRegistradoPorCliente.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TurnoRegistradoPorClienteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TurnoRegistradoPorCliente model
+   */
+  interface TurnoRegistradoPorClienteFieldRefs {
+    readonly id: FieldRef<"TurnoRegistradoPorCliente", 'String'>
+    readonly fecha: FieldRef<"TurnoRegistradoPorCliente", 'DateTime'>
+    readonly usuarioId: FieldRef<"TurnoRegistradoPorCliente", 'String'>
+    readonly cancha: FieldRef<"TurnoRegistradoPorCliente", 'Cancha'>
+    readonly dia: FieldRef<"TurnoRegistradoPorCliente", 'Dia'>
+    readonly horaComienzo: FieldRef<"TurnoRegistradoPorCliente", 'String'>
+    readonly horaFinaliza: FieldRef<"TurnoRegistradoPorCliente", 'String'>
+    readonly cantidadModulos: FieldRef<"TurnoRegistradoPorCliente", 'Int'>
+    readonly modulosOcupados: FieldRef<"TurnoRegistradoPorCliente", 'String[]'>
+    readonly createdAt: FieldRef<"TurnoRegistradoPorCliente", 'DateTime'>
+    readonly updatedAt: FieldRef<"TurnoRegistradoPorCliente", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TurnoRegistradoPorCliente findUnique
+   */
+  export type TurnoRegistradoPorClienteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
+     */
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TurnoRegistradoPorCliente
+     */
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
+    /**
+     * Filter, which TurnoRegistradoPorCliente to fetch.
+     */
+    where: TurnoRegistradoPorClienteWhereUniqueInput
+  }
+
+  /**
+   * TurnoRegistradoPorCliente findUniqueOrThrow
+   */
+  export type TurnoRegistradoPorClienteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
+     */
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TurnoRegistradoPorCliente
+     */
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
+    /**
+     * Filter, which TurnoRegistradoPorCliente to fetch.
+     */
+    where: TurnoRegistradoPorClienteWhereUniqueInput
+  }
+
+  /**
+   * TurnoRegistradoPorCliente findFirst
+   */
+  export type TurnoRegistradoPorClienteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
+     */
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TurnoRegistradoPorCliente
+     */
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
+    /**
+     * Filter, which TurnoRegistradoPorCliente to fetch.
+     */
+    where?: TurnoRegistradoPorClienteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TurnoRegistradoPorClientes to fetch.
+     */
+    orderBy?: TurnoRegistradoPorClienteOrderByWithRelationInput | TurnoRegistradoPorClienteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TurnoRegistradoPorClientes.
+     */
+    cursor?: TurnoRegistradoPorClienteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TurnoRegistradoPorClientes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TurnoRegistradoPorClientes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TurnoRegistradoPorClientes.
+     */
+    distinct?: TurnoRegistradoPorClienteScalarFieldEnum | TurnoRegistradoPorClienteScalarFieldEnum[]
+  }
+
+  /**
+   * TurnoRegistradoPorCliente findFirstOrThrow
+   */
+  export type TurnoRegistradoPorClienteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
+     */
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TurnoRegistradoPorCliente
+     */
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
+    /**
+     * Filter, which TurnoRegistradoPorCliente to fetch.
+     */
+    where?: TurnoRegistradoPorClienteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TurnoRegistradoPorClientes to fetch.
+     */
+    orderBy?: TurnoRegistradoPorClienteOrderByWithRelationInput | TurnoRegistradoPorClienteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TurnoRegistradoPorClientes.
+     */
+    cursor?: TurnoRegistradoPorClienteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TurnoRegistradoPorClientes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TurnoRegistradoPorClientes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TurnoRegistradoPorClientes.
+     */
+    distinct?: TurnoRegistradoPorClienteScalarFieldEnum | TurnoRegistradoPorClienteScalarFieldEnum[]
+  }
+
+  /**
+   * TurnoRegistradoPorCliente findMany
+   */
+  export type TurnoRegistradoPorClienteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
+     */
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TurnoRegistradoPorCliente
+     */
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
+    /**
+     * Filter, which TurnoRegistradoPorClientes to fetch.
+     */
+    where?: TurnoRegistradoPorClienteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TurnoRegistradoPorClientes to fetch.
+     */
+    orderBy?: TurnoRegistradoPorClienteOrderByWithRelationInput | TurnoRegistradoPorClienteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TurnoRegistradoPorClientes.
+     */
+    cursor?: TurnoRegistradoPorClienteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TurnoRegistradoPorClientes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TurnoRegistradoPorClientes.
+     */
+    skip?: number
+    distinct?: TurnoRegistradoPorClienteScalarFieldEnum | TurnoRegistradoPorClienteScalarFieldEnum[]
+  }
+
+  /**
+   * TurnoRegistradoPorCliente create
+   */
+  export type TurnoRegistradoPorClienteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
+     */
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TurnoRegistradoPorCliente
+     */
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TurnoRegistradoPorCliente.
+     */
+    data: XOR<TurnoRegistradoPorClienteCreateInput, TurnoRegistradoPorClienteUncheckedCreateInput>
+  }
+
+  /**
+   * TurnoRegistradoPorCliente createMany
+   */
+  export type TurnoRegistradoPorClienteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TurnoRegistradoPorClientes.
+     */
+    data: TurnoRegistradoPorClienteCreateManyInput | TurnoRegistradoPorClienteCreateManyInput[]
+  }
+
+  /**
+   * TurnoRegistradoPorCliente update
+   */
+  export type TurnoRegistradoPorClienteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
+     */
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TurnoRegistradoPorCliente
+     */
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TurnoRegistradoPorCliente.
+     */
+    data: XOR<TurnoRegistradoPorClienteUpdateInput, TurnoRegistradoPorClienteUncheckedUpdateInput>
+    /**
+     * Choose, which TurnoRegistradoPorCliente to update.
+     */
+    where: TurnoRegistradoPorClienteWhereUniqueInput
+  }
+
+  /**
+   * TurnoRegistradoPorCliente updateMany
+   */
+  export type TurnoRegistradoPorClienteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TurnoRegistradoPorClientes.
+     */
+    data: XOR<TurnoRegistradoPorClienteUpdateManyMutationInput, TurnoRegistradoPorClienteUncheckedUpdateManyInput>
+    /**
+     * Filter which TurnoRegistradoPorClientes to update
+     */
+    where?: TurnoRegistradoPorClienteWhereInput
+    /**
+     * Limit how many TurnoRegistradoPorClientes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TurnoRegistradoPorCliente upsert
+   */
+  export type TurnoRegistradoPorClienteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
+     */
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TurnoRegistradoPorCliente
+     */
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TurnoRegistradoPorCliente to update in case it exists.
+     */
+    where: TurnoRegistradoPorClienteWhereUniqueInput
+    /**
+     * In case the TurnoRegistradoPorCliente found by the `where` argument doesn't exist, create a new TurnoRegistradoPorCliente with this data.
+     */
+    create: XOR<TurnoRegistradoPorClienteCreateInput, TurnoRegistradoPorClienteUncheckedCreateInput>
+    /**
+     * In case the TurnoRegistradoPorCliente was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TurnoRegistradoPorClienteUpdateInput, TurnoRegistradoPorClienteUncheckedUpdateInput>
+  }
+
+  /**
+   * TurnoRegistradoPorCliente delete
+   */
+  export type TurnoRegistradoPorClienteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
+     */
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TurnoRegistradoPorCliente
+     */
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
+    /**
+     * Filter which TurnoRegistradoPorCliente to delete.
+     */
+    where: TurnoRegistradoPorClienteWhereUniqueInput
+  }
+
+  /**
+   * TurnoRegistradoPorCliente deleteMany
+   */
+  export type TurnoRegistradoPorClienteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TurnoRegistradoPorClientes to delete
+     */
+    where?: TurnoRegistradoPorClienteWhereInput
+    /**
+     * Limit how many TurnoRegistradoPorClientes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TurnoRegistradoPorCliente findRaw
+   */
+  export type TurnoRegistradoPorClienteFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * TurnoRegistradoPorCliente aggregateRaw
+   */
+  export type TurnoRegistradoPorClienteAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * TurnoRegistradoPorCliente without action
+   */
+  export type TurnoRegistradoPorClienteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TurnoRegistradoPorCliente
+     */
+    select?: TurnoRegistradoPorClienteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TurnoRegistradoPorCliente
+     */
+    omit?: TurnoRegistradoPorClienteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TurnoRegistradoPorClienteInclude<ExtArgs> | null
   }
 
 
@@ -6389,22 +7715,43 @@ export namespace Prisma {
     id: 'id',
     dia: 'dia',
     horarioComienzo: 'horarioComienzo',
-    abierto: 'abierto'
+    abierto: 'abierto',
+    mostrar: 'mostrar'
   };
 
   export type HorarioPosibleScalarFieldEnum = (typeof HorarioPosibleScalarFieldEnum)[keyof typeof HorarioPosibleScalarFieldEnum]
 
 
-  export const AdministradorScalarFieldEnum: {
+  export const UsuarioScalarFieldEnum: {
     id: 'id',
     email: 'email',
+    name: 'name',
     password: 'password',
     createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     twoFactorSecret: 'twoFactorSecret',
-    twoFactorActivated: 'twoFactorActivated'
+    twoFactorActivated: 'twoFactorActivated',
+    role: 'role'
   };
 
-  export type AdministradorScalarFieldEnum = (typeof AdministradorScalarFieldEnum)[keyof typeof AdministradorScalarFieldEnum]
+  export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
+
+
+  export const TurnoRegistradoPorClienteScalarFieldEnum: {
+    id: 'id',
+    fecha: 'fecha',
+    usuarioId: 'usuarioId',
+    cancha: 'cancha',
+    dia: 'dia',
+    horaComienzo: 'horaComienzo',
+    horaFinaliza: 'horaFinaliza',
+    cantidadModulos: 'cantidadModulos',
+    modulosOcupados: 'modulosOcupados',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TurnoRegistradoPorClienteScalarFieldEnum = (typeof TurnoRegistradoPorClienteScalarFieldEnum)[keyof typeof TurnoRegistradoPorClienteScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6502,6 +7849,20 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Role'
+   */
+  export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
+    
+
+
+  /**
+   * Reference to a field of type 'Role[]'
+   */
+  export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
     
 
 
@@ -6772,6 +8133,7 @@ export namespace Prisma {
     dia?: StringFilter<"HorarioPosible"> | string
     horarioComienzo?: StringFilter<"HorarioPosible"> | string
     abierto?: BoolFilter<"HorarioPosible"> | boolean
+    mostrar?: BoolFilter<"HorarioPosible"> | boolean
   }
 
   export type HorarioPosibleOrderByWithRelationInput = {
@@ -6779,6 +8141,7 @@ export namespace Prisma {
     dia?: SortOrder
     horarioComienzo?: SortOrder
     abierto?: SortOrder
+    mostrar?: SortOrder
   }
 
   export type HorarioPosibleWhereUniqueInput = Prisma.AtLeast<{
@@ -6789,6 +8152,7 @@ export namespace Prisma {
     dia?: StringFilter<"HorarioPosible"> | string
     horarioComienzo?: StringFilter<"HorarioPosible"> | string
     abierto?: BoolFilter<"HorarioPosible"> | boolean
+    mostrar?: BoolFilter<"HorarioPosible"> | boolean
   }, "id">
 
   export type HorarioPosibleOrderByWithAggregationInput = {
@@ -6796,6 +8160,7 @@ export namespace Prisma {
     dia?: SortOrder
     horarioComienzo?: SortOrder
     abierto?: SortOrder
+    mostrar?: SortOrder
     _count?: HorarioPosibleCountOrderByAggregateInput
     _max?: HorarioPosibleMaxOrderByAggregateInput
     _min?: HorarioPosibleMinOrderByAggregateInput
@@ -6809,63 +8174,169 @@ export namespace Prisma {
     dia?: StringWithAggregatesFilter<"HorarioPosible"> | string
     horarioComienzo?: StringWithAggregatesFilter<"HorarioPosible"> | string
     abierto?: BoolWithAggregatesFilter<"HorarioPosible"> | boolean
+    mostrar?: BoolWithAggregatesFilter<"HorarioPosible"> | boolean
   }
 
-  export type AdministradorWhereInput = {
-    AND?: AdministradorWhereInput | AdministradorWhereInput[]
-    OR?: AdministradorWhereInput[]
-    NOT?: AdministradorWhereInput | AdministradorWhereInput[]
-    id?: StringFilter<"Administrador"> | string
-    email?: StringFilter<"Administrador"> | string
-    password?: StringFilter<"Administrador"> | string
-    createdAt?: DateTimeFilter<"Administrador"> | Date | string
-    twoFactorSecret?: StringFilter<"Administrador"> | string
-    twoFactorActivated?: BoolFilter<"Administrador"> | boolean
+  export type UsuarioWhereInput = {
+    AND?: UsuarioWhereInput | UsuarioWhereInput[]
+    OR?: UsuarioWhereInput[]
+    NOT?: UsuarioWhereInput | UsuarioWhereInput[]
+    id?: StringFilter<"Usuario"> | string
+    email?: StringFilter<"Usuario"> | string
+    name?: StringFilter<"Usuario"> | string
+    password?: StringFilter<"Usuario"> | string
+    createdAt?: DateTimeFilter<"Usuario"> | Date | string
+    updatedAt?: DateTimeFilter<"Usuario"> | Date | string
+    twoFactorSecret?: StringFilter<"Usuario"> | string
+    twoFactorActivated?: BoolFilter<"Usuario"> | boolean
+    role?: EnumRoleFilter<"Usuario"> | $Enums.Role
+    turnos?: TurnoRegistradoPorClienteListRelationFilter
   }
 
-  export type AdministradorOrderByWithRelationInput = {
+  export type UsuarioOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
+    name?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     twoFactorSecret?: SortOrder
     twoFactorActivated?: SortOrder
+    role?: SortOrder
+    turnos?: TurnoRegistradoPorClienteOrderByRelationAggregateInput
   }
 
-  export type AdministradorWhereUniqueInput = Prisma.AtLeast<{
+  export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
-    AND?: AdministradorWhereInput | AdministradorWhereInput[]
-    OR?: AdministradorWhereInput[]
-    NOT?: AdministradorWhereInput | AdministradorWhereInput[]
-    password?: StringFilter<"Administrador"> | string
-    createdAt?: DateTimeFilter<"Administrador"> | Date | string
-    twoFactorSecret?: StringFilter<"Administrador"> | string
-    twoFactorActivated?: BoolFilter<"Administrador"> | boolean
+    AND?: UsuarioWhereInput | UsuarioWhereInput[]
+    OR?: UsuarioWhereInput[]
+    NOT?: UsuarioWhereInput | UsuarioWhereInput[]
+    name?: StringFilter<"Usuario"> | string
+    password?: StringFilter<"Usuario"> | string
+    createdAt?: DateTimeFilter<"Usuario"> | Date | string
+    updatedAt?: DateTimeFilter<"Usuario"> | Date | string
+    twoFactorSecret?: StringFilter<"Usuario"> | string
+    twoFactorActivated?: BoolFilter<"Usuario"> | boolean
+    role?: EnumRoleFilter<"Usuario"> | $Enums.Role
+    turnos?: TurnoRegistradoPorClienteListRelationFilter
   }, "id" | "email">
 
-  export type AdministradorOrderByWithAggregationInput = {
+  export type UsuarioOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
+    name?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     twoFactorSecret?: SortOrder
     twoFactorActivated?: SortOrder
-    _count?: AdministradorCountOrderByAggregateInput
-    _max?: AdministradorMaxOrderByAggregateInput
-    _min?: AdministradorMinOrderByAggregateInput
+    role?: SortOrder
+    _count?: UsuarioCountOrderByAggregateInput
+    _max?: UsuarioMaxOrderByAggregateInput
+    _min?: UsuarioMinOrderByAggregateInput
   }
 
-  export type AdministradorScalarWhereWithAggregatesInput = {
-    AND?: AdministradorScalarWhereWithAggregatesInput | AdministradorScalarWhereWithAggregatesInput[]
-    OR?: AdministradorScalarWhereWithAggregatesInput[]
-    NOT?: AdministradorScalarWhereWithAggregatesInput | AdministradorScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Administrador"> | string
-    email?: StringWithAggregatesFilter<"Administrador"> | string
-    password?: StringWithAggregatesFilter<"Administrador"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Administrador"> | Date | string
-    twoFactorSecret?: StringWithAggregatesFilter<"Administrador"> | string
-    twoFactorActivated?: BoolWithAggregatesFilter<"Administrador"> | boolean
+  export type UsuarioScalarWhereWithAggregatesInput = {
+    AND?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
+    OR?: UsuarioScalarWhereWithAggregatesInput[]
+    NOT?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Usuario"> | string
+    email?: StringWithAggregatesFilter<"Usuario"> | string
+    name?: StringWithAggregatesFilter<"Usuario"> | string
+    password?: StringWithAggregatesFilter<"Usuario"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Usuario"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Usuario"> | Date | string
+    twoFactorSecret?: StringWithAggregatesFilter<"Usuario"> | string
+    twoFactorActivated?: BoolWithAggregatesFilter<"Usuario"> | boolean
+    role?: EnumRoleWithAggregatesFilter<"Usuario"> | $Enums.Role
+  }
+
+  export type TurnoRegistradoPorClienteWhereInput = {
+    AND?: TurnoRegistradoPorClienteWhereInput | TurnoRegistradoPorClienteWhereInput[]
+    OR?: TurnoRegistradoPorClienteWhereInput[]
+    NOT?: TurnoRegistradoPorClienteWhereInput | TurnoRegistradoPorClienteWhereInput[]
+    id?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    fecha?: DateTimeFilter<"TurnoRegistradoPorCliente"> | Date | string
+    usuarioId?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    cancha?: EnumCanchaFilter<"TurnoRegistradoPorCliente"> | $Enums.Cancha
+    dia?: EnumDiaFilter<"TurnoRegistradoPorCliente"> | $Enums.Dia
+    horaComienzo?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    horaFinaliza?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    cantidadModulos?: IntFilter<"TurnoRegistradoPorCliente"> | number
+    modulosOcupados?: StringNullableListFilter<"TurnoRegistradoPorCliente">
+    createdAt?: DateTimeFilter<"TurnoRegistradoPorCliente"> | Date | string
+    updatedAt?: DateTimeFilter<"TurnoRegistradoPorCliente"> | Date | string
+    usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+  }
+
+  export type TurnoRegistradoPorClienteOrderByWithRelationInput = {
+    id?: SortOrder
+    fecha?: SortOrder
+    usuarioId?: SortOrder
+    cancha?: SortOrder
+    dia?: SortOrder
+    horaComienzo?: SortOrder
+    horaFinaliza?: SortOrder
+    cantidadModulos?: SortOrder
+    modulosOcupados?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    usuario?: UsuarioOrderByWithRelationInput
+  }
+
+  export type TurnoRegistradoPorClienteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TurnoRegistradoPorClienteWhereInput | TurnoRegistradoPorClienteWhereInput[]
+    OR?: TurnoRegistradoPorClienteWhereInput[]
+    NOT?: TurnoRegistradoPorClienteWhereInput | TurnoRegistradoPorClienteWhereInput[]
+    fecha?: DateTimeFilter<"TurnoRegistradoPorCliente"> | Date | string
+    usuarioId?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    cancha?: EnumCanchaFilter<"TurnoRegistradoPorCliente"> | $Enums.Cancha
+    dia?: EnumDiaFilter<"TurnoRegistradoPorCliente"> | $Enums.Dia
+    horaComienzo?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    horaFinaliza?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    cantidadModulos?: IntFilter<"TurnoRegistradoPorCliente"> | number
+    modulosOcupados?: StringNullableListFilter<"TurnoRegistradoPorCliente">
+    createdAt?: DateTimeFilter<"TurnoRegistradoPorCliente"> | Date | string
+    updatedAt?: DateTimeFilter<"TurnoRegistradoPorCliente"> | Date | string
+    usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+  }, "id">
+
+  export type TurnoRegistradoPorClienteOrderByWithAggregationInput = {
+    id?: SortOrder
+    fecha?: SortOrder
+    usuarioId?: SortOrder
+    cancha?: SortOrder
+    dia?: SortOrder
+    horaComienzo?: SortOrder
+    horaFinaliza?: SortOrder
+    cantidadModulos?: SortOrder
+    modulosOcupados?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TurnoRegistradoPorClienteCountOrderByAggregateInput
+    _avg?: TurnoRegistradoPorClienteAvgOrderByAggregateInput
+    _max?: TurnoRegistradoPorClienteMaxOrderByAggregateInput
+    _min?: TurnoRegistradoPorClienteMinOrderByAggregateInput
+    _sum?: TurnoRegistradoPorClienteSumOrderByAggregateInput
+  }
+
+  export type TurnoRegistradoPorClienteScalarWhereWithAggregatesInput = {
+    AND?: TurnoRegistradoPorClienteScalarWhereWithAggregatesInput | TurnoRegistradoPorClienteScalarWhereWithAggregatesInput[]
+    OR?: TurnoRegistradoPorClienteScalarWhereWithAggregatesInput[]
+    NOT?: TurnoRegistradoPorClienteScalarWhereWithAggregatesInput | TurnoRegistradoPorClienteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TurnoRegistradoPorCliente"> | string
+    fecha?: DateTimeWithAggregatesFilter<"TurnoRegistradoPorCliente"> | Date | string
+    usuarioId?: StringWithAggregatesFilter<"TurnoRegistradoPorCliente"> | string
+    cancha?: EnumCanchaWithAggregatesFilter<"TurnoRegistradoPorCliente"> | $Enums.Cancha
+    dia?: EnumDiaWithAggregatesFilter<"TurnoRegistradoPorCliente"> | $Enums.Dia
+    horaComienzo?: StringWithAggregatesFilter<"TurnoRegistradoPorCliente"> | string
+    horaFinaliza?: StringWithAggregatesFilter<"TurnoRegistradoPorCliente"> | string
+    cantidadModulos?: IntWithAggregatesFilter<"TurnoRegistradoPorCliente"> | number
+    modulosOcupados?: StringNullableListFilter<"TurnoRegistradoPorCliente">
+    createdAt?: DateTimeWithAggregatesFilter<"TurnoRegistradoPorCliente"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TurnoRegistradoPorCliente"> | Date | string
   }
 
   export type ClienteCreateInput = {
@@ -7133,6 +8604,7 @@ export namespace Prisma {
     dia: string
     horarioComienzo: string
     abierto: boolean
+    mostrar: boolean
   }
 
   export type HorarioPosibleUncheckedCreateInput = {
@@ -7140,18 +8612,21 @@ export namespace Prisma {
     dia: string
     horarioComienzo: string
     abierto: boolean
+    mostrar: boolean
   }
 
   export type HorarioPosibleUpdateInput = {
     dia?: StringFieldUpdateOperationsInput | string
     horarioComienzo?: StringFieldUpdateOperationsInput | string
     abierto?: BoolFieldUpdateOperationsInput | boolean
+    mostrar?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HorarioPosibleUncheckedUpdateInput = {
     dia?: StringFieldUpdateOperationsInput | string
     horarioComienzo?: StringFieldUpdateOperationsInput | string
     abierto?: BoolFieldUpdateOperationsInput | boolean
+    mostrar?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HorarioPosibleCreateManyInput = {
@@ -7159,77 +8634,198 @@ export namespace Prisma {
     dia: string
     horarioComienzo: string
     abierto: boolean
+    mostrar: boolean
   }
 
   export type HorarioPosibleUpdateManyMutationInput = {
     dia?: StringFieldUpdateOperationsInput | string
     horarioComienzo?: StringFieldUpdateOperationsInput | string
     abierto?: BoolFieldUpdateOperationsInput | boolean
+    mostrar?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HorarioPosibleUncheckedUpdateManyInput = {
     dia?: StringFieldUpdateOperationsInput | string
     horarioComienzo?: StringFieldUpdateOperationsInput | string
     abierto?: BoolFieldUpdateOperationsInput | boolean
+    mostrar?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type AdministradorCreateInput = {
+  export type UsuarioCreateInput = {
     id?: string
     email: string
+    name: string
     password: string
     createdAt?: Date | string
+    updatedAt?: Date | string
     twoFactorSecret: string
     twoFactorActivated?: boolean
+    role?: $Enums.Role
+    turnos?: TurnoRegistradoPorClienteCreateNestedManyWithoutUsuarioInput
   }
 
-  export type AdministradorUncheckedCreateInput = {
+  export type UsuarioUncheckedCreateInput = {
     id?: string
     email: string
+    name: string
     password: string
     createdAt?: Date | string
+    updatedAt?: Date | string
     twoFactorSecret: string
     twoFactorActivated?: boolean
+    role?: $Enums.Role
+    turnos?: TurnoRegistradoPorClienteUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
-  export type AdministradorUpdateInput = {
+  export type UsuarioUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    turnos?: TurnoRegistradoPorClienteUpdateManyWithoutUsuarioNestedInput
   }
 
-  export type AdministradorUncheckedUpdateInput = {
+  export type UsuarioUncheckedUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    turnos?: TurnoRegistradoPorClienteUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
-  export type AdministradorCreateManyInput = {
+  export type UsuarioCreateManyInput = {
     id?: string
     email: string
+    name: string
     password: string
     createdAt?: Date | string
+    updatedAt?: Date | string
     twoFactorSecret: string
     twoFactorActivated?: boolean
+    role?: $Enums.Role
   }
 
-  export type AdministradorUpdateManyMutationInput = {
+  export type UsuarioUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
-  export type AdministradorUncheckedUpdateManyInput = {
+  export type UsuarioUncheckedUpdateManyInput = {
     email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  }
+
+  export type TurnoRegistradoPorClienteCreateInput = {
+    id?: string
+    fecha?: Date | string
+    cancha: $Enums.Cancha
+    dia: $Enums.Dia
+    horaComienzo: string
+    horaFinaliza: string
+    cantidadModulos: number
+    modulosOcupados?: TurnoRegistradoPorClienteCreatemodulosOcupadosInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    usuario: UsuarioCreateNestedOneWithoutTurnosInput
+  }
+
+  export type TurnoRegistradoPorClienteUncheckedCreateInput = {
+    id?: string
+    fecha?: Date | string
+    usuarioId: string
+    cancha: $Enums.Cancha
+    dia: $Enums.Dia
+    horaComienzo: string
+    horaFinaliza: string
+    cantidadModulos: number
+    modulosOcupados?: TurnoRegistradoPorClienteCreatemodulosOcupadosInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TurnoRegistradoPorClienteUpdateInput = {
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cancha?: EnumCanchaFieldUpdateOperationsInput | $Enums.Cancha
+    dia?: EnumDiaFieldUpdateOperationsInput | $Enums.Dia
+    horaComienzo?: StringFieldUpdateOperationsInput | string
+    horaFinaliza?: StringFieldUpdateOperationsInput | string
+    cantidadModulos?: IntFieldUpdateOperationsInput | number
+    modulosOcupados?: TurnoRegistradoPorClienteUpdatemodulosOcupadosInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuario?: UsuarioUpdateOneRequiredWithoutTurnosNestedInput
+  }
+
+  export type TurnoRegistradoPorClienteUncheckedUpdateInput = {
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    cancha?: EnumCanchaFieldUpdateOperationsInput | $Enums.Cancha
+    dia?: EnumDiaFieldUpdateOperationsInput | $Enums.Dia
+    horaComienzo?: StringFieldUpdateOperationsInput | string
+    horaFinaliza?: StringFieldUpdateOperationsInput | string
+    cantidadModulos?: IntFieldUpdateOperationsInput | number
+    modulosOcupados?: TurnoRegistradoPorClienteUpdatemodulosOcupadosInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TurnoRegistradoPorClienteCreateManyInput = {
+    id?: string
+    fecha?: Date | string
+    usuarioId: string
+    cancha: $Enums.Cancha
+    dia: $Enums.Dia
+    horaComienzo: string
+    horaFinaliza: string
+    cantidadModulos: number
+    modulosOcupados?: TurnoRegistradoPorClienteCreatemodulosOcupadosInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TurnoRegistradoPorClienteUpdateManyMutationInput = {
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cancha?: EnumCanchaFieldUpdateOperationsInput | $Enums.Cancha
+    dia?: EnumDiaFieldUpdateOperationsInput | $Enums.Dia
+    horaComienzo?: StringFieldUpdateOperationsInput | string
+    horaFinaliza?: StringFieldUpdateOperationsInput | string
+    cantidadModulos?: IntFieldUpdateOperationsInput | number
+    modulosOcupados?: TurnoRegistradoPorClienteUpdatemodulosOcupadosInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TurnoRegistradoPorClienteUncheckedUpdateManyInput = {
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    cancha?: EnumCanchaFieldUpdateOperationsInput | $Enums.Cancha
+    dia?: EnumDiaFieldUpdateOperationsInput | $Enums.Dia
+    horaComienzo?: StringFieldUpdateOperationsInput | string
+    horaFinaliza?: StringFieldUpdateOperationsInput | string
+    cantidadModulos?: IntFieldUpdateOperationsInput | number
+    modulosOcupados?: TurnoRegistradoPorClienteUpdatemodulosOcupadosInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7520,6 +9116,7 @@ export namespace Prisma {
     dia?: SortOrder
     horarioComienzo?: SortOrder
     abierto?: SortOrder
+    mostrar?: SortOrder
   }
 
   export type HorarioPosibleMaxOrderByAggregateInput = {
@@ -7527,6 +9124,7 @@ export namespace Prisma {
     dia?: SortOrder
     horarioComienzo?: SortOrder
     abierto?: SortOrder
+    mostrar?: SortOrder
   }
 
   export type HorarioPosibleMinOrderByAggregateInput = {
@@ -7534,6 +9132,7 @@ export namespace Prisma {
     dia?: SortOrder
     horarioComienzo?: SortOrder
     abierto?: SortOrder
+    mostrar?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -7544,31 +9143,120 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type AdministradorCountOrderByAggregateInput = {
-    id?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    createdAt?: SortOrder
-    twoFactorSecret?: SortOrder
-    twoFactorActivated?: SortOrder
+  export type EnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
-  export type AdministradorMaxOrderByAggregateInput = {
-    id?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    createdAt?: SortOrder
-    twoFactorSecret?: SortOrder
-    twoFactorActivated?: SortOrder
+  export type TurnoRegistradoPorClienteListRelationFilter = {
+    every?: TurnoRegistradoPorClienteWhereInput
+    some?: TurnoRegistradoPorClienteWhereInput
+    none?: TurnoRegistradoPorClienteWhereInput
   }
 
-  export type AdministradorMinOrderByAggregateInput = {
+  export type TurnoRegistradoPorClienteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UsuarioCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    name?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     twoFactorSecret?: SortOrder
     twoFactorActivated?: SortOrder
+    role?: SortOrder
+  }
+
+  export type UsuarioMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    twoFactorSecret?: SortOrder
+    twoFactorActivated?: SortOrder
+    role?: SortOrder
+  }
+
+  export type UsuarioMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    twoFactorSecret?: SortOrder
+    twoFactorActivated?: SortOrder
+    role?: SortOrder
+  }
+
+  export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type UsuarioScalarRelationFilter = {
+    is?: UsuarioWhereInput
+    isNot?: UsuarioWhereInput
+  }
+
+  export type TurnoRegistradoPorClienteCountOrderByAggregateInput = {
+    id?: SortOrder
+    fecha?: SortOrder
+    usuarioId?: SortOrder
+    cancha?: SortOrder
+    dia?: SortOrder
+    horaComienzo?: SortOrder
+    horaFinaliza?: SortOrder
+    cantidadModulos?: SortOrder
+    modulosOcupados?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TurnoRegistradoPorClienteAvgOrderByAggregateInput = {
+    cantidadModulos?: SortOrder
+  }
+
+  export type TurnoRegistradoPorClienteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    fecha?: SortOrder
+    usuarioId?: SortOrder
+    cancha?: SortOrder
+    dia?: SortOrder
+    horaComienzo?: SortOrder
+    horaFinaliza?: SortOrder
+    cantidadModulos?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TurnoRegistradoPorClienteMinOrderByAggregateInput = {
+    id?: SortOrder
+    fecha?: SortOrder
+    usuarioId?: SortOrder
+    cancha?: SortOrder
+    dia?: SortOrder
+    horaComienzo?: SortOrder
+    horaFinaliza?: SortOrder
+    cantidadModulos?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TurnoRegistradoPorClienteSumOrderByAggregateInput = {
+    cantidadModulos?: SortOrder
   }
 
   export type TurnoFijoCreateNestedManyWithoutClienteInput = {
@@ -7729,6 +9417,75 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type TurnoRegistradoPorClienteCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<TurnoRegistradoPorClienteCreateWithoutUsuarioInput, TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput> | TurnoRegistradoPorClienteCreateWithoutUsuarioInput[] | TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput | TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput[]
+    createMany?: TurnoRegistradoPorClienteCreateManyUsuarioInputEnvelope
+    connect?: TurnoRegistradoPorClienteWhereUniqueInput | TurnoRegistradoPorClienteWhereUniqueInput[]
+  }
+
+  export type TurnoRegistradoPorClienteUncheckedCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<TurnoRegistradoPorClienteCreateWithoutUsuarioInput, TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput> | TurnoRegistradoPorClienteCreateWithoutUsuarioInput[] | TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput | TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput[]
+    createMany?: TurnoRegistradoPorClienteCreateManyUsuarioInputEnvelope
+    connect?: TurnoRegistradoPorClienteWhereUniqueInput | TurnoRegistradoPorClienteWhereUniqueInput[]
+  }
+
+  export type EnumRoleFieldUpdateOperationsInput = {
+    set?: $Enums.Role
+  }
+
+  export type TurnoRegistradoPorClienteUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<TurnoRegistradoPorClienteCreateWithoutUsuarioInput, TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput> | TurnoRegistradoPorClienteCreateWithoutUsuarioInput[] | TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput | TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput[]
+    upsert?: TurnoRegistradoPorClienteUpsertWithWhereUniqueWithoutUsuarioInput | TurnoRegistradoPorClienteUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: TurnoRegistradoPorClienteCreateManyUsuarioInputEnvelope
+    set?: TurnoRegistradoPorClienteWhereUniqueInput | TurnoRegistradoPorClienteWhereUniqueInput[]
+    disconnect?: TurnoRegistradoPorClienteWhereUniqueInput | TurnoRegistradoPorClienteWhereUniqueInput[]
+    delete?: TurnoRegistradoPorClienteWhereUniqueInput | TurnoRegistradoPorClienteWhereUniqueInput[]
+    connect?: TurnoRegistradoPorClienteWhereUniqueInput | TurnoRegistradoPorClienteWhereUniqueInput[]
+    update?: TurnoRegistradoPorClienteUpdateWithWhereUniqueWithoutUsuarioInput | TurnoRegistradoPorClienteUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: TurnoRegistradoPorClienteUpdateManyWithWhereWithoutUsuarioInput | TurnoRegistradoPorClienteUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: TurnoRegistradoPorClienteScalarWhereInput | TurnoRegistradoPorClienteScalarWhereInput[]
+  }
+
+  export type TurnoRegistradoPorClienteUncheckedUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<TurnoRegistradoPorClienteCreateWithoutUsuarioInput, TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput> | TurnoRegistradoPorClienteCreateWithoutUsuarioInput[] | TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput | TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput[]
+    upsert?: TurnoRegistradoPorClienteUpsertWithWhereUniqueWithoutUsuarioInput | TurnoRegistradoPorClienteUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: TurnoRegistradoPorClienteCreateManyUsuarioInputEnvelope
+    set?: TurnoRegistradoPorClienteWhereUniqueInput | TurnoRegistradoPorClienteWhereUniqueInput[]
+    disconnect?: TurnoRegistradoPorClienteWhereUniqueInput | TurnoRegistradoPorClienteWhereUniqueInput[]
+    delete?: TurnoRegistradoPorClienteWhereUniqueInput | TurnoRegistradoPorClienteWhereUniqueInput[]
+    connect?: TurnoRegistradoPorClienteWhereUniqueInput | TurnoRegistradoPorClienteWhereUniqueInput[]
+    update?: TurnoRegistradoPorClienteUpdateWithWhereUniqueWithoutUsuarioInput | TurnoRegistradoPorClienteUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: TurnoRegistradoPorClienteUpdateManyWithWhereWithoutUsuarioInput | TurnoRegistradoPorClienteUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: TurnoRegistradoPorClienteScalarWhereInput | TurnoRegistradoPorClienteScalarWhereInput[]
+  }
+
+  export type TurnoRegistradoPorClienteCreatemodulosOcupadosInput = {
+    set: string[]
+  }
+
+  export type UsuarioCreateNestedOneWithoutTurnosInput = {
+    create?: XOR<UsuarioCreateWithoutTurnosInput, UsuarioUncheckedCreateWithoutTurnosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutTurnosInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type TurnoRegistradoPorClienteUpdatemodulosOcupadosInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UsuarioUpdateOneRequiredWithoutTurnosNestedInput = {
+    create?: XOR<UsuarioCreateWithoutTurnosInput, UsuarioUncheckedCreateWithoutTurnosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutTurnosInput
+    upsert?: UsuarioUpsertWithoutTurnosInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutTurnosInput, UsuarioUpdateWithoutTurnosInput>, UsuarioUncheckedUpdateWithoutTurnosInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7868,6 +9625,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type TurnoFijoCreateWithoutClienteInput = {
@@ -8127,6 +9901,136 @@ export namespace Prisma {
     fijos?: TurnoFijoUncheckedUpdateManyWithoutClienteNestedInput
   }
 
+  export type TurnoRegistradoPorClienteCreateWithoutUsuarioInput = {
+    id?: string
+    fecha?: Date | string
+    cancha: $Enums.Cancha
+    dia: $Enums.Dia
+    horaComienzo: string
+    horaFinaliza: string
+    cantidadModulos: number
+    modulosOcupados?: TurnoRegistradoPorClienteCreatemodulosOcupadosInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput = {
+    id?: string
+    fecha?: Date | string
+    cancha: $Enums.Cancha
+    dia: $Enums.Dia
+    horaComienzo: string
+    horaFinaliza: string
+    cantidadModulos: number
+    modulosOcupados?: TurnoRegistradoPorClienteCreatemodulosOcupadosInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput = {
+    where: TurnoRegistradoPorClienteWhereUniqueInput
+    create: XOR<TurnoRegistradoPorClienteCreateWithoutUsuarioInput, TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type TurnoRegistradoPorClienteCreateManyUsuarioInputEnvelope = {
+    data: TurnoRegistradoPorClienteCreateManyUsuarioInput | TurnoRegistradoPorClienteCreateManyUsuarioInput[]
+  }
+
+  export type TurnoRegistradoPorClienteUpsertWithWhereUniqueWithoutUsuarioInput = {
+    where: TurnoRegistradoPorClienteWhereUniqueInput
+    update: XOR<TurnoRegistradoPorClienteUpdateWithoutUsuarioInput, TurnoRegistradoPorClienteUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<TurnoRegistradoPorClienteCreateWithoutUsuarioInput, TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type TurnoRegistradoPorClienteUpdateWithWhereUniqueWithoutUsuarioInput = {
+    where: TurnoRegistradoPorClienteWhereUniqueInput
+    data: XOR<TurnoRegistradoPorClienteUpdateWithoutUsuarioInput, TurnoRegistradoPorClienteUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type TurnoRegistradoPorClienteUpdateManyWithWhereWithoutUsuarioInput = {
+    where: TurnoRegistradoPorClienteScalarWhereInput
+    data: XOR<TurnoRegistradoPorClienteUpdateManyMutationInput, TurnoRegistradoPorClienteUncheckedUpdateManyWithoutUsuarioInput>
+  }
+
+  export type TurnoRegistradoPorClienteScalarWhereInput = {
+    AND?: TurnoRegistradoPorClienteScalarWhereInput | TurnoRegistradoPorClienteScalarWhereInput[]
+    OR?: TurnoRegistradoPorClienteScalarWhereInput[]
+    NOT?: TurnoRegistradoPorClienteScalarWhereInput | TurnoRegistradoPorClienteScalarWhereInput[]
+    id?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    fecha?: DateTimeFilter<"TurnoRegistradoPorCliente"> | Date | string
+    usuarioId?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    cancha?: EnumCanchaFilter<"TurnoRegistradoPorCliente"> | $Enums.Cancha
+    dia?: EnumDiaFilter<"TurnoRegistradoPorCliente"> | $Enums.Dia
+    horaComienzo?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    horaFinaliza?: StringFilter<"TurnoRegistradoPorCliente"> | string
+    cantidadModulos?: IntFilter<"TurnoRegistradoPorCliente"> | number
+    modulosOcupados?: StringNullableListFilter<"TurnoRegistradoPorCliente">
+    createdAt?: DateTimeFilter<"TurnoRegistradoPorCliente"> | Date | string
+    updatedAt?: DateTimeFilter<"TurnoRegistradoPorCliente"> | Date | string
+  }
+
+  export type UsuarioCreateWithoutTurnosInput = {
+    id?: string
+    email: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    twoFactorSecret: string
+    twoFactorActivated?: boolean
+    role?: $Enums.Role
+  }
+
+  export type UsuarioUncheckedCreateWithoutTurnosInput = {
+    id?: string
+    email: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    twoFactorSecret: string
+    twoFactorActivated?: boolean
+    role?: $Enums.Role
+  }
+
+  export type UsuarioCreateOrConnectWithoutTurnosInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutTurnosInput, UsuarioUncheckedCreateWithoutTurnosInput>
+  }
+
+  export type UsuarioUpsertWithoutTurnosInput = {
+    update: XOR<UsuarioUpdateWithoutTurnosInput, UsuarioUncheckedUpdateWithoutTurnosInput>
+    create: XOR<UsuarioCreateWithoutTurnosInput, UsuarioUncheckedCreateWithoutTurnosInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutTurnosInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutTurnosInput, UsuarioUncheckedUpdateWithoutTurnosInput>
+  }
+
+  export type UsuarioUpdateWithoutTurnosInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    twoFactorSecret?: StringFieldUpdateOperationsInput | string
+    twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  }
+
+  export type UsuarioUncheckedUpdateWithoutTurnosInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    twoFactorSecret?: StringFieldUpdateOperationsInput | string
+    twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  }
+
   export type TurnoFijoCreateManyClienteInput = {
     id?: string
     cancha: $Enums.Cancha
@@ -8217,6 +10121,55 @@ export namespace Prisma {
     horaFinaliza?: StringFieldUpdateOperationsInput | string
     cantidadModulos?: IntFieldUpdateOperationsInput | number
     modulosOcupados?: TurnoPuntualUpdatemodulosOcupadosInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TurnoRegistradoPorClienteCreateManyUsuarioInput = {
+    id?: string
+    fecha?: Date | string
+    cancha: $Enums.Cancha
+    dia: $Enums.Dia
+    horaComienzo: string
+    horaFinaliza: string
+    cantidadModulos: number
+    modulosOcupados?: TurnoRegistradoPorClienteCreatemodulosOcupadosInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TurnoRegistradoPorClienteUpdateWithoutUsuarioInput = {
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cancha?: EnumCanchaFieldUpdateOperationsInput | $Enums.Cancha
+    dia?: EnumDiaFieldUpdateOperationsInput | $Enums.Dia
+    horaComienzo?: StringFieldUpdateOperationsInput | string
+    horaFinaliza?: StringFieldUpdateOperationsInput | string
+    cantidadModulos?: IntFieldUpdateOperationsInput | number
+    modulosOcupados?: TurnoRegistradoPorClienteUpdatemodulosOcupadosInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TurnoRegistradoPorClienteUncheckedUpdateWithoutUsuarioInput = {
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cancha?: EnumCanchaFieldUpdateOperationsInput | $Enums.Cancha
+    dia?: EnumDiaFieldUpdateOperationsInput | $Enums.Dia
+    horaComienzo?: StringFieldUpdateOperationsInput | string
+    horaFinaliza?: StringFieldUpdateOperationsInput | string
+    cantidadModulos?: IntFieldUpdateOperationsInput | number
+    modulosOcupados?: TurnoRegistradoPorClienteUpdatemodulosOcupadosInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TurnoRegistradoPorClienteUncheckedUpdateManyWithoutUsuarioInput = {
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cancha?: EnumCanchaFieldUpdateOperationsInput | $Enums.Cancha
+    dia?: EnumDiaFieldUpdateOperationsInput | $Enums.Dia
+    horaComienzo?: StringFieldUpdateOperationsInput | string
+    horaFinaliza?: StringFieldUpdateOperationsInput | string
+    cantidadModulos?: IntFieldUpdateOperationsInput | number
+    modulosOcupados?: TurnoRegistradoPorClienteUpdatemodulosOcupadosInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

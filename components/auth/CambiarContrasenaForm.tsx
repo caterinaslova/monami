@@ -8,7 +8,7 @@ import { z } from "zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import {changePassword} from "@/actions/administradoresAction"
+import {changePassword} from "@/actions/usuarioAction"
 
 
 const formSchema = z.object({

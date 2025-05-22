@@ -9,7 +9,7 @@ export default function InfoTorneos() {
         <div className='flex flex-col  lg:flex-row '>
         <CardTitle className=' text-lg md:text-2xl text-[#00BDA7] text-center mb-2  lg:hidden'>Torneo ACS </CardTitle>
           <div className='w-[100%] max-h-[30rem]  rounded  mx-auto'>
-             <Image src="/torneos/foto.jpg" alt="foto" width={600} height={600} className='rounded object-cover'/>
+             <Image src="/torneos/foto.jpg" alt="foto" width={600} height={600} className='rounded object-cover mx-auto'/>
           </div>
           <div className='w-full '>
             <CardContent className='mt-2 px-2 md:px-8 md:ml-6'>

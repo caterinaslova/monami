@@ -27,18 +27,14 @@ import { useForm } from 'react-hook-form';
 
 import { z } from 'zod';
 
-const Response = z.object({
-  error:z.boolean(),
-  message:z.string(),
-  user:z.optional(z.object({id:z.string(),name:z.string(),email:z.string(),role:z.enum(['USER','ADMIN'])}))
-})
+
 const formSchema = z.object({
   email: z.string().email({message:"Debe escribir un email válido"}),
   password:passwordSchema
 })
 
-export default function LoginComponent()  {
- 
+export default function LoginComponentModal()  {
+
   const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,30 +50,14 @@ export default function LoginComponent()  {
     password:data.password,
 
    })
-   const respuestaTipeada = Response.parse(response)
-
-   if (respuestaTipeada?.error){
-    form.setError("root",{message:respuestaTipeada.message})
+   if (response?.error){
+    form.setError("root",{message:response.message})
    }else{
-   
-    if (!respuestaTipeada.error) {
-      if (respuestaTipeada?.user && respuestaTipeada.user.role==="ADMIN" ) {
-        router.push("/admin") // redirige a admin
-      } else {
-        router.push("/monamipadelsquash/reservas") // redirige a usuario común
-      }
-    }
-  }
+    router.push('/')
+   }
 }
   return (
-        <main className='flex justify-center items-center min-h-screen bg-radial from-[#00BDA7] to-[#004B49]'>
-     
-        <Card className='w-[350px]'>
-        <CardHeader>
-          <CardTitle><Link className='cursor-pointer hover:underline' href={'/'}>Entrar a Monami Padel&Squash</Link></CardTitle>
-          <CardDescription>Escriba su email y contraseña</CardDescription>
-        </CardHeader>
-        <CardContent>
+
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)} >
               <fieldset disabled={form.formState.isSubmitting} className='flex flex-col gap-4'>
@@ -112,23 +92,9 @@ export default function LoginComponent()  {
                 }
 
                <Button type="submit" className='mt-2 cursor-pointer'>Entrar</Button>
-               <Link href="/" > <Button type="button" variant={"outline"} className='cursor-pointer w-full'>Continuar sin loguearme</Button></Link>
               </fieldset>
-              
+           
             </form>
           </Form>
-        </CardContent>
-        <CardFooter className='flex flex-col gap-4 justify-center items-center'>
-          <div className="text-muted-foreground text-xs">
-             Primera vez. <Link href={"/register"} className='underline cursor-pointer'> Registrarme</Link>
-          </div>
-          <div className="text-muted-foreground text-xs">
-                Olvidaste tu contraseña. <Link href={"/recuperarpassword"} className='underline cursor-pointer'> Recuperarla</Link>
-          </div>
-        </CardFooter>
-       </Card>
-  
-
-    </main>
   )
 }

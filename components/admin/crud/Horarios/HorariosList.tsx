@@ -12,16 +12,17 @@ const FormSchema = z.object({
 
 type HorarioFormTypes = {
   horariosDeEseDia: HorarioPosible[];
+  tarea: "abrir" | "mostrar"
 };
 
-export default function HorariosList({ horariosDeEseDia }: HorarioFormTypes) {
+export default function HorariosList({ horariosDeEseDia,tarea }: HorarioFormTypes) {
 
   return (
   
 
       <div className='grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-1'>
             {horariosDeEseDia.map((horario) => (
-                <HorarioForm horario={horario} key={horario.id} />
+                <HorarioForm horario={horario} key={horario.id} tarea={tarea} />
             ))}
       </div>
 

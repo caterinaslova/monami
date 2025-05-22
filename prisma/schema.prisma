@@ -76,20 +76,44 @@ model TurnoPuntual {
   cliente         Cliente  @relation(fields: [clienteId], references: [id])
 }
 
-
-
 model HorarioPosible {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
   dia             String
   horarioComienzo String
   abierto         Boolean
+  mostrar         Boolean
 }
 
-model Administrador{
-   id              String    @id @default(auto()) @map("_id") @db.ObjectId
-   email           String    @unique()
-   password        String
+
+model Usuario {
+  id                 String                      @id @default(auto()) @map("_id") @db.ObjectId
+  email              String                      @unique
+  name               String
+  password           String
+  createdAt          DateTime                    @default(now())
+  updatedAt          DateTime                    @updatedAt
+  twoFactorSecret    String
+  twoFactorActivated Boolean                     @default(false)
+  turnos             TurnoRegistradoPorCliente[]
+  role               Role                        @default(USER)
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model TurnoRegistradoPorCliente {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  fecha           DateTime @default(now())
+  usuarioId       String   @db.ObjectId
+  cancha          Cancha
+  dia             Dia
+  horaComienzo    String
+  horaFinaliza    String
+  cantidadModulos Int
+  modulosOcupados String[]
   createdAt       DateTime @default(now())
-  twoFactorSecret String
-  twoFactorActivated  Boolean @default(false)
+  updatedAt       DateTime @updatedAt
+  usuario         Usuario  @relation(fields: [usuarioId], references: [id])
 }

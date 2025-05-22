@@ -1,16 +1,15 @@
 "use server"
+import prisma from "@/lib/prisma";
+import { Mensajeria } from "./zz-tiposDatosGenerales";
+import { revalidatePath } from "next/cache";
+import { DiaConLetras } from "@/lib/schemas";
+import { referenciaDia } from "@/lib/datos";
+import { z } from "zod";
+import { modificarCliente } from "./clientesAction";
 
-import {  referenciaDia } from "@/lib/datos"
-import prisma from "@/lib/prisma"
-import { z } from "zod"
-import { Mensajeria } from "./zz-tiposDatosGenerales"
-import { DiaConLetras } from "@/lib/schemas"
-import { revalidatePath } from "next/cache"
-
-
-const TurnoPuntualForm =z.object({
+const TurnoGeneralForm =z.object({
     fecha:z.date(),
-    clienteId: z
+    usuarioId: z
     .string()
     .min(2, { message: 'El cliente es obligatorio' }),
   cancha: z.enum(['Squash1','Squash2','Squash3','Padel1','Padel2','Asador1','Asador2']),
@@ -19,11 +18,22 @@ const TurnoPuntualForm =z.object({
   cantidadModulos: z.coerce.number(),
 })
 
-export const createTurnoPuntual = async (mensajeria:Mensajeria, formData:FormData)=>{
-
+export const createTurnoGeneral = async (mensajeria:Mensajeria,formData:FormData)=>{
    
+   
+    const clienteId = formData.get('clienteId')
+
+    if(!clienteId || clienteId===""){
+       
+        return{
+            errors:['Debe estar logueado para reservar.'],
+            exitoso:''
+        }
+    }
+    
 
     const fechaRecibida= formData.get('fecha') as string
+   
 
     const fechaDividida = fechaRecibida.split('-')
 
@@ -34,14 +44,19 @@ export const createTurnoPuntual = async (mensajeria:Mensajeria, formData:FormDat
     
     const fechaDate = new Date(anio,mes,diaElegido)
 
-    const diaNumero = fechaDate.getDay()
   
+
+    const diaNumero = fechaDate.getDay()
+
     const diaReferenciado= DiaConLetras.parse(referenciaDia[diaNumero]) 
 
-    const horariosPosibles = await prisma.horarioPosible.findMany({where:{AND:[{dia:diaReferenciado}]},orderBy:{horarioComienzo:'asc'}})
 
+    const horariosPosibles = await prisma.horarioPosible.findMany({where:{AND:[{dia:diaReferenciado}]},orderBy:[
+     {horarioComienzo:'asc'}
+    ]})
+ 
     const dataCruda = {
-        clienteId:formData.get('clienteId') as string,
+        usuarioId:formData.get('clienteId') as string,
         cancha:formData.get('cancha') as string,
         horaComienzo:formData.get('horaComienzo') as string,
         cantidadModulos:formData.get('cantidadModulos') as string,
@@ -49,47 +64,50 @@ export const createTurnoPuntual = async (mensajeria:Mensajeria, formData:FormDat
         dia:diaReferenciado
     }
 
-    const dataValida = TurnoPuntualForm.safeParse(dataCruda)
+    const dataValida = TurnoGeneralForm.safeParse(dataCruda)
     if(dataValida.error){
         const errors = dataValida.error.issues.map(error=>error.message)
+    
         return{
             errors,
             exitoso:''
         }
     }
-  
-    const desde = horariosPosibles.findIndex(item=>item.id===dataValida.data.horaComienzo)
+ 
+
+    const desde = horariosPosibles.findIndex(item=>item.horarioComienzo===dataValida.data.horaComienzo)
   
    const hasta = desde + Number(dataValida.data.cantidadModulos)
 
      if (hasta> horariosPosibles.length){
+     
         return {
-      errors:['Los horarios elegidos superan los horarios abiertos de este día'],
+      errors:['Los horarios elegidos superan los horarios abiertos de este día.'],
       exitoso: '',
     };
   }
-
-    const modulosOcupados:string[] =[]
+  const modulosOcupados:string[] =[]
 
     for (let i=desde; i< hasta; i++){
 
         if(!horariosPosibles[i]){
             return{
-                errors:['Eligió un turno cerrado'],
+                errors:['Eligió un turno cerrado.'],
                  exitoso:''
             }
         }
        
         modulosOcupados.push(horariosPosibles[i].horarioComienzo) 
     }
-
+console.log('modulos ocupados',modulosOcupados)
  const cerrados = modulosOcupados
   .map(item => horariosPosibles.find(horario => horario.horarioComienzo === item))
   .filter(horario => horario && !horario.abierto);
 
+  console.log('modulos cerrados',cerrados)
    if (cerrados.length>0){
             return{
-        errors:['Ha elegido horarios cerrados. debe abrirlo primero.'],
+        errors:['Ha elegido horarios cerrados.'],
         exitoso:''
     }
    }
@@ -101,7 +119,6 @@ if (hasta < horariosPosibles.length){
     horaFinaliza="24:00"
 }
  
-
 
  const verificarOcupadoPuntual = await prisma.turnoPuntual.findFirst({
     where:{
@@ -124,12 +141,14 @@ if (hasta < horariosPosibles.length){
 
     }
  })
+
  if (verificarOcupadoPuntual){
         return{
-        errors:['Ya hay un turno Puntual en ese horario, en esa cancha.'],
+        errors:['Ya hay un turno  en ese horario, en esa cancha.'],
         exitoso:''
     }
  }
+
 
  const verificarOcupadoFijo = await prisma.turnoFijo.findFirst({
     where:{
@@ -152,13 +171,14 @@ if (hasta < horariosPosibles.length){
 
     }
  })
+
   if (verificarOcupadoFijo){
         return{
-        errors:['Ya hay un turno Fijo en ese horario, en esa cancha.'],
+        errors:['Ya hay un turno  en ese horario, en esa cancha.'],
         exitoso:''
     }
  }
-   const verificarOcupadoAuto = await prisma.turnoRegistradoPorCliente.findFirst({
+  const verificarOcupadoAuto = await prisma.turnoRegistradoPorCliente.findFirst({
     where:{
         OR:[
             {
@@ -187,8 +207,8 @@ if (hasta < horariosPosibles.length){
     }
  }
 
-    await prisma.turnoPuntual.create({data:{
-        clienteId: dataValida.data.clienteId,
+ await prisma.turnoRegistradoPorCliente.create({data:{
+        usuarioId: dataValida.data.usuarioId,
         fecha:new Date(dataValida.data.fecha),
         cancha:dataValida.data.cancha,
         dia:dataValida.data.dia,
@@ -198,22 +218,12 @@ if (hasta < horariosPosibles.length){
         modulosOcupados,
         createdAt: new Date(),
       }})
-
+ 
     revalidatePath('/admin/turnosPuntuales')
     revalidatePath('/monamipadelsquah/reservas')
+
     return{
         errors:[],
         exitoso:'El turno fue registrado correctamente.'
-    }
-}
-
-export const modificarTurnoPuntual = async (turnoFijoId:string,mensajeria:Mensajeria,formData:FormData)=>{
-
-
-    console.log(formData)
-
-    return{
-        errors:[],
-        exitoso:'El turno fue modificado correctamente.'
     }
 }

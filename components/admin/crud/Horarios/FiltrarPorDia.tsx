@@ -1,6 +1,5 @@
 'use client';
 
-import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import {
   Select,
   SelectContent,
@@ -10,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { diasOrdenados } from '@/lib/datos';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function FiltrarPorDia() {
   const pathname = usePathname();

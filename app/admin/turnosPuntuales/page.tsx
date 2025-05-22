@@ -4,6 +4,8 @@ import prisma from '@/lib/prisma';
 import { DataTable } from '../../../components/admin/crud/generales/data-table';
 import { columns } from './columns';
 import TurnoPuntualAgregar from '@/components/admin/crud/TurnosPuntuales/TurnoPuntualAgregar';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
 const getTurnosPuntuales = async () => {
   const datos = await prisma.turnoPuntual.findMany({
@@ -33,6 +35,10 @@ const getTurnosPuntuales = async () => {
 };
 
 export default async function TurnosPuntualesPage() {
+    const session = await auth()
+    if (!session?.user.id || session?.user.role !== "ADMIN"){
+      redirect('/login')
+    }
   const data = await getTurnosPuntuales();
  
   return (

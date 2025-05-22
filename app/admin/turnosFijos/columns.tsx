@@ -68,8 +68,19 @@ export const columns: ColumnDef<TurnoFijoType>[] = [
   },
   {
     accessorKey: "cancha",
-    header: ()=><div  className="text-center font-bold tracking-wide">Cancha</div>,
-    
+    header: ({ column }) => {
+        return (
+            <div className="text-center font-bold tracking-wide">
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    <p>Cancha</p>
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            </div>
+        )
+      },
     cell:({row})=>{
         const cancha =row.getValue("cancha") as string
         return <div className="text-center">{cancha}</div>
@@ -77,7 +88,19 @@ export const columns: ColumnDef<TurnoFijoType>[] = [
   },
   {
     accessorKey: "dia",
-    header: ()=><div  className="text-center font-bold tracking-wide">Día</div>,
+    header: ({ column }) => {
+        return (
+            <div className="text-center font-bold tracking-wide">
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    <p>Día</p>
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            </div>
+        )
+      },
     
     cell:({row})=>{
         const dia =row.getValue("dia") as string

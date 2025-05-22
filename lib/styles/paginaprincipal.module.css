@@ -25,7 +25,7 @@
       }
       .cajaImagen{
         text-align: center;
-          transform-style: preserve-3d;
+        transform-style: preserve-3d;
       }
       .cajaImagen video{
         animation: apareceJugador 1.5s ease forwards 1.5s;
@@ -49,12 +49,19 @@
             align-items: center;
         }
       }
+      .contenido{
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
       .logo {
         height: 150px;
-        display: flex;
-         justify-content: center;
+        /* display: flex;
+        justify-content: center;
         align-items: center;
-        flex-direction: column;
+        flex-direction: column; */
         position: relative;
       }
 
@@ -209,13 +216,7 @@
         }
         
       }
-      .contenido{
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
+
       .btn{
         background: white;
         color:black;

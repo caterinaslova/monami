@@ -3,7 +3,7 @@ import { HorarioPosible } from '@/lib/generated/prisma';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { createHorario } from '@/actions/horariosAction';
+import { createHorario, mostrarHorario } from '@/actions/horariosAction';
 import { Button } from '@/components/ui/button';
 import {
   Form
@@ -19,18 +19,19 @@ const FormSchema = z.object({
 
 type HorarioFormTypes = {
   horario: HorarioPosible;
+  tarea:"abrir" | "mostrar"
 };
 
-export default function HorarioForm({ horario }: HorarioFormTypes) {
+export default function HorarioForm({ horario,tarea }: HorarioFormTypes) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
   
 
-  const [valor,setValor]= useState(horario.abierto)
+  const [valor,setValor]= useState(tarea==="abrir" ? horario.abierto : horario.mostrar)
 
   const formRef = useRef<HTMLFormElement>(null);
-  const [mensaje, envioDatos] = useActionState(createHorario.bind(null,horario.id), {
+  const [mensaje, envioDatos] = useActionState(tarea==="abrir" ? createHorario.bind(null,horario.id): mostrarHorario.bind(null,horario.id), {
     errors: [],
     exitoso: '',
   });

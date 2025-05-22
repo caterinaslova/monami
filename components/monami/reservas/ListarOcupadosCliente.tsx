@@ -13,39 +13,48 @@ import { DiaConLetras } from '@/lib/schemas';
 import { TurnoFijoType, TurnoPuntualType } from '@/lib/types';
 import { format } from 'date-fns';
 import { GiImpLaugh } from 'react-icons/gi';
-import FormReserva from './FormReserva';
-import { useEffect } from 'react';
+import FormReservaCliente from './FormReservaCliente';
 
+// para hacer el listado
 const canchas = ['Hora', 'Squash1', 'Squash2', 'Squash3', 'Padel1', 'Padel2'];
-
 const diagonal="bg-gray-100 before:content-[''] before:absolute before:w-[50%] before:h-[2px] before:bg-black before:top-1/2 before:left-[30%] before:rotate-45"
 
 type ListarOcupadosProps = {
   fecha: Date;
   turnosPuntuales: TurnoPuntualType[];
   turnosFijos: TurnoFijoType[];
-  horarioDeEseDia: HorarioPosible[];
   turnosAutoRegistrados:TurnoRegistradoPorCliente[]
-   clientesSelect: { label: string; value: string }[];
+  horarioDeEseDia: HorarioPosible[];
+  email?:string | null;
+  userId?: string | null;
+ 
 };
 
-export default function ListarOcupados({
+export default function ListarOcupadosCliente({
   fecha,
   turnosPuntuales,
   turnosFijos,
-  horarioDeEseDia,
   turnosAutoRegistrados,
-  clientesSelect
+  horarioDeEseDia,
+  email,
+  userId
   
 }: ListarOcupadosProps) {
+ // para mantener la sheet abierta mientras se guardan los datos
+
+
   const dia = fecha.getDate();
   const mes = fecha.getMonth();
   const anio = fecha.getFullYear();
 
   const diaNumero = fecha.getDay();
 
+
+  // para poder listar los fijos
   const diaReferenciado = DiaConLetras.parse(referenciaDia[diaNumero]);
 
+
+  // para poder hacer un rango y listar los puntuales
   const hoy = new Date(anio, mes, dia);
   hoy.setHours(0, 0, 0);
 
@@ -58,18 +67,21 @@ export default function ListarOcupados({
   const turnosfechaHoy = turnosPuntuales.filter(
     (item) => item.fecha >= hoy && item.fecha <= siguiente
   );
-  const turnosAutoHoy = turnosAutoRegistrados.filter(
+    const turnosAutoHoy = turnosAutoRegistrados.filter(
     (item) => item.fecha >= hoy && item.fecha <= siguiente
   );
+   
   const cerrados = horarioDeEseDia.filter(item=>item.mostrar && !item.abierto)
+  // un array con solo las horas
   const horas = horarioDeEseDia.map((item) => item.horarioComienzo);
 
+  // por si está cerrado
   const hayTurnos = horas.length !== 0;
 
+  // para hacer 2 cuadros
   const mitad = Math.ceil(horas.length / 2);
   const primeraMitad = horas.slice(0, mitad);
   const segundaMitad = horas.slice(mitad);
-
 
   return (
     <>
@@ -102,37 +114,26 @@ export default function ListarOcupados({
                       (t) =>
                         t.modulosOcupados.includes(hora) && t.cancha === cancha
                     );
-                    const cerrado = cerrados.find(item=>item.horarioComienzo===hora)
+                     const cerrado = cerrados.find(item=>item.horarioComienzo===hora)
                     return (
-                      <Sheet key={i} >
+                      <Sheet key={i}  >
                         <SheetTrigger className='block w-full' disabled={turno || turnoFijo || turnoAuto || cancha==="Hora" || cerrado ? true : false}>
                           <div
-
-                            className={`p-1 text-sm text-center cursor-grab text-stone-900 border mb-1 rounded relative h-8 hover:${turno || turnoFijo || turnoAuto || cancha==="Hora" || cerrado ? 'bg-transparent' :'bg-[#00BDA7]'}
+                            className={`p-1 text-sm text-center cursor-grab text-stone-900 border relative mb-1 rounded h-8 hover:${turno || turnoFijo || turnoAuto || cancha==="Hora" || cerrado  ? 'bg-transparent' :'bg-[#00BDA7]'}
                       ${
                         turno || turnoFijo || turnoAuto || cerrado
                           ? turnoFijo
-                            ? 'bg-stone-800'
-                            : turnoAuto ?'bg-red-500' : cerrado ? `${diagonal}` :'bg-stone-500'
-                          : 'bg-green-200'
+                            ?  'bg-stone-800'
+                            :  cerrado ? `${diagonal}` : 'bg-stone-500'
+                          :'bg-green-200'
                       }`}
                           >
-                            {cancha === 'Hora' ? (
-                                hora
-                              ) : turno || turnoFijo || turnoAuto ? (
-                                turno ? (
-                                  <p className='text-[10px] text-white'>
-                                    {turno.cliente.nombre.slice(0, 8)}
-                                  </p>
-                                ) : turnoFijo ? (
-                                  <p className='text-[10px] text-white'>
-                                    {turnoFijo!.cliente.nombre.slice(0, 8)}
-                                  </p>
-                                ): (<p className='text-[10px] text-white'>{turnoAuto!.usuarioId.slice(0,8)}</p>)
-                              ) : null}
+                            {
+                            cancha==="Hora" && <p>{hora}</p>
+                           }                          
                           </div>
                         </SheetTrigger>
-                        <SheetContent>
+                        <SheetContent  >
                           <SheetHeader>
                             <SheetTitle>Revisa los datos a  grabar</SheetTitle>
                             <div className="mt-5">
@@ -144,7 +145,7 @@ export default function ListarOcupados({
 
                           </SheetHeader>
                           <div className='grid gap-4 py-4'>
-                              <FormReserva clientesSelect={clientesSelect} horariosPosibles={horarioDeEseDia} cancha={cancha} horaComienzo={hora} fecha={hoy}/>
+                              <FormReservaCliente  horariosPosibles={horarioDeEseDia} cancha={cancha} horaComienzo={hora} fecha={hoy} email={email} userId={userId} />
                           </div>
 
                         </SheetContent>
@@ -170,39 +171,28 @@ export default function ListarOcupados({
                       (t) =>
                         t.modulosOcupados.includes(hora) && t.cancha === cancha
                     );
-                     const turnoAuto = turnosAutoHoy.find(
+                    const turnoAuto = turnosAutoHoy.find(
                       (t) =>
                         t.modulosOcupados.includes(hora) && t.cancha === cancha
                     );
-                    const cerrado = cerrados.find(item=>item.horarioComienzo===hora)
+                     const cerrado = cerrados.find(item=>item.horarioComienzo===hora)
                     return (
                       <Sheet key={i} >
-                        <SheetTrigger className='block w-full' disabled={turno || turnoFijo || turnoAuto || cancha==="Hora" || cerrado ? true : false}>
+                        <SheetTrigger className='block w-full' disabled={turno || turnoFijo || cancha==="Hora" || turnoAuto || cerrado ? true : false}>
                           <div
-       
-                            className={`p-1 text-sm text-center cursor-grab text-stone-900 border relative mb-1 rounded h-8 hover:${turno || turnoFijo || turnoAuto || cancha==="Hora" || cerrado ? 'bg-transparent' :'bg-[#00BDA7]'}
+                    
+                            className={`p-1 text-sm text-center cursor-grab text-stone-900 border mb-1 relative rounded h-8 hover:${turno || turnoFijo || turnoAuto || cancha==="Hora" || cerrado ? 'bg-transparent' :'bg-[#00BDA7]'}
                       ${
                         turno || turnoFijo || turnoAuto || cerrado
                           ? turnoFijo
                             ? 'bg-stone-800'
-                            : turnoAuto? 'bg-red-500' : cerrado ? `${diagonal}`: 'bg-stone-500'
+                            :  cerrado ? `${diagonal}` : 'bg-stone-500'
                           : 'bg-green-200'
                       }`}
                           >
-                            {cancha === 'Hora' ? (
-                                hora
-                              ) : turno || turnoFijo || turnoAuto ? (
-                                turno ? (
-                                  <p className='text-[10px] text-white'>
-                                    {turno.cliente.nombre.slice(0, 8)}
-                                  </p>
-                                ) : turnoFijo ? (
-                                  <p className='text-[10px] text-white'>
-                                    {turnoFijo!.cliente.nombre.slice(0, 8)}
-                                  </p>
-                                ) : (<p className='text-[10px] text-white'>{turnoAuto!.usuarioId.slice(0,8)}</p>)
-                              ) : null
-                            }
+                           {
+                            cancha==="Hora" && <p>{hora}</p>
+                           }
                           </div>
                         </SheetTrigger>
                         <SheetContent>
@@ -217,7 +207,7 @@ export default function ListarOcupados({
 
                           </SheetHeader>
                           <div className='grid gap-4 py-4'>
-                              <FormReserva clientesSelect={clientesSelect} horariosPosibles={horarioDeEseDia} cancha={cancha} horaComienzo={hora} fecha={hoy}/>
+                              <FormReservaCliente  horariosPosibles={horarioDeEseDia} cancha={cancha} horaComienzo={hora} fecha={hoy} email={email} userId={userId} />
                           </div>
 
                         </SheetContent>

@@ -1,7 +1,13 @@
+import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
-export default function EscuelaPage() {
+export default async function EscuelaPage() {
+    const session = await auth()
+    if (!session?.user.id || session?.user.role !== "ADMIN"){
+      redirect('/login')
+    }
   return (
-    <div>EscuelaPage</div>
+    <div className='flex justify-center items-center text-7xl mt-10'>EscuelaPage</div>
   )
 }

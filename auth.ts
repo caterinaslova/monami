@@ -1,20 +1,50 @@
-import NextAuth from "next-auth"
+
 import Credentials from "next-auth/providers/credentials"
 import prisma from "./lib/prisma";
 import { compare } from "bcryptjs";
+import NextAuth, { type DefaultSession } from "next-auth"
+ 
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string
+      name?: string | null
+      email?: string | null
+      role?: string | null
+    }
+  }
+
+  interface User {
+    id: string
+    role?: string | null
+  }
+    interface JWT {
+    role?: string
+    id?: string
+  }
+
+}
+
+
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks:{
-    jwt({token,user}){
+    async jwt({token,user}){
       if(user){
+        token.role = user.role
         token.id = user.id
       }
       return token;
     },
-    session({session,token}){
-      session.user.id = token.id as string
+    async session({session,token}){
+      session.user.id = token.sub as string
+      session.user.role = token.role as string
       return session
-    }
+    },
+
+  },
+    session: {
+    strategy: "jwt", // importante para usar token con datos extendidos
   },
   providers: [
     Credentials({
@@ -23,7 +53,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password:{}
       },
       async authorize(credentials){
-        const user= await prisma.administrador.findFirst({where:{email:credentials.email as string}})
+        const user= await prisma.usuario.findFirst({where:{email:credentials.email as string}})
         
         if (!user){
           throw new Error('Credenciales no válidas')
@@ -35,7 +65,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
         return{
           id:user.id.toString(),
-          email:user.email
+          email:user.email,
+          role:user.role,
+          name:user.name
         }
       }
 

@@ -1,13 +1,13 @@
 "use client"
-import { es } from "date-fns/locale";
-import EliminarCliente from "@/components/admin/crud/Clientes/EliminarCliente"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
-import Link from "next/link"
+import EliminarCliente from "@/components/admin/crud/Clientes/EliminarCliente";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { horariosPosibles } from "@/lib/datos"
+import { es } from "date-fns/locale";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import Link from "next/link";
+
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -69,7 +69,19 @@ export const columns: ColumnDef<TurnoFijoType>[] = [
   },
   {
     accessorKey: "cancha",
-    header: ()=><div  className="text-center font-bold tracking-wide">Cancha</div>,
+        header: ({ column }) => {
+        return (
+            <div className="text-center font-bold tracking-wide">
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    <p>Cancha</p>
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            </div>
+        )
+      },
     
     cell:({row})=>{
         const cancha =row.getValue("cancha") as string

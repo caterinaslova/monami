@@ -1,6 +1,6 @@
 
 
-import { logout } from '@/actions/administradoresAction';
+import { logout } from '@/actions/usuarioAction';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,

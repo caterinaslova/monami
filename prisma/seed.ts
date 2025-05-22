@@ -1,1702 +1,2044 @@
 
 //npx tsx prisma/seed.ts
 //npx ts-node prisma/seed.ts
-
+type HorarioPosible = {
+    dia:string;
+    horarioComienzo:string;
+    abierto:boolean;
+    mostrar:boolean;
+}[]
 
 
 import prisma from "@/lib/prisma";
-const horariosPosiblesLunes=[
+const horariosPosiblesLunes:HorarioPosible=[
   {
     dia:"aLunes",
     horarioComienzo:"00:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"aLunes",
     horarioComienzo:"00:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"aLunes",
     horarioComienzo:"01:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"aLunes",
     horarioComienzo:"01:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"aLunes",
     horarioComienzo:"02:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"02:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"03:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"03:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"aLunes",
     horarioComienzo:"04:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"04:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"05:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"05:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"06:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"06:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"07:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"aLunes",
     horarioComienzo:"07:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"08:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"aLunes",
     horarioComienzo:"08:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"09:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"aLunes",
     horarioComienzo:"09:30",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"aLunes",
     horarioComienzo:"10:00",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"aLunes",
     horarioComienzo:"10:30",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"aLunes",
     horarioComienzo:"11:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"11:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"12:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"12:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"aLunes",
     horarioComienzo:"13:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"13:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"14:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"14:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"15:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"aLunes",
     horarioComienzo:"15:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"16:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"16:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"17:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"17:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"18:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"18:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"aLunes",
     horarioComienzo:"19:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"19:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"20:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"20:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"21:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"aLunes",
     horarioComienzo:"21:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"22:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"22:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"23:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"aLunes",
     horarioComienzo:"23:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
 ]
-const horariosPosiblesMartes=[
+const horariosPosiblesMartes:HorarioPosible=[
   {
     dia:"bMartes",
     horarioComienzo:"00:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"00:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"bMartes",
     horarioComienzo:"01:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"bMartes",
     horarioComienzo:"01:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"02:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"02:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"03:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"03:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"bMartes",
     horarioComienzo:"04:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"04:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"05:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"05:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"06:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"06:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"07:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"bMartes",
     horarioComienzo:"07:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"08:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"bMartes",
     horarioComienzo:"08:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"09:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"bMartes",
     horarioComienzo:"09:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"bMartes",
     horarioComienzo:"10:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"bMartes",
     horarioComienzo:"10:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"bMartes",
     horarioComienzo:"11:00",
-    abierto:false
+    abierto:false,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"11:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"12:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"12:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"bMartes",
     horarioComienzo:"13:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"13:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"14:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"14:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"15:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"bMartes",
     horarioComienzo:"15:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"16:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"16:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"17:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"17:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"18:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"18:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"bMartes",
     horarioComienzo:"19:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"19:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"20:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"20:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"21:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"bMartes",
     horarioComienzo:"21:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"22:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"22:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"23:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"bMartes",
     horarioComienzo:"23:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
 ]
-const horariosPosiblesMiercoles=[
+const horariosPosiblesMiercoles:HorarioPosible=[
   {
     dia:"cMiércoles",
     horarioComienzo:"00:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"00:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"01:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"01:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"02:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"02:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"03:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"03:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"04:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"04:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"05:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"05:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"06:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"06:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"07:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"07:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"08:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"08:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"09:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"09:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"10:00",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"10:30",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"11:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"11:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"12:00",
-    abierto:false
+    abierto:false,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"12:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"13:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"13:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"14:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"14:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"15:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"15:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"16:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"16:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"17:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"17:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"18:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"18:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"19:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"19:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"20:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"20:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"21:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"cMiércoles",
     horarioComienzo:"21:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"22:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"22:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"23:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"cMiércoles",
     horarioComienzo:"23:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
 ]
-const horariosPosiblesJueves=[
+const horariosPosiblesJueves:HorarioPosible=[
   {
     dia:"dJueves",
     horarioComienzo:"00:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"00:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"dJueves",
     horarioComienzo:"01:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"dJueves",
     horarioComienzo:"01:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"02:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"02:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"03:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"03:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"dJueves",
     horarioComienzo:"04:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"04:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"05:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"05:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"06:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"06:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"07:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"dJueves",
     horarioComienzo:"07:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"08:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"dJueves",
     horarioComienzo:"08:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"09:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"dJueves",
     horarioComienzo:"09:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"dJueves",
     horarioComienzo:"10:00",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"dJueves",
     horarioComienzo:"10:30",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"dJueves",
     horarioComienzo:"11:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"11:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"12:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"12:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"dJueves",
     horarioComienzo:"13:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"13:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"14:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"14:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"15:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"dJueves",
     horarioComienzo:"15:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
+
   },
   {
      dia:"dJueves",
     horarioComienzo:"16:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"16:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"17:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"17:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"18:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"18:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"dJueves",
     horarioComienzo:"19:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"19:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"20:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"20:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"21:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"dJueves",
     horarioComienzo:"21:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"22:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"22:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"23:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"dJueves",
     horarioComienzo:"23:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
 ]
-const horariosPosiblesViernes=[
+const horariosPosiblesViernes:HorarioPosible=[
   {
     dia:"eViernes",
     horarioComienzo:"00:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"00:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"eViernes",
     horarioComienzo:"01:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"eViernes",
     horarioComienzo:"01:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"02:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"02:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"03:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"03:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"eViernes",
     horarioComienzo:"04:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"04:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"05:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"05:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"06:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"06:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"07:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"eViernes",
     horarioComienzo:"07:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"08:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"eViernes",
     horarioComienzo:"08:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"09:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"eViernes",
     horarioComienzo:"09:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"eViernes",
     horarioComienzo:"10:00",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"eViernes",
     horarioComienzo:"10:30",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"eViernes",
     horarioComienzo:"11:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"11:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"12:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"12:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"eViernes",
     horarioComienzo:"13:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"13:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"14:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"14:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"15:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"eViernes",
     horarioComienzo:"15:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"16:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"16:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"17:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"17:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"18:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"18:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"eViernes",
     horarioComienzo:"19:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"19:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"20:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"20:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"21:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"eViernes",
     horarioComienzo:"21:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"22:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"22:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"23:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"eViernes",
     horarioComienzo:"23:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
 ]
-const horariosPosiblesSabado=[
+const horariosPosiblesSabado:HorarioPosible=[
   {
     dia:"fSábado",
     horarioComienzo:"00:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"00:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"fSábado",
     horarioComienzo:"01:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"fSábado",
     horarioComienzo:"01:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"02:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"02:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"03:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"03:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"fSábado",
     horarioComienzo:"04:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"04:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"05:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"05:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"06:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"06:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"07:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"fSábado",
     horarioComienzo:"07:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"08:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"fSábado",
     horarioComienzo:"08:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"09:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
      dia:"fSábado",
     horarioComienzo:"09:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"fSábado",
     horarioComienzo:"10:00",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"fSábado",
     horarioComienzo:"10:30",
-    abierto:true
+    abierto:true,
+    mostrar:false
   },
   {
     dia:"fSábado",
     horarioComienzo:"11:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"11:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"12:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"12:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
     dia:"fSábado",
     horarioComienzo:"13:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"13:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"14:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"14:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"15:00",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
     dia:"fSábado",
     horarioComienzo:"15:30",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"16:00",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"16:30",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"17:00",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"17:30",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"18:00",
-    abierto:true
+    abierto:true,
+    mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"18:30",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
     dia:"fSábado",
     horarioComienzo:"19:00",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"19:30",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"20:00",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"20:30",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"21:00",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
     dia:"fSábado",
     horarioComienzo:"21:30",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"22:00",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"22:30",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"23:00",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
   {
      dia:"fSábado",
     horarioComienzo:"23:30",
-    abierto:true
+    abierto:true,
+     mostrar:true
   },
 ]
-const horariosPosiblesDomingo=[
+const horariosPosiblesDomingo:HorarioPosible=[
   {
     dia:"gDomingo",
     horarioComienzo:"00:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
-     dia:"gDomingo",
+    dia:"gDomingo",
     horarioComienzo:"00:30",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"gDomingo",
     horarioComienzo:"01:00",
-    abierto:false
+    abierto:false,
+    mostrar:false
   },
   {
     dia:"gDomingo",
     horarioComienzo:"01:30",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"02:00",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"02:30",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"03:00",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"03:30",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
     dia:"gDomingo",
     horarioComienzo:"04:00",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"04:30",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"05:00",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"05:30",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"06:00",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"06:30",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"07:00",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
     dia:"gDomingo",
     horarioComienzo:"07:30",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"08:00",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
     dia:"gDomingo",
     horarioComienzo:"08:30",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"09:00",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
      dia:"gDomingo",
     horarioComienzo:"09:30",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
     dia:"gDomingo",
     horarioComienzo:"10:00",
-    abierto:true
+    abierto:true,
+     mostrar:false
   },
   {
     dia:"gDomingo",
     horarioComienzo:"10:30",
-    abierto:false
+    abierto:false,
+     mostrar:false
   },
   {
     dia:"gDomingo",
     horarioComienzo:"11:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"11:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"12:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"12:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
     dia:"gDomingo",
     horarioComienzo:"13:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"13:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"14:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"14:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"15:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
     dia:"gDomingo",
     horarioComienzo:"15:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"16:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"16:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"17:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"17:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"18:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"18:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
     dia:"gDomingo",
     horarioComienzo:"19:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"19:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"20:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"20:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"21:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
     dia:"gDomingo",
     horarioComienzo:"21:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"22:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"22:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"23:00",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
   {
      dia:"gDomingo",
     horarioComienzo:"23:30",
-    abierto:false
+    abierto:false,
+     mostrar:true
   },
 ]
 
