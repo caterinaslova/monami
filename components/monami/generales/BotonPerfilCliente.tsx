@@ -18,8 +18,8 @@ export default function BotonPerfilCliente({session}:{session?:Session}) {
     <DropdownMenu >
   <DropdownMenuTrigger className=" cursor-pointer hidden xl:block">{session?.user.name}</DropdownMenuTrigger>
   <DropdownMenuContent className="mr-3 hidden xl:block">
-    <DropdownMenuItem className="cursor-pointer hidden xl:block">Mis Datos</DropdownMenuItem>
-    <DropdownMenuItem className="cursor-pointer hidden xl:block">Mis Reservas</DropdownMenuItem>
+    <DropdownMenuItem className="cursor-pointer hidden xl:block"><Link href="/monamipadelsquash/misdatos">Mis Datos</Link></DropdownMenuItem>
+    <DropdownMenuItem className="cursor-pointer hidden xl:block"><Link href={'/monamipadelsquash/misreservas'}>Mis Reservas</Link></DropdownMenuItem>
     {session?.user.role==="ADMIN"  && <DropdownMenuItem className="cursor-pointer hidden xl:block"><Link href="/admin">Panel</Link></DropdownMenuItem>}
     <DropdownMenuItem className="cursor-pointer" onClick={async ()=>await logout()}>Salir</DropdownMenuItem>
   </DropdownMenuContent>

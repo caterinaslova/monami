@@ -29,6 +29,7 @@ export default function MenuCliente({session}:{session:Session| null | undefined
       
         
         <DropdownMenuItem onClick={()=>setOpenDrop(false)}> <Link href="https://maps.app.goo.gl/UcyNPscFnckB6GnB9" target="_blank" className="flex gap-2"><span className="text-[#00BDA7]"><LandPlot/></span><span className="tracking-widest">Enrique Larreta 660</span></Link></DropdownMenuItem>
+        <DropdownMenuItem onClick={()=>setOpenDrop(false)} >{session?.user.id && <Link href="/monamipadelsquash/misdatos">Mis Datos</Link> }</DropdownMenuItem>
    
           <DropdownMenuItem onClick={()=>setOpenDrop(false)} >{session?.user.id ?(<Link href="/monamipadelsquash/misreservas">Mis Reservas</Link>) :(<Link href="/login">Ingresar</Link>)}</DropdownMenuItem>
           {
