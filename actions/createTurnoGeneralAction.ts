@@ -5,7 +5,8 @@ import { revalidatePath } from "next/cache";
 import { DiaConLetras } from "@/lib/schemas";
 import { referenciaDia } from "@/lib/datos";
 import { z } from "zod";
-import { modificarCliente } from "./clientesAction";
+
+
 
 const TurnoGeneralForm =z.object({
     fecha:z.date(),
@@ -17,6 +18,8 @@ const TurnoGeneralForm =z.object({
   horaComienzo: z.string().min(2),
   cantidadModulos: z.coerce.number(),
 })
+
+const zona = "America/Argentina/Buenos_Aires"
 
 export const createTurnoGeneral = async (mensajeria:Mensajeria,formData:FormData)=>{
    
@@ -43,8 +46,9 @@ export const createTurnoGeneral = async (mensajeria:Mensajeria,formData:FormData
  
     
     const fechaDate = new Date(anio,mes,diaElegido)
+    fechaDate.setUTCHours(fechaDate.getUTCHours() + 3)
+  console.log(fechaDate)
 
-  
 
     const diaNumero = fechaDate.getDay()
 
@@ -227,3 +231,5 @@ if (hasta < horariosPosibles.length){
         exitoso:'El turno fue registrado correctamente.'
     }
 }
+
+
