@@ -61,7 +61,7 @@ export const registerUser = async ({email,name,password,passwordConfirm}:{
 
     }})
     
-    //  await AuthEmail.sendConfirmationEmail({name,email,token:tokenDeVerificacion})
+     await AuthEmail.sendConfirmationEmail({name,email,token:tokenDeVerificacion})
     
      return{
             error:false,
