@@ -44,7 +44,7 @@ export default async function TurnosPuntualesPage() {
   return (
     <div>
       <Titulo titulo='Listado de Turnos Puntuales' />
-      <div className='container mx-auto py-1 max-w-[800px]'>
+      <div className='container mx-auto py-1 max-w-[800px]  overflow-x-auto'>
         <DataTable
           columns={columns}
           data={data}

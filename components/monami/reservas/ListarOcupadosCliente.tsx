@@ -100,10 +100,7 @@ const masTresHoras = addHours(ahora, 3)
   // por si está cerrado 
   const hayTurnos = horas.length !== 0;
 
-  // para hacer 2 cuadros
-  const mitad = Math.ceil(horas.length / 2);
-  const primeraMitad = horas.slice(0, mitad);
-  const segundaMitad = horas.slice(mitad);
+
 
   return (
     <>
@@ -123,7 +120,7 @@ const masTresHoras = addHours(ahora, 3)
                   <h3 className='text-center font-bold mb-2 text-xs md:text-base'>
                     {cancha}
                   </h3>
-                  {primeraMitad.map((hora, i) => {
+                  {horas.map((hora, i) => {
                     const turno = turnosfechaHoy.find(
                       (t) =>
                         t.modulosOcupados.includes(hora) && t.cancha === cancha
@@ -147,7 +144,7 @@ const masTresHoras = addHours(ahora, 3)
                           ? turnoFijo
                             ?  'bg-stone-800'
                             :  cerrado ? `${diagonal}` : 'bg-stone-500'
-                          :'bg-green-200'
+                          : cancha.startsWith('Padel')? 'bg-sky-400' :'bg-green-300'
                       }`}
                           >
                             {
@@ -178,67 +175,6 @@ const masTresHoras = addHours(ahora, 3)
               ))}
             </div>
 
-            <div className='grid grid-cols-6 gap-2 p-4'>
-              {canchas.map((cancha) => (
-                <div key={cancha}>
-                  <h3 className='text-center font-bold mb-2 text-xs md:text-base'>
-                    {cancha}
-                  </h3>
-                  {segundaMitad.map((hora, i) => {
-                    const turno = turnosfechaHoy.find(
-                      (t) =>
-                        t.modulosOcupados.includes(hora) && t.cancha === cancha
-                    );
-                    const turnoFijo = turnosfijosHoy.find(
-                      (t) =>
-                        t.modulosOcupados.includes(hora) && t.cancha === cancha
-                    );
-                    const turnoAuto = turnosAutoHoy.find(
-                      (t) =>
-                        t.modulosOcupados.includes(hora) && t.cancha === cancha
-                    );
-                     const cerrado = cerrados.find(item=>item.horarioComienzo===hora)
-                    return (
-                      <Sheet key={i} >
-                        <SheetTrigger className='block w-full' disabled={turno || turnoFijo || cancha==="Hora" || turnoAuto || cerrado ? true : false}>
-                          <div
-                    
-                            className={`p-1 text-sm text-center cursor-grab text-stone-900 border mb-1 relative rounded h-8 hover:${turno || turnoFijo || turnoAuto || cancha==="Hora" || cerrado ? 'bg-transparent' :'bg-[#00BDA7]'}
-                      ${
-                        turno || turnoFijo || turnoAuto || cerrado
-                          ? turnoFijo
-                            ? 'bg-stone-800'
-                            :  cerrado ? `${diagonal}` : 'bg-stone-500'
-                          : 'bg-green-200'
-                      }`}
-                          >
-                           {
-                            cancha==="Hora" && <p>{hora}</p>
-                           }
-                          </div>
-                        </SheetTrigger>
-                        <SheetContent>
-                          <SheetHeader>
-                            <SheetTitle>Revisa los datos a  grabar</SheetTitle>
-                            <div className="mt-5">
-                              <SheetDescription className='text-lg tracking-wide text-stone-900 dark:text-stone-100'><strong>Día: </strong> {format(hoy, 'dd-MM-yyyy')}
-                              </SheetDescription>
-                              <SheetDescription className='text-lg tracking-wide text-stone-900 dark:text-stone-100'><strong>Cancha: </strong> {cancha}</SheetDescription>
-                              <SheetDescription className='text-lg tracking-wide text-stone-900 dark:text-stone-100'><strong>A partir de: </strong>{hora} h.</SheetDescription>
-                            </div>
-
-                          </SheetHeader>
-                          <div className='grid gap-4 py-4'>
-                              <FormReservaCliente  horariosPosibles={horarioDeEseDia} cancha={cancha} horaComienzo={hora} fecha={hoy} email={email} userId={userId} />
-                          </div>
-
-                        </SheetContent>
-                      </Sheet>
-                    );
-                  })}
-                </div>
-              ))}
-            </div>
           </div>
         </>
       )}

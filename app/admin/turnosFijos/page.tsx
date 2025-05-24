@@ -43,7 +43,7 @@ export default async function TurnosFijosPage() {
   return (
     <div>
       <Titulo titulo='Listado de Turnos Fijos' />
-      <div className='container mx-auto py-1 max-w-[800px]'>
+      <div className='container mx-auto py-1 max-w-[800px]  overflow-x-auto'>
         <DataTable columns={columns} data={data} BotonAgregar={TurnoFijoAgregar} />
       </div>
     </div>

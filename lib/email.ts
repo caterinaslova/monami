@@ -15,9 +15,9 @@ export class AuthEmail{
                 html:`
                 <p>Hola, ${user.name} has creado tu cuenta</p>
                 <p>Visita el siguiente enlace</p>
-                <a href="${process.env.FRONTEND_URL_DEV}/autenticacion/confirm-account"><strong>Confirmar cuenta</strong></a>
+                <a href="${process.env.FRONTEND_URL}/autenticacion/confirm-account"><strong>Confirmar cuenta</strong></a>
                 <p>Copie y pegue este link en su navegador web</p>
-                <a>http://localhost:3000/autenticacion/confirm-account</a>
+                <p>https://monami-psi.vercel.app/autenticacion/confirm-account</p>
                 <p>Ingresa el código <b>${user.token}</b></p>
                 `
             })
@@ -33,7 +33,7 @@ export class AuthEmail{
             html:`
             <p>Hola, ${user.name} escribe una nueva contraseña</p>
             <p>Visita el siguiente enlace</p>
-            <a href="${process.env.FRONTEND_URL_DEV}/autenticacion/nuevapassword/${user.token}">Restablecer contraseña</a>
+            <a href="${process.env.FRONTEND_URL}/autenticacion/nuevapassword/${user.token}">Restablecer contraseña</a>
            
             `
         })

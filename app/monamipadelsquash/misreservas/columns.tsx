@@ -26,7 +26,7 @@ export const columns: ColumnDef<TurnoAutoRegistradoType>[] = [
     accessorKey: "fecha",
     header: ({ column }) => {
         return (
-            <div className="hidden md:table-cell text-center font-bold tracking-wide ">
+            <div className=" text-center font-bold tracking-wide ">
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
@@ -39,7 +39,7 @@ export const columns: ColumnDef<TurnoAutoRegistradoType>[] = [
       },
     cell:({row})=>{
         const fecha =row.getValue("fecha") as string
-        return <div className="hidden md:table-cell text-center ">{format(fecha, "EEEE, dd-MM-yyyy", { locale: es })}</div>
+        return <div className=" text-center ">{format(fecha, "EEEE, dd-MM-yyyy", { locale: es })}</div>
     }
   },
 
