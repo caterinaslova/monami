@@ -98,7 +98,6 @@ model Usuario {
   role               Role                        @default(USER)
   tokenDeVerificacion String
   cuentaVerificada   Boolean                      @default(false)
-  fechaVerificacion  DateTime?
 }
 
 enum Role {
