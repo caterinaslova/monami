@@ -18,11 +18,43 @@
          overflow: hidden;
         z-index: 10;
         /* background: radial-gradient(circle at 80% 80%, #111 0%, #000 100%); */
-      
-  
         /* gap: 4rem; */
-        
       }
+        .section2 {
+        width: 100vw;
+        height: 100vh;
+        padding: 2rem 2rem;
+        display: flex;
+        justify-content: center;
+        border-bottom-left-radius: 5%;
+         border-bottom-right-radius: 5%;
+        align-items: center;
+        /* background: radial-gradient( #000000 70%, #fdfd96,#000000);  */
+         /* background: radial-gradient( #000000 75%, #00BDA7,#000000 );  */
+         perspective: 1000px;
+         overflow: hidden;
+        z-index: 10;
+        /* background: radial-gradient(circle at 80% 80%, #111 0%, #000 100%); */
+        /* gap: 4rem; */
+      }
+        .section3 {
+        width: 100vw;
+        height: 100vh;
+        padding: 2rem 2rem;
+        display: flex;
+        justify-content: center;
+        border-bottom-left-radius: 5%;
+         border-bottom-right-radius: 5%;
+        align-items: center;
+        /* background: radial-gradient( #000000 70%, #fdfd96,#000000);  */
+         background: radial-gradient( #000000 75%,#000000 ); 
+         perspective: 1000px;
+         overflow: hidden;
+        z-index: 10;
+        /* background: radial-gradient(circle at 80% 80%, #111 0%, #000 100%); */
+        /* gap: 4rem; */
+      }
+
       .cajaImagen{
         text-align: center;
         transform-style: preserve-3d;

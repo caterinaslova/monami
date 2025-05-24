@@ -1,14 +1,31 @@
 import { auth } from '@/auth'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import prisma from '@/lib/prisma'
 import { redirect } from 'next/navigation'
 
+const getMisDatos = async (usuarioId:string)=>{
 
-export default function MisDatosPage() {
-      const session = auth()
-      if (!session){
-        redirect('/login')
-      }
+  const turnos = await prisma.usuario.findFirst({where:{id:usuarioId}})
+  return turnos
+}
+
+export default async function MisDatosPage() {
+  const session = await  auth()
+  if (!session){
+    redirect('/login')
+  }
+  const misDatos = await getMisDatos(session.user.id)
   return (
-    <div className="min-h-screen flex justify-center items-center mt-10 md:text-7xl">MisDatosPage 
+    <div className="min-h-screen flex justify-center items-center">
+      <Card className="w-[350px] px-5 py-10" >
+        <CardHeader className='w-full text-center'>
+          <CardTitle>Mis datos</CardTitle>
+        </CardHeader>
+        <CardContent className=' flex flex-col justify-start gap-3'>
+          <p><strong>Nombre: </strong>{' '}{session.user.name}</p>
+          <p><strong>Email: </strong>{' '}{session.user.email}</p>
+        </CardContent>
+      </Card>
     </div>
   )
 }

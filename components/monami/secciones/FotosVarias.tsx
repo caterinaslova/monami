@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image'
 
 const imagenes = [
   { src: '/galeria/1.jpg', alt: 'Imagen 1' },
@@ -50,9 +51,11 @@ export default function FotosVarias() {
           style={{ transitionDelay: `${i * 150}ms` }}
             onClick={() => setIndexActivo(i)}
           >
-            <img
+            <Image
               src={img.src}
               alt={img.alt}
+              width={300}
+              height={300}
               className="w-full rounded-xl h-80 object-cover hover:scale-105 transition"
             />
           </div>

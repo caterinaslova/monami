@@ -5,6 +5,7 @@ import prisma from '@/lib/prisma';
 import { z } from 'zod';
 import { Mensajeria } from './zz-tiposDatosGenerales';
 import { format } from 'date-fns';
+import { revalidatePath } from 'next/cache';
 
 const TurnoFijoForm = z.object({
   clienteId: z.string().min(2, { message: 'El cliente es obligatorio' }),
@@ -188,15 +189,43 @@ const verificarOcupadoAuto = await prisma.turnoRegistradoPorCliente.findFirst({
   };
 };
 
+export const eliminarTurnoFijo = async (
+  turnoFijoId: string,
+  mensajeria: Mensajeria,
+ 
+) => {
+try {
+    await prisma.turnoFijo.delete({where:{id:turnoFijoId}})
+    revalidatePath('/admin/turnosFijos')
+    revalidatePath('/admin')
+    revalidatePath('/monamipadelsquash/reservas')
+  return {
+    errors: [],
+    exitoso: 'El turno fue eliminado correctamente.',
+  };
+} catch (error) {
+  return {
+    errors: [],
+    exitoso: 'No se pudo eliminar.',
+  };
+}
+};
 export const modificarTurnoFijo = async (
   turnoFijoId: string,
   mensajeria: Mensajeria,
-  formData: FormData
+  formData:FormData
 ) => {
-  console.log(formData);
-
+try {
+   console.log(formData)
   return {
     errors: [],
-    exitoso: 'El turno fue modificado correctamente.',
+    exitoso: 'El turno fue eliminado correctamente.',
   };
+} catch (error) {
+  return {
+    errors: [],
+    exitoso: 'No se pudo eliminar.',
+  };
+}
+
 };

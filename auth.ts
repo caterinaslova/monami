@@ -59,6 +59,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!user){
           throw new Error('Credenciales no válidas')
         }else{
+          if (!user.cuentaVerificada){
+             throw new Error('Revise su email para verificar la cuenta.')
+          }
           const passwordCorrect = await compare(credentials.password as string, user.password!)
           if (!passwordCorrect){
              throw new Error('Credenciales no válidas')

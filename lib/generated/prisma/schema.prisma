@@ -85,16 +85,19 @@ model HorarioPosible {
 }
 
 model Usuario {
-  id                 String                      @id @default(auto()) @map("_id") @db.ObjectId
-  email              String                      @unique
-  name               String
-  password           String
-  createdAt          DateTime                    @default(now())
-  updatedAt          DateTime                    @updatedAt
-  twoFactorSecret    String
-  twoFactorActivated Boolean                     @default(false)
-  turnos             TurnoRegistradoPorCliente[]
-  role               Role                        @default(USER)
+  id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
+  email               String                      @unique
+  name                String
+  password            String
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
+  twoFactorSecret     String
+  twoFactorActivated  Boolean                     @default(false)
+  turnos              TurnoRegistradoPorCliente[]
+  role                Role                        @default(USER)
+  tokenDeVerificacion String
+  cuentaVerificada    Boolean                     @default(false)
+  fechaVerificacion   DateTime?
 }
 
 enum Role {

@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { DiaConLetras } from "@/lib/schemas";
 import { referenciaDia } from "@/lib/datos";
 import { z } from "zod";
+import { auth } from "@/auth";
 
 
 
@@ -233,3 +234,62 @@ if (hasta < horariosPosibles.length){
 }
 
 
+export const eliminarTurnoAuto = async (
+  turnoFijoId: string,
+  mensajeria: Mensajeria,
+ 
+) => {
+try {
+    const turno = await prisma.turnoRegistradoPorCliente.findFirst({where:{id:turnoFijoId}})
+    if (!turno){
+          return {
+            errors: [],
+            exitoso: 'No existe el turno.',
+            };
+    }
+    const session = await auth()
+    if (session?.user.id && session.user.role==="ADMIN"){
+
+        await prisma.turnoRegistradoPorCliente.delete({where:{id:turnoFijoId}})
+    }
+    if (session?.user.id && session.user.id==turno.usuarioId){
+
+        
+
+        // Fecha actual (UTC) y compensar +3 horas
+        const ahora = new Date();
+        ahora.setHours(ahora.getHours() + 3); // compensar la diferencia horaria
+
+        // Convertir el turno a Date
+        const fechaTurno = new Date(turno.fecha);
+
+        // Calcular diferencia en milisegundos
+        const diferenciaMs = fechaTurno.getTime() - ahora.getTime();
+
+        // Convertir a horas
+        const diferenciaHoras = diferenciaMs / (1000 * 60 * 60);
+
+        // Verificar si faltan al menos 24 horas
+        if (diferenciaHoras < 24) {
+            return { 
+                  errors: ['El turno debe reservarse con al menos 24 horas de anticipación.'],
+                exitoso: 'El turno fue eliminado correctamente.',
+             };
+        }
+
+        await prisma.turnoRegistradoPorCliente.delete({where:{id:turnoFijoId}})
+    }
+    revalidatePath('/admin/turnosAuto')
+    revalidatePath('/admin')
+    revalidatePath('/monamipadelsquash/reservas')
+  return {
+    errors: [],
+    exitoso: 'El turno fue eliminado correctamente.',
+  };
+} catch (error) {
+  return {
+    errors: [],
+    exitoso: 'No se pudo eliminar.',
+  };
+}
+};

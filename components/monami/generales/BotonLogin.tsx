@@ -56,9 +56,9 @@ export default function BotonLogin() {
             </Link>
           </div>
           <div className='text-muted-foreground text-xs'>
-            Olvidaste tu contraseña.{' '}
+            Olvidé mi contraseña.{' '}
             <Link
-              href={'/recuperarpassword'}
+              href={'/autenticacion/olvide-password'}
               className='underline cursor-pointer'
             >
               {' '}

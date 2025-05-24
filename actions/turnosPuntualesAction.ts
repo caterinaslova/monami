@@ -33,6 +33,7 @@ export const createTurnoPuntual = async (mensajeria:Mensajeria, formData:FormDat
  
     
     const fechaDate = new Date(anio,mes,diaElegido)
+    fechaDate.setUTCHours(fechaDate.getUTCHours() + 3)
 
     const diaNumero = fechaDate.getDay()
   
@@ -217,3 +218,25 @@ export const modificarTurnoPuntual = async (turnoFijoId:string,mensajeria:Mensaj
         exitoso:'El turno fue modificado correctamente.'
     }
 }
+
+export const eliminarPuntual = async (
+  turnoPuntualId: string,
+  mensajeria: Mensajeria,
+ 
+) => {
+try {
+    await prisma.turnoPuntual.delete({where:{id:turnoPuntualId}})
+    revalidatePath('/admin/turnosPuntuales')
+    revalidatePath('/admin')
+    revalidatePath('/monamipadelsquash/reservas')
+  return {
+    errors: [],
+    exitoso: 'El turno fue eliminado correctamente.',
+  };
+} catch (error) {
+  return {
+    errors: [],
+    exitoso: 'No se pudo eliminar.',
+  };
+}
+};

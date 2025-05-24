@@ -29,7 +29,7 @@ import { getPageNumbers } from '@/lib/getPageNumbers';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  BotonAgregar:React.ComponentType
+  BotonAgregar?:React.ComponentType
 }
 
 export function DataTable<TData, TValue>({
@@ -99,7 +99,7 @@ export function DataTable<TData, TValue>({
           }
         className='max-w-xs'
         /> */}
-        <BotonAgregar />
+       { BotonAgregar && <BotonAgregar />}
       </div>
 
       <Table>

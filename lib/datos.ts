@@ -1,4 +1,4 @@
-import { BadgeDollarSign, Calendar, CalendarArrowUp, CalendarCheck2, CalendarClock, CalendarHeart, UserCheck, UserPen, Users } from "lucide-react";
+import { BadgeDollarSign, Calendar, CalendarArrowUp, CalendarCheck2, CalendarClock, CalendarHeart, Trophy, UserCheck, UserPen, Users } from "lucide-react";
 
 export const diasOrdenados=["gDomingo","aLunes","bMartes","cMiércoles","dJueves","eViernes","fSábado"]
 
@@ -26,9 +26,15 @@ export const menuSideBarTurnos =[
   },
   {
     id:4,
-    titulo:'Escuela',
-    url:'/admin/escuela',
+    titulo:'Escuelas',
+    url:'/admin/escuelas',
     icono:BadgeDollarSign
+  },
+  {
+    id:4,
+    titulo:'Torneos',
+    url:'/admin/torneos',
+    icono:Trophy
   },
 
 ]

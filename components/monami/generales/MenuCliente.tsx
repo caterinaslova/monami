@@ -22,16 +22,16 @@ export default function MenuCliente({session}:{session:Session| null | undefined
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='xl:hidden'>
-        <DropdownMenuItem onClick={()=>setOpenDrop(false)}><Link href="/">Inicio</Link></DropdownMenuItem>
-        <DropdownMenuItem onClick={()=>setOpenDrop(false)}><Link href="/monamipadelsquash/escuela">Escuela</Link></DropdownMenuItem>
-        <DropdownMenuItem onClick={()=>setOpenDrop(false)}><Link href="/monamipadelsquash/reservas">Reservas</Link></DropdownMenuItem>
-        <DropdownMenuItem onClick={()=>setOpenDrop(false)}><Link href="/monamipadelsquash/torneos">Torneos</Link></DropdownMenuItem>
+        <Link href="/"><DropdownMenuItem onClick={()=>setOpenDrop(false)}>Inicio</DropdownMenuItem></Link>
+       <Link href="/monamipadelsquash/escuela"><DropdownMenuItem onClick={()=>setOpenDrop(false)}>Escuela</DropdownMenuItem></Link>
+        <Link href="/monamipadelsquash/reservas"><DropdownMenuItem onClick={()=>setOpenDrop(false)}>Reservas</DropdownMenuItem></Link>
+        <Link href="/monamipadelsquash/torneos"><DropdownMenuItem onClick={()=>setOpenDrop(false)}>Torneos</DropdownMenuItem></Link>
       
         
-        <DropdownMenuItem onClick={()=>setOpenDrop(false)}> <Link href="https://maps.app.goo.gl/UcyNPscFnckB6GnB9" target="_blank" className="flex gap-2"><span className="text-[#00BDA7]"><LandPlot/></span><span className="tracking-widest">Enrique Larreta 660</span></Link></DropdownMenuItem>
-        <DropdownMenuItem onClick={()=>setOpenDrop(false)} >{session?.user.id && <Link href="/monamipadelsquash/misdatos">Mis Datos</Link> }</DropdownMenuItem>
+      <Link href="https://maps.app.goo.gl/UcyNPscFnckB6GnB9" target="_blank" className="flex gap-2"><DropdownMenuItem onClick={()=>setOpenDrop(false)}><span className="text-[#00BDA7]"><LandPlot/></span><span className="tracking-widest">Enrique Larreta 660</span></DropdownMenuItem></Link>
+       {session?.user.id && <Link href="/monamipadelsquash/misdatos"> <DropdownMenuItem onClick={()=>setOpenDrop(false)} >Mis Datos</DropdownMenuItem></Link> }
    
-          <DropdownMenuItem onClick={()=>setOpenDrop(false)} >{session?.user.id ?(<Link href="/monamipadelsquash/misreservas">Mis Reservas</Link>) :(<Link href="/login">Ingresar</Link>)}</DropdownMenuItem>
+         {session?.user.id ?(<Link href="/monamipadelsquash/misreservas"> <DropdownMenuItem onClick={()=>setOpenDrop(false)} >Mis Reservas</DropdownMenuItem></Link>) :(<Link href="/login"><DropdownMenuItem onClick={()=>setOpenDrop(false)} >Ingresar</DropdownMenuItem></Link>)}
           {
             session?.user.name &&  <DropdownMenuItem className="cursor-pointer" onClick={async ()=>await logout()}>Salir</DropdownMenuItem>
           }

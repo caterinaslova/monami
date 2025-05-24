@@ -53,7 +53,7 @@ export default function LoginComponentModal()  {
    if (response?.error){
     form.setError("root",{message:response.message})
    }else{
-    router.push('/')
+    router.push('/monamipadelsquash/reservas')
    }
 }
   return (

@@ -7,6 +7,8 @@ import prisma from "@/lib/prisma";
 import { passwordSchema } from "@/lib/validaciones/passwordSchema";
 import { auth, signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
+import { generateToken } from "@/lib/config/generateToken";
+import { AuthEmail } from "@/lib/email";
 
 interface User {
     id:string;
@@ -47,18 +49,24 @@ export const registerUser = async ({email,name,password,passwordConfirm}:{
    
     const hashedPassword = await hash(password,10)
 
+    const tokenDeVerificacion = generateToken()
+
     await prisma.usuario.create({data:{
         name,
         email,
         password:hashedPassword,
         twoFactorSecret:"",
+        tokenDeVerificacion
    
 
     }})
-        return{
+    
+     await AuthEmail.sendConfirmationEmail({name,email,token:tokenDeVerificacion})
+    
+     return{
             error:false,
             message:"El usuario ha sido creado correctamente"
-        }
+    }
         
     } catch (error:any) {
         let mensajeError=""
@@ -98,7 +106,9 @@ export const loginUser= async ({email,password}:{email:string,password:string})=
             password,
             redirect:false
         })
+       
         if (response?.error) {
+              console.log(response.auth.caus)
                 return { error:true, message: response.error,user:{} }
         }
         const user:User | null = await prisma.usuario.findUnique({
@@ -124,10 +134,12 @@ export const loginUser= async ({email,password}:{email:string,password:string})=
         // console.log(role)
         // return { success: true, role }
     } catch (error) {
+       
         if (error instanceof AuthError) {
-             return { error: "Credenciales inválidas" }
+            
+             return { error:true, message:"Credenciales no válidas / Cuenta no verificada", user:{} }
         }
-    return { error: "Error desconocido" }
+    return { error:true, message:"Hubo un error" , user:{}  }
     }
 
 }
@@ -140,3 +152,64 @@ export const logout = async ()=>{
 export const changePassword = async ({currentPassword,password,passwordConfirm}:{currentPassword:string,password:string,passwordConfirm:string})=>{
 
 }
+
+type DataEmail= {
+    email:string;
+}
+const DataEmailRecibido = z.string().email()
+
+export const olvidePasswordAction = async(data:DataEmail)=>{
+    try {
+     const dataValida = DataEmailRecibido.safeParse(data.email)
+     if (!dataValida.success){
+        return{
+            ok:false,
+            mensaje: 'Email no válido'
+        }
+     }
+ 
+     const usuario = await prisma.usuario.findFirst({where:{email:dataValida.data}})
+     if (!usuario){
+        return{
+            ok:false,
+            mensaje: 'Email no válido'
+        }
+     }
+   
+      const tokenDeVerificacion = generateToken()
+    await prisma.usuario.update({where:{id:usuario.id},data:{
+      tokenDeVerificacion,
+
+    }})
+    await AuthEmail.sendPasswordResendToken({name:usuario.name,email:usuario.email,token:tokenDeVerificacion}) 
+
+    return { ok: true, mensaje: 'Revisa email para cambiar la contraseña.' };
+
+    } catch (error) {
+      
+      return { ok: false, mensaje: 'Credenciales no válidas' };
+    }
+  }
+  type DataNuevaPass = {password:string}
+  
+    export const modificarPasswordAction = async(data:DataNuevaPass,token:string)=>{
+    try {
+      
+        const usuario = await prisma.usuario.findFirst({where:{tokenDeVerificacion:token}})
+        if (!usuario){
+            return { ok: false, mensaje: 'Credenciales no válidas' };
+        }
+        const hashedPassword = await hash(data.password,10)
+
+      await prisma.usuario.update({where:{id:usuario.id},data:{
+      tokenDeVerificacion:'',
+      password:hashedPassword
+
+    }})
+       
+      return { ok: true, mensaje: 'Password modificada' };
+    } catch (error) {
+      
+      return { ok: false, mensaje: 'Credenciales no válidas' };
+    }
+  }

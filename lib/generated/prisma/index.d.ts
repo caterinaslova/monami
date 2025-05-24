@@ -5556,6 +5556,9 @@ export namespace Prisma {
     twoFactorSecret: string | null
     twoFactorActivated: boolean | null
     role: $Enums.Role | null
+    tokenDeVerificacion: string | null
+    cuentaVerificada: boolean | null
+    fechaVerificacion: Date | null
   }
 
   export type UsuarioMaxAggregateOutputType = {
@@ -5568,6 +5571,9 @@ export namespace Prisma {
     twoFactorSecret: string | null
     twoFactorActivated: boolean | null
     role: $Enums.Role | null
+    tokenDeVerificacion: string | null
+    cuentaVerificada: boolean | null
+    fechaVerificacion: Date | null
   }
 
   export type UsuarioCountAggregateOutputType = {
@@ -5580,6 +5586,9 @@ export namespace Prisma {
     twoFactorSecret: number
     twoFactorActivated: number
     role: number
+    tokenDeVerificacion: number
+    cuentaVerificada: number
+    fechaVerificacion: number
     _all: number
   }
 
@@ -5594,6 +5603,9 @@ export namespace Prisma {
     twoFactorSecret?: true
     twoFactorActivated?: true
     role?: true
+    tokenDeVerificacion?: true
+    cuentaVerificada?: true
+    fechaVerificacion?: true
   }
 
   export type UsuarioMaxAggregateInputType = {
@@ -5606,6 +5618,9 @@ export namespace Prisma {
     twoFactorSecret?: true
     twoFactorActivated?: true
     role?: true
+    tokenDeVerificacion?: true
+    cuentaVerificada?: true
+    fechaVerificacion?: true
   }
 
   export type UsuarioCountAggregateInputType = {
@@ -5618,6 +5633,9 @@ export namespace Prisma {
     twoFactorSecret?: true
     twoFactorActivated?: true
     role?: true
+    tokenDeVerificacion?: true
+    cuentaVerificada?: true
+    fechaVerificacion?: true
     _all?: true
   }
 
@@ -5703,6 +5721,9 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated: boolean
     role: $Enums.Role
+    tokenDeVerificacion: string
+    cuentaVerificada: boolean
+    fechaVerificacion: Date | null
     _count: UsuarioCountAggregateOutputType | null
     _min: UsuarioMinAggregateOutputType | null
     _max: UsuarioMaxAggregateOutputType | null
@@ -5732,6 +5753,9 @@ export namespace Prisma {
     twoFactorSecret?: boolean
     twoFactorActivated?: boolean
     role?: boolean
+    tokenDeVerificacion?: boolean
+    cuentaVerificada?: boolean
+    fechaVerificacion?: boolean
     turnos?: boolean | Usuario$turnosArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
@@ -5748,9 +5772,12 @@ export namespace Prisma {
     twoFactorSecret?: boolean
     twoFactorActivated?: boolean
     role?: boolean
+    tokenDeVerificacion?: boolean
+    cuentaVerificada?: boolean
+    fechaVerificacion?: boolean
   }
 
-  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "password" | "createdAt" | "updatedAt" | "twoFactorSecret" | "twoFactorActivated" | "role", ExtArgs["result"]["usuario"]>
+  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "password" | "createdAt" | "updatedAt" | "twoFactorSecret" | "twoFactorActivated" | "role" | "tokenDeVerificacion" | "cuentaVerificada" | "fechaVerificacion", ExtArgs["result"]["usuario"]>
   export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     turnos?: boolean | Usuario$turnosArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
@@ -5771,6 +5798,9 @@ export namespace Prisma {
       twoFactorSecret: string
       twoFactorActivated: boolean
       role: $Enums.Role
+      tokenDeVerificacion: string
+      cuentaVerificada: boolean
+      fechaVerificacion: Date | null
     }, ExtArgs["result"]["usuario"]>
     composites: {}
   }
@@ -6173,6 +6203,9 @@ export namespace Prisma {
     readonly twoFactorSecret: FieldRef<"Usuario", 'String'>
     readonly twoFactorActivated: FieldRef<"Usuario", 'Boolean'>
     readonly role: FieldRef<"Usuario", 'Role'>
+    readonly tokenDeVerificacion: FieldRef<"Usuario", 'String'>
+    readonly cuentaVerificada: FieldRef<"Usuario", 'Boolean'>
+    readonly fechaVerificacion: FieldRef<"Usuario", 'DateTime'>
   }
     
 
@@ -7731,7 +7764,10 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     twoFactorSecret: 'twoFactorSecret',
     twoFactorActivated: 'twoFactorActivated',
-    role: 'role'
+    role: 'role',
+    tokenDeVerificacion: 'tokenDeVerificacion',
+    cuentaVerificada: 'cuentaVerificada',
+    fechaVerificacion: 'fechaVerificacion'
   };
 
   export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
@@ -8190,6 +8226,9 @@ export namespace Prisma {
     twoFactorSecret?: StringFilter<"Usuario"> | string
     twoFactorActivated?: BoolFilter<"Usuario"> | boolean
     role?: EnumRoleFilter<"Usuario"> | $Enums.Role
+    tokenDeVerificacion?: StringFilter<"Usuario"> | string
+    cuentaVerificada?: BoolFilter<"Usuario"> | boolean
+    fechaVerificacion?: DateTimeNullableFilter<"Usuario"> | Date | string | null
     turnos?: TurnoRegistradoPorClienteListRelationFilter
   }
 
@@ -8203,6 +8242,9 @@ export namespace Prisma {
     twoFactorSecret?: SortOrder
     twoFactorActivated?: SortOrder
     role?: SortOrder
+    tokenDeVerificacion?: SortOrder
+    cuentaVerificada?: SortOrder
+    fechaVerificacion?: SortOrder
     turnos?: TurnoRegistradoPorClienteOrderByRelationAggregateInput
   }
 
@@ -8219,6 +8261,9 @@ export namespace Prisma {
     twoFactorSecret?: StringFilter<"Usuario"> | string
     twoFactorActivated?: BoolFilter<"Usuario"> | boolean
     role?: EnumRoleFilter<"Usuario"> | $Enums.Role
+    tokenDeVerificacion?: StringFilter<"Usuario"> | string
+    cuentaVerificada?: BoolFilter<"Usuario"> | boolean
+    fechaVerificacion?: DateTimeNullableFilter<"Usuario"> | Date | string | null
     turnos?: TurnoRegistradoPorClienteListRelationFilter
   }, "id" | "email">
 
@@ -8232,6 +8277,9 @@ export namespace Prisma {
     twoFactorSecret?: SortOrder
     twoFactorActivated?: SortOrder
     role?: SortOrder
+    tokenDeVerificacion?: SortOrder
+    cuentaVerificada?: SortOrder
+    fechaVerificacion?: SortOrder
     _count?: UsuarioCountOrderByAggregateInput
     _max?: UsuarioMaxOrderByAggregateInput
     _min?: UsuarioMinOrderByAggregateInput
@@ -8250,6 +8298,9 @@ export namespace Prisma {
     twoFactorSecret?: StringWithAggregatesFilter<"Usuario"> | string
     twoFactorActivated?: BoolWithAggregatesFilter<"Usuario"> | boolean
     role?: EnumRoleWithAggregatesFilter<"Usuario"> | $Enums.Role
+    tokenDeVerificacion?: StringWithAggregatesFilter<"Usuario"> | string
+    cuentaVerificada?: BoolWithAggregatesFilter<"Usuario"> | boolean
+    fechaVerificacion?: DateTimeNullableWithAggregatesFilter<"Usuario"> | Date | string | null
   }
 
   export type TurnoRegistradoPorClienteWhereInput = {
@@ -8661,6 +8712,9 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated?: boolean
     role?: $Enums.Role
+    tokenDeVerificacion: string
+    cuentaVerificada?: boolean
+    fechaVerificacion?: Date | string | null
     turnos?: TurnoRegistradoPorClienteCreateNestedManyWithoutUsuarioInput
   }
 
@@ -8674,6 +8728,9 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated?: boolean
     role?: $Enums.Role
+    tokenDeVerificacion: string
+    cuentaVerificada?: boolean
+    fechaVerificacion?: Date | string | null
     turnos?: TurnoRegistradoPorClienteUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
@@ -8686,6 +8743,9 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
+    fechaVerificacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     turnos?: TurnoRegistradoPorClienteUpdateManyWithoutUsuarioNestedInput
   }
 
@@ -8698,6 +8758,9 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
+    fechaVerificacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     turnos?: TurnoRegistradoPorClienteUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
@@ -8711,6 +8774,9 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated?: boolean
     role?: $Enums.Role
+    tokenDeVerificacion: string
+    cuentaVerificada?: boolean
+    fechaVerificacion?: Date | string | null
   }
 
   export type UsuarioUpdateManyMutationInput = {
@@ -8722,6 +8788,9 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
+    fechaVerificacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UsuarioUncheckedUpdateManyInput = {
@@ -8733,6 +8802,9 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
+    fechaVerificacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TurnoRegistradoPorClienteCreateInput = {
@@ -9150,6 +9222,18 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    isSet?: boolean
+  }
+
   export type TurnoRegistradoPorClienteListRelationFilter = {
     every?: TurnoRegistradoPorClienteWhereInput
     some?: TurnoRegistradoPorClienteWhereInput
@@ -9170,6 +9254,9 @@ export namespace Prisma {
     twoFactorSecret?: SortOrder
     twoFactorActivated?: SortOrder
     role?: SortOrder
+    tokenDeVerificacion?: SortOrder
+    cuentaVerificada?: SortOrder
+    fechaVerificacion?: SortOrder
   }
 
   export type UsuarioMaxOrderByAggregateInput = {
@@ -9182,6 +9269,9 @@ export namespace Prisma {
     twoFactorSecret?: SortOrder
     twoFactorActivated?: SortOrder
     role?: SortOrder
+    tokenDeVerificacion?: SortOrder
+    cuentaVerificada?: SortOrder
+    fechaVerificacion?: SortOrder
   }
 
   export type UsuarioMinOrderByAggregateInput = {
@@ -9194,6 +9284,9 @@ export namespace Prisma {
     twoFactorSecret?: SortOrder
     twoFactorActivated?: SortOrder
     role?: SortOrder
+    tokenDeVerificacion?: SortOrder
+    cuentaVerificada?: SortOrder
+    fechaVerificacion?: SortOrder
   }
 
   export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -9204,6 +9297,21 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type UsuarioScalarRelationFilter = {
@@ -9435,6 +9543,11 @@ export namespace Prisma {
     set?: $Enums.Role
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+    unset?: boolean
+  }
+
   export type TurnoRegistradoPorClienteUpdateManyWithoutUsuarioNestedInput = {
     create?: XOR<TurnoRegistradoPorClienteCreateWithoutUsuarioInput, TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput> | TurnoRegistradoPorClienteCreateWithoutUsuarioInput[] | TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput | TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput[]
@@ -9634,6 +9747,18 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    isSet?: boolean
+  }
+
   export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
@@ -9642,6 +9767,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
   }
 
   export type TurnoFijoCreateWithoutClienteInput = {
@@ -9979,6 +10131,9 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated?: boolean
     role?: $Enums.Role
+    tokenDeVerificacion: string
+    cuentaVerificada?: boolean
+    fechaVerificacion?: Date | string | null
   }
 
   export type UsuarioUncheckedCreateWithoutTurnosInput = {
@@ -9991,6 +10146,9 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated?: boolean
     role?: $Enums.Role
+    tokenDeVerificacion: string
+    cuentaVerificada?: boolean
+    fechaVerificacion?: Date | string | null
   }
 
   export type UsuarioCreateOrConnectWithoutTurnosInput = {
@@ -10018,6 +10176,9 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
+    fechaVerificacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UsuarioUncheckedUpdateWithoutTurnosInput = {
@@ -10029,6 +10190,9 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
+    fechaVerificacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TurnoFijoCreateManyClienteInput = {

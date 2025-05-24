@@ -63,7 +63,7 @@ export default function RegisterComponent() {
         <Card className='w-[350px]'>
           <CardHeader>
             <CardTitle className='text-center'>
-              Revisa tu correo para validar la cuenta!
+              Revisá tu correo para validar la cuenta!
             </CardTitle>
           </CardHeader>
           <CardContent>

@@ -1,6 +1,6 @@
 "use client"
 
-import EliminarCliente from "@/components/admin/crud/Clientes/EliminarCliente"
+import EliminarTurnoFijo from "@/components/admin/crud/TurnosFijos/EliminarTurnoFijo"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table"
@@ -140,7 +140,7 @@ export const columns: ColumnDef<TurnoFijoType>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const cliente = row.original
+      const turno = row.original
  
       return (
         <DropdownMenu>
@@ -152,10 +152,10 @@ export const columns: ColumnDef<TurnoFijoType>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             {/* <DropdownMenuLabel className="flex justify-center items-center font-bold">Acciones</DropdownMenuLabel> */}
-            <DropdownMenuItem className=" w-full flex justify-start items-center px-4"><Link href={`/admin/turnoFijos/${cliente.id}/ver`}>Ver</Link>
+            <DropdownMenuItem className=" w-full flex justify-start items-center px-4"><Link href={`/admin/turnoFijos/${turno.id}/ver`}>Ver</Link>
             </DropdownMenuItem>
 
-            <DropdownMenuItem><EliminarCliente clienteId={cliente.id}/></DropdownMenuItem>
+            <DropdownMenuItem><EliminarTurnoFijo turnoId={turno.id}/></DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

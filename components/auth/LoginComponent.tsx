@@ -27,11 +27,7 @@ import { useForm } from 'react-hook-form';
 
 import { z } from 'zod';
 
-const Response = z.object({
-  error:z.boolean(),
-  message:z.string(),
-  user:z.optional(z.object({id:z.string(),name:z.string(),email:z.string(),role:z.enum(['USER','ADMIN'])}))
-})
+
 const formSchema = z.object({
   email: z.string().email({message:"Debe escribir un email válido"}),
   password:passwordSchema
@@ -49,19 +45,20 @@ export default function LoginComponent()  {
   });
 
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
-   const response = await loginUser({
+   const response:any = await loginUser({
     email:data.email,
     password:data.password,
 
    })
-   const respuestaTipeada = Response.parse(response)
 
-   if (respuestaTipeada?.error){
-    form.setError("root",{message:respuestaTipeada.message})
+
+   if (response?.error){
+   
+    form.setError("root",{message:response.message})
    }else{
    
-    if (!respuestaTipeada.error) {
-      if (respuestaTipeada?.user && respuestaTipeada.user.role==="ADMIN" ) {
+    if (!response.error) {
+      if (response?.user && response.user.role==="ADMIN" ) {
         router.push("/admin") // redirige a admin
       } else {
         router.push("/monamipadelsquash/reservas") // redirige a usuario común
@@ -112,7 +109,7 @@ export default function LoginComponent()  {
                 }
 
                <Button type="submit" className='mt-2 cursor-pointer'>Entrar</Button>
-               <Link href="/" > <Button type="button" variant={"outline"} className='cursor-pointer w-full'>Continuar sin loguearme</Button></Link>
+               <Link href="/monamipadelsquash/reservas" > <Button type="button" variant={"outline"} className='cursor-pointer w-full'>Continuar sin loguearme</Button></Link>
               </fieldset>
               
             </form>
@@ -123,7 +120,7 @@ export default function LoginComponent()  {
              Primera vez. <Link href={"/register"} className='underline cursor-pointer'> Registrarme</Link>
           </div>
           <div className="text-muted-foreground text-xs">
-                Olvidaste tu contraseña. <Link href={"/recuperarpassword"} className='underline cursor-pointer'> Recuperarla</Link>
+                Olvidaste tu contraseña. <Link href={"/autenticacion/olvide-password"} className='underline cursor-pointer'> Recuperarla</Link>
           </div>
         </CardFooter>
        </Card>

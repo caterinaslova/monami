@@ -153,3 +153,15 @@ export const modificarCliente = async (clienteId:string, mensaje:Mensajeria, for
   }
 
 }
+  export const modificarPasswordAction = async(data:any,token:string)=>{
+    try {
+
+      const passwordNueva= {password: data.password, token}
+ 
+       
+      return { ok: true, mensaje: 'Password modificada' };
+    } catch (error) {
+      
+      return { ok: false, mensaje: 'Credenciales no válidas' };
+    }
+  }
