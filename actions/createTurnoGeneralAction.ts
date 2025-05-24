@@ -235,12 +235,12 @@ if (hasta < horariosPosibles.length){
 
 
 export const eliminarTurnoAuto = async (
-  turnoFijoId: string,
+  turnoAutoId: string,
   mensajeria: Mensajeria,
  
 ) => {
 try {
-    const turno = await prisma.turnoRegistradoPorCliente.findFirst({where:{id:turnoFijoId}})
+    const turno = await prisma.turnoRegistradoPorCliente.findFirst({where:{id:turnoAutoId}})
     if (!turno){
           return {
             errors: [],
@@ -250,7 +250,7 @@ try {
     const session = await auth()
     if (session?.user.id && session.user.role==="ADMIN"){
 
-        await prisma.turnoRegistradoPorCliente.delete({where:{id:turnoFijoId}})
+        await prisma.turnoRegistradoPorCliente.delete({where:{id:turnoAutoId}})
     }
     if (session?.user.id && session.user.id==turno.usuarioId){
 
@@ -277,11 +277,13 @@ try {
              };
         }
 
-        await prisma.turnoRegistradoPorCliente.delete({where:{id:turnoFijoId}})
+        await prisma.turnoRegistradoPorCliente.delete({where:{id:turnoAutoId}})
     }
     revalidatePath('/admin/turnosAuto')
+    revalidatePath('/monamipadelsquash/misreservas')
     revalidatePath('/admin')
     revalidatePath('/monamipadelsquash/reservas')
+
   return {
     errors: [],
     exitoso: 'El turno fue eliminado correctamente.',

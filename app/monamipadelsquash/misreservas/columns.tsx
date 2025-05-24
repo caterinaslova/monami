@@ -1,5 +1,4 @@
 "use client"
-import EliminarCliente from "@/components/admin/crud/Clientes/EliminarCliente";
 import EliminarTurnoAuto from "@/components/admin/crud/TurnosAuto/EliminarTurnoAuto";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";

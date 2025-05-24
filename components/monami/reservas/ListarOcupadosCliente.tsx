@@ -11,9 +11,10 @@ import { referenciaDia } from '@/lib/datos';
 import { HorarioPosible, TurnoRegistradoPorCliente } from '@/lib/generated/prisma';
 import { DiaConLetras } from '@/lib/schemas';
 import { TurnoFijoType, TurnoPuntualType } from '@/lib/types';
-import { format } from 'date-fns';
+import { addHours, format } from 'date-fns';
 import { GiImpLaugh } from 'react-icons/gi';
 import FormReservaCliente from './FormReservaCliente';
+
 
 // para hacer el listado
 const canchas = ['Hora', 'Squash1', 'Squash2', 'Squash3', 'Padel1', 'Padel2'];
@@ -58,6 +59,24 @@ export default function ListarOcupadosCliente({
   const hoy = new Date(anio, mes, dia);
   hoy.setHours(0, 0, 0);
 
+
+const ahora = new Date() // no uses Date.now()
+const masTresHoras = addHours(ahora, 3)
+
+  // const ahora= Date.now()
+  const ahoraString= format(ahora,'yyyy-MM-dd')
+  const horaActual = format(ahora,'HH:mm')
+
+  
+  const fechaElegida = `${anio}-${mes<9 ? `0${mes+1}` : `${mes+1}`}-${dia}` 
+
+  let esElMismoDia=false
+  if (ahoraString===fechaElegida){
+    esElMismoDia=true
+  }
+
+ 
+
   const siguiente = new Date(anio, mes, dia);
   siguiente.setHours(23, 59, 59);
 
@@ -73,9 +92,12 @@ export default function ListarOcupadosCliente({
    
   const cerrados = horarioDeEseDia.filter(item=>item.mostrar && !item.abierto)
   // un array con solo las horas
-  const horas = horarioDeEseDia.map((item) => item.horarioComienzo);
+ let horas = horarioDeEseDia.map((item) => item.horarioComienzo);
+ if (esElMismoDia){
+    horas= horas.filter(item=>item> horaActual)
+ }
 
-  // por si está cerrado
+  // por si está cerrado 
   const hayTurnos = horas.length !== 0;
 
   // para hacer 2 cuadros

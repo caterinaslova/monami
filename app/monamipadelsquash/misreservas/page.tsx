@@ -21,8 +21,9 @@ export default async function MisReservasPage() {
   const data = await getTurnosAutoReservados(session.user.id)
 
   return (
-    <div>
-      <Titulo titulo='Listado de Turnos Puntuales' />
+    <div className="mt-25">
+      <h2 className="text-center text-2xl font-semibold my-4">Mis Reservas</h2>
+      <p className="text-center font-bold text-stone-700">Una reserva solo puede eliminarse 24 horas antes.</p>
       <div className='container mx-auto py-1 max-w-[800px]'>
         <DataTable
           columns={columns}
