@@ -37,7 +37,6 @@ export async function confirmAccountAction ({token}:{token:string}){
     await prisma.usuario.update({where:{id:usuario.id},data:{
       tokenDeVerificacion:'',
       cuentaVerificada:true,
-      fechaVerificacion: new Date()
     }})
    
 
