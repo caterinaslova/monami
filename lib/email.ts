@@ -1,4 +1,4 @@
-import { transport } from "@/lib/config/nodeMailerConfig";
+import { transporter } from "@/lib/config/nodeMailerConfig";
 
 type EmailType ={
     name:string;
@@ -8,7 +8,7 @@ type EmailType ={
 
 export class AuthEmail{
     static sendConfirmationEmail= async(user:EmailType)=>{
-            const email = await transport.sendMail({
+            const email = await transporter.sendMail({
                 from:'Monami Padel&Squash<monamipadelsquash@gmail.com>',
                 to: user.email,
                 subject:'Monami Padel&Squash - Confirmá tu cuenta',
@@ -26,7 +26,7 @@ export class AuthEmail{
 
 
     static sendPasswordResendToken= async(user:EmailType)=>{
-        const email = await transport.sendMail({
+        const email = await transporter.sendMail({
             from:'Monami Padel&Squash<monamipadelsquash@gmail.com>',
             to: user.email,
             subject:'Monami Padel&Squash  - reestablece tu contraseña',
@@ -43,7 +43,7 @@ export class AuthEmail{
 export class Emails {
     static consultaEmail = async(nombre:string,email:string,consulta:string)=>{
 
-    await transport.sendMail({
+    await transporter.sendMail({
         from:'KyV Muebles<info@kyvmuebles.com.ar>',
         to: 'info@kyvmuebles.com.ar',
         subject:'Consulta desde sitio web',

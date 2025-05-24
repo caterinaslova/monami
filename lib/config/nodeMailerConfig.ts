@@ -1,19 +1,13 @@
 
 import nodemailer from 'nodemailer'
 
-const config = ()=>{
-    return {
-        service:'gmail',
-        host: process.env.EMAIL_HOST!,
-        port: +process.env.EMAIL_PORT! ,
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS
-        }
-    }
-}
-
-export const transport = nodemailer.createTransport(config())
+export const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER, // tu correo gmail
+    pass: process.env.EMAIL_PASS, // tu app password
+  },
+});
 
  // Looking to send emails in production? Check out our Email API/SMTP product!
 
