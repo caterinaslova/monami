@@ -5715,7 +5715,7 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated: boolean
     role: $Enums.Role
-    tokenDeVerificacion: string
+    tokenDeVerificacion: string | null
     cuentaVerificada: boolean
     _count: UsuarioCountAggregateOutputType | null
     _min: UsuarioMinAggregateOutputType | null
@@ -5789,7 +5789,7 @@ export namespace Prisma {
       twoFactorSecret: string
       twoFactorActivated: boolean
       role: $Enums.Role
-      tokenDeVerificacion: string
+      tokenDeVerificacion: string | null
       cuentaVerificada: boolean
     }, ExtArgs["result"]["usuario"]>
     composites: {}
@@ -8214,7 +8214,7 @@ export namespace Prisma {
     twoFactorSecret?: StringFilter<"Usuario"> | string
     twoFactorActivated?: BoolFilter<"Usuario"> | boolean
     role?: EnumRoleFilter<"Usuario"> | $Enums.Role
-    tokenDeVerificacion?: StringFilter<"Usuario"> | string
+    tokenDeVerificacion?: StringNullableFilter<"Usuario"> | string | null
     cuentaVerificada?: BoolFilter<"Usuario"> | boolean
     turnos?: TurnoRegistradoPorClienteListRelationFilter
   }
@@ -8247,7 +8247,7 @@ export namespace Prisma {
     twoFactorSecret?: StringFilter<"Usuario"> | string
     twoFactorActivated?: BoolFilter<"Usuario"> | boolean
     role?: EnumRoleFilter<"Usuario"> | $Enums.Role
-    tokenDeVerificacion?: StringFilter<"Usuario"> | string
+    tokenDeVerificacion?: StringNullableFilter<"Usuario"> | string | null
     cuentaVerificada?: BoolFilter<"Usuario"> | boolean
     turnos?: TurnoRegistradoPorClienteListRelationFilter
   }, "id" | "email">
@@ -8282,7 +8282,7 @@ export namespace Prisma {
     twoFactorSecret?: StringWithAggregatesFilter<"Usuario"> | string
     twoFactorActivated?: BoolWithAggregatesFilter<"Usuario"> | boolean
     role?: EnumRoleWithAggregatesFilter<"Usuario"> | $Enums.Role
-    tokenDeVerificacion?: StringWithAggregatesFilter<"Usuario"> | string
+    tokenDeVerificacion?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
     cuentaVerificada?: BoolWithAggregatesFilter<"Usuario"> | boolean
   }
 
@@ -8695,7 +8695,7 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated?: boolean
     role?: $Enums.Role
-    tokenDeVerificacion: string
+    tokenDeVerificacion?: string | null
     cuentaVerificada?: boolean
     turnos?: TurnoRegistradoPorClienteCreateNestedManyWithoutUsuarioInput
   }
@@ -8710,7 +8710,7 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated?: boolean
     role?: $Enums.Role
-    tokenDeVerificacion: string
+    tokenDeVerificacion?: string | null
     cuentaVerificada?: boolean
     turnos?: TurnoRegistradoPorClienteUncheckedCreateNestedManyWithoutUsuarioInput
   }
@@ -8724,7 +8724,7 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    tokenDeVerificacion?: NullableStringFieldUpdateOperationsInput | string | null
     cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
     turnos?: TurnoRegistradoPorClienteUpdateManyWithoutUsuarioNestedInput
   }
@@ -8738,7 +8738,7 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    tokenDeVerificacion?: NullableStringFieldUpdateOperationsInput | string | null
     cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
     turnos?: TurnoRegistradoPorClienteUncheckedUpdateManyWithoutUsuarioNestedInput
   }
@@ -8753,7 +8753,7 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated?: boolean
     role?: $Enums.Role
-    tokenDeVerificacion: string
+    tokenDeVerificacion?: string | null
     cuentaVerificada?: boolean
   }
 
@@ -8766,7 +8766,7 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    tokenDeVerificacion?: NullableStringFieldUpdateOperationsInput | string | null
     cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -8779,7 +8779,7 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    tokenDeVerificacion?: NullableStringFieldUpdateOperationsInput | string | null
     cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -9198,6 +9198,22 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    isSet?: boolean
+  }
+
   export type TurnoRegistradoPorClienteListRelationFilter = {
     every?: TurnoRegistradoPorClienteWhereInput
     some?: TurnoRegistradoPorClienteWhereInput
@@ -9258,6 +9274,25 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type UsuarioScalarRelationFilter = {
@@ -9489,6 +9524,11 @@ export namespace Prisma {
     set?: $Enums.Role
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+    unset?: boolean
+  }
+
   export type TurnoRegistradoPorClienteUpdateManyWithoutUsuarioNestedInput = {
     create?: XOR<TurnoRegistradoPorClienteCreateWithoutUsuarioInput, TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput> | TurnoRegistradoPorClienteCreateWithoutUsuarioInput[] | TurnoRegistradoPorClienteUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput | TurnoRegistradoPorClienteCreateOrConnectWithoutUsuarioInput[]
@@ -9688,6 +9728,21 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    isSet?: boolean
+  }
+
   export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
@@ -9696,6 +9751,36 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
   }
 
   export type TurnoFijoCreateWithoutClienteInput = {
@@ -10033,7 +10118,7 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated?: boolean
     role?: $Enums.Role
-    tokenDeVerificacion: string
+    tokenDeVerificacion?: string | null
     cuentaVerificada?: boolean
   }
 
@@ -10047,7 +10132,7 @@ export namespace Prisma {
     twoFactorSecret: string
     twoFactorActivated?: boolean
     role?: $Enums.Role
-    tokenDeVerificacion: string
+    tokenDeVerificacion?: string | null
     cuentaVerificada?: boolean
   }
 
@@ -10076,7 +10161,7 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    tokenDeVerificacion?: NullableStringFieldUpdateOperationsInput | string | null
     cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -10089,7 +10174,7 @@ export namespace Prisma {
     twoFactorSecret?: StringFieldUpdateOperationsInput | string
     twoFactorActivated?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    tokenDeVerificacion?: StringFieldUpdateOperationsInput | string
+    tokenDeVerificacion?: NullableStringFieldUpdateOperationsInput | string | null
     cuentaVerificada?: BoolFieldUpdateOperationsInput | boolean
   }
 

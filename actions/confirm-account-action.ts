@@ -12,9 +12,10 @@ const TokenSchema = z
 
 
 export async function confirmAccountAction ({token}:{token:string}){
- 
- 
-    const tokenConfirm = TokenSchema.safeParse(token)
+
+
+  try {
+        const tokenConfirm = TokenSchema.safeParse(token)
    
     if(!tokenConfirm.success){
         return{
@@ -44,4 +45,14 @@ export async function confirmAccountAction ({token}:{token:string}){
         errors:[],
         success:'ok'
     }
+    
+  } catch (error) {
+          return{
+        errors:["Hubo un error"],
+        success:''
+      }
+  }
+ 
+ 
+
 }

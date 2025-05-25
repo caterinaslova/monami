@@ -95,7 +95,7 @@ model Usuario {
   twoFactorActivated  Boolean                     @default(false)
   turnos              TurnoRegistradoPorCliente[]
   role                Role                        @default(USER)
-  tokenDeVerificacion String
+  tokenDeVerificacion String?
   cuentaVerificada    Boolean                     @default(false)
 }
 
