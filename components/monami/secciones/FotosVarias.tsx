@@ -83,9 +83,11 @@ export default function FotosVarias() {
             ‹
           </button>
 
-          <img
+          <Image
             src={imagenes[indexActivo].src}
             alt=""
+            width={300}
+             height={300}
             className="max-h-[80vh] max-w-[90vw] object-contain"
           />
 

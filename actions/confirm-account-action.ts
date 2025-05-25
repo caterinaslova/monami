@@ -26,7 +26,7 @@ export async function confirmAccountAction ({token}:{token:string}){
 
 
     // confirmar el usuario
-    const usuario = await prisma.usuario.findFirst({where:{tokenDeVerificacion:token}})
+    const usuario = await prisma.usuario.findFirst({where:{tokenDeVerificacion:tokenConfirm.data}})
 
     if(!usuario){
       return{
